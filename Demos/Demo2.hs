@@ -16,8 +16,15 @@ import Control.Monad
 import Data.Maybe
 import Data.Vector.Unboxed qualified as U
 import Data.Massiv.Array
-import Data.Massiv.Array.IO
+-- import Data.Massiv.Array.IO
+import Control.Parallel.Strategies (parMap, rpar, rseq, using)
+import Control.Concurrent.Async (async, wait)
 
+
+import Control.Parallel.Strategies (parMap, rpar, rseq, using)
+import Data.List (sort, findIndices) -- Ensure you're importing from Prelude
+import Data.Massiv.Array (map) -- or use qualified imports
+import qualified Data.Massiv.Array as M -- To avoid ambiguities
 
 
 -- First-order Autoregressive Model [AR(1)]
@@ -190,7 +197,9 @@ reverseOrder (x : xs) = reverseOrder xs ++ [x]
 -- Call functions
 ----------------------------------------------------------------------------------------------------------------
 
-
+-- Function to apply necessary operations for each index
+extractSignal :: Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double))) -> ForSyDe.Shallow.Vector (ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double))
+extractSignal idx datSignal = vector [fromSignal (datSignal `atV` idx) !! 0]
 
 procMatrix1 :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double) 
 procMatrix1 dimx dimy dat = cm1
@@ -214,12 +223,22 @@ procMatrix3 dimx dimy dat = cms !! head sorList
         where
 
         t = dat `atV` 0; st = fromSignal t !! 0
-        
-        ref1 = dat `atV` 1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
-        ref2 = dat `atV` 3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
-        ref3 = dat `atV` 5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
+        -- -- OLD CODE:
+        -- ref1 = dat `atV` 1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
+        -- ref2 = dat `atV` 3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
+        -- ref3 = dat `atV` 5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
 
-        sv = signal [ssr1, ssr2, ssr3]
+        -- sv = signal [ssr1, ssr2, ssr3]
+         
+        -- -- NEW CODE:
+
+        -- -- Create a list of indices to extract data
+        indices = signal[1, 3, 5]
+
+        -- Create the signal vector using mapSY
+        sv = mapSY (`extractSignal` dat) indices
+
+        -- -- END OF NEW CODE
         
 
         m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
@@ -251,18 +270,28 @@ procMatrix6 dimx dimy dat = cms !! head sorList
 
         t = dat `atV` 0; st = fromSignal t !! 0
         
-        ref1 = dat `atV`  1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
-        ref2 = dat `atV`  3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
-        ref3 = dat `atV`  5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
-        ref4 = dat `atV`  7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
-        ref5 = dat `atV`  9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
-        ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
+        -- -- OLD CODE:
+        -- ref1 = dat `atV`  1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
+        -- ref2 = dat `atV`  3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
+        -- ref3 = dat `atV`  5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
+        -- ref4 = dat `atV`  7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
+        -- ref5 = dat `atV`  9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
+        -- ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
 
-        sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6]
-        
+        -- sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6]
+ 
+        -- -- NEW CODE:
 
-        m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
-        c = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> mcSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) m
+        -- -- Create a list of indices to extract data
+        indices = signal[0, 1, 3, 5, 7, 9, 11]
+
+        -- Create the signal vector using mapSY
+        sv = mapSY (`extractSignal` dat) indices
+
+        -- -- END OF NEW CODE
+
+        m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv 
+        c = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> mcSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) m 
 
         
         p1 = fromSignal c !! 0; p1mat = fromMatrix p1 !! 0; p1List = p1mat `atV` 0
@@ -288,27 +317,36 @@ procMatrix6 dimx dimy dat = cms !! head sorList
         pOrder = qsort pLists
         sorList = findIndices (\l -> l <= pOrder !! 0) revpLists
         
+
+
 procMatrix9 :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double) 
 procMatrix9 dimx dimy dat = cms !! head sorList
         where
 
         t = dat `atV` 0; st = fromSignal t !! 0
-        
-        ref1 = dat `atV`  1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
-        ref2 = dat `atV`  3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
-        ref3 = dat `atV`  5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
-        ref4 = dat `atV`  7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
-        ref5 = dat `atV`  9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
-        ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
-        ref7 = dat `atV` 13; sr7 = fromSignal ref7 !! 0; ssr7 = vector [sr7]
-        ref8 = dat `atV` 15; sr8 = fromSignal ref8 !! 0; ssr8 = vector [sr8]
-        ref9 = dat `atV` 17; sr9 = fromSignal ref9 !! 0; ssr9 = vector [sr9]
 
+        -- -- OLD CODE
+        -- ref1 = dat `atV`  1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
+        -- ref2 = dat `atV`  3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
+        -- ref3 = dat `atV`  5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
+        -- ref4 = dat `atV`  7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
+        -- ref5 = dat `atV`  9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
+        -- ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
+        -- ref7 = dat `atV` 13; sr7 = fromSignal ref7 !! 0; ssr7 = vector [sr7]
+        -- ref8 = dat `atV` 15; sr8 = fromSignal ref8 !! 0; ssr8 = vector [sr8]
+        -- ref9 = dat `atV` 17; sr9 = fromSignal ref9 !! 0; ssr9 = vector [sr9]
 
-        -- parallism is here
+        -- sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6, ssr7, ssr8, ssr9]
 
-        sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6, ssr7, ssr8, ssr9]
+        -- -- NEW CODE:
 
+        -- -- Create a list of indices to extract data
+        indices = signal[1, 3, 5, 7, 9, 11, 13, 15, 17]
+
+        -- Create the signal vector using mapSY
+        sv = mapSY (`extractSignal` dat) indices
+
+        -- -- END OF NEW CODE
 
         m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
         c = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> mcSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) m
@@ -352,26 +390,26 @@ main = do
 
 
 
-    test <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Itest0.dat" ReadMode; contentsTest <- hGetContents test
+    test <- openFile "SampleData/Itest0.dat" ReadMode; contentsTest <- hGetContents test
 
-    ref1 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0A.dat" ReadMode; contentsRef1 <- hGetContents ref1
-    ref2 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0B.dat" ReadMode; contentsRef2 <- hGetContents ref2
-    ref3 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0C.dat" ReadMode; contentsRef3 <- hGetContents ref3
-    ref4 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0D.dat" ReadMode; contentsRef4 <- hGetContents ref4
-    ref5 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0E.dat" ReadMode; contentsRef5 <- hGetContents ref5
-    ref6 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0F.dat" ReadMode; contentsRef6 <- hGetContents ref6
-    ref7 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0G.dat" ReadMode; contentsRef7 <- hGetContents ref7
-    ref8 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0H.dat" ReadMode; contentsRef8 <- hGetContents ref8
-    ref9 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0I.dat" ReadMode; contentsRef9 <- hGetContents ref9
-    ref10 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0J.dat" ReadMode; contentsRef10 <- hGetContents ref10
-    ref11 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0K.dat" ReadMode; contentsRef11 <- hGetContents ref11
-    ref12 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0L.dat" ReadMode; contentsRef12 <- hGetContents ref12
-    ref13 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0M.dat" ReadMode; contentsRef13 <- hGetContents ref13
-    ref14 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0N.dat" ReadMode; contentsRef14 <- hGetContents ref14
-    ref15 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0O.dat" ReadMode; contentsRef15 <- hGetContents ref15
-    ref16 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0P.dat" ReadMode; contentsRef16 <- hGetContents ref16
-    ref17 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0Q.dat" ReadMode; contentsRef17 <- hGetContents ref17
-    ref18 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0R.dat" ReadMode; contentsRef18 <- hGetContents ref18
+    ref1 <- openFile "SampleData/Iref0A.dat" ReadMode; contentsRef1 <- hGetContents ref1
+    ref2 <- openFile "SampleData/Iref0B.dat" ReadMode; contentsRef2 <- hGetContents ref2
+    ref3 <- openFile "SampleData/Iref0C.dat" ReadMode; contentsRef3 <- hGetContents ref3
+    ref4 <- openFile "SampleData/Iref0D.dat" ReadMode; contentsRef4 <- hGetContents ref4
+    ref5 <- openFile "SampleData/Iref0E.dat" ReadMode; contentsRef5 <- hGetContents ref5
+    ref6 <- openFile "SampleData/Iref0F.dat" ReadMode; contentsRef6 <- hGetContents ref6
+    ref7 <- openFile "SampleData/Iref0G.dat" ReadMode; contentsRef7 <- hGetContents ref7
+    ref8 <- openFile "SampleData/Iref0H.dat" ReadMode; contentsRef8 <- hGetContents ref8
+    ref9 <- openFile "SampleData/Iref0I.dat" ReadMode; contentsRef9 <- hGetContents ref9
+    ref10 <- openFile "SampleData/Iref0J.dat" ReadMode; contentsRef10 <- hGetContents ref10
+    ref11 <- openFile "SampleData/Iref0K.dat" ReadMode; contentsRef11 <- hGetContents ref11
+    ref12 <- openFile "SampleData/Iref0L.dat" ReadMode; contentsRef12 <- hGetContents ref12
+    ref13 <- openFile "SampleData/Iref0M.dat" ReadMode; contentsRef13 <- hGetContents ref13
+    ref14 <- openFile "SampleData/Iref0N.dat" ReadMode; contentsRef14 <- hGetContents ref14
+    ref15 <- openFile "SampleData/Iref0O.dat" ReadMode; contentsRef15 <- hGetContents ref15
+    ref16 <- openFile "SampleData/Iref0P.dat" ReadMode; contentsRef16 <- hGetContents ref16
+    ref17 <- openFile "SampleData/Iref0Q.dat" ReadMode; contentsRef17 <- hGetContents ref17
+    ref18 <- openFile "SampleData/Iref0R.dat" ReadMode; contentsRef18 <- hGetContents ref18
    
      
      ----- Dataset Arrangement---------------------------------------------------------------------------------------------
@@ -438,7 +476,17 @@ main = do
 
 
     ----- Output File ------------------------------------------------------------------------------------------------
-    writeFile "/home/marcello-costa/workspace/AR1MoC/Out/CD0.txt" (show m)
-    -- writeFile "/home/marcello-costa/workspace/AR1MoC/Out/Test1.txt" (show intest)
-    -- writeFile "/home/marcello-costa/workspace/AR1MoC/Out/Iref2.txt" (show inref) 
-    
+    writeFile "Out/CD0.txt" (show m)
+    -- writeFile "Out/Test1.txt" (show intest)
+    -- writeFile "Out/Iref2.txt" (show inref) 
+
+
+    ---- GHC terminal ----------------------------------------------------------------------------------------------
+    -- ghci
+    -- :load Demo1.hs    
+    --- main
+
+      ---- GHC terminal with parallelism ----------------------------------------------------------------------------------------------
+    -- ghc -O2 -threaded --make Demo1.hs 
+    -- time ./Demo1 +RTS -s -N12
+   
