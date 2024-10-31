@@ -1,0 +1,108 @@
+/home/marcello-costa/workspace/ImageProcessing/forsyde-atom.cabal:
+  hash: 5df649f8c254018103bf7a16289f3a059969a00be6e1861e67d5c83a5fdcc9ec
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom.hs:
+  hash: 5318d57320c8d259298295459803186194c89ad808607e2c344810a614c2cbca
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/ExB.hs:
+  hash: a70939c16d9c5835caf625ca47ae6ae408337d27f1048917f6ee18545cd50c31
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/ExB/Absent.hs:
+  hash: b3d890ff11755ed5525455f2cd9c19fa4c1f794e4fd31bd7c709789b7ab2960b
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC.hs:
+  hash: ed18df8838ea81dbc4f48294c8e2a700e615e9cce9068d64b5899319a07970e9
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/CT.hs:
+  hash: 652a78919ade442f8a4a5cf8b1e2293ae454266f4523936e24f3be84feddb526
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/CT/Core.hs:
+  hash: 95c9037336eec106ca559f06406e574ff15b86ba3f9a4096af676467baeb8b77
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/CT/Interface.hs:
+  hash: 058822955b12288ee70969c348773da859c9b426bae1f141240ad66ee750ecc2
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/CT/Lib.hs:
+  hash: 8d2dc7bf9ff5a95a2bb933bafbfb563f784d3707ff4cec6a65d6cac382c1d06a
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE.hs:
+  hash: 7649804a45410005a6a65bc9ec3a8124b052701eca91fef904b23128574b28ef
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/Core.hs:
+  hash: 413a74e0d271030c45f9696309c7e5cb3dd7551259afbc4153517ca1e14b8256
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/Hybrid.hs:
+  hash: 14dffef8e8a2ac7382206a787f7d76ec325106d1c6d900d0382a7aeda638993a
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/Interface.hs:
+  hash: 03d6770d576f75a079085bb8a4503946c0deb25f2c7a2650a265260c00792631
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/Lib.hs:
+  hash: 9342fcee2de1b17050aef103ab5a87d2e5a6214f0030954412db0494c610013c
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/React.hs:
+  hash: 3bb43ea078778326cb92e87bea8668152aaeef1aff38dbabbe5a8836eb3abf1c
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/React/Core.hs:
+  hash: bc1456edf0b08b2e6620cbeaf7d719f80161c58ffe592f7689203f6a78a78b20
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/React/LF.hs:
+  hash: 0c94b9acef2102c3e9af1fab7d2edec9e27ff2d8a2df3d31ea898b2662c6df09
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/DE/React/Lib.hs:
+  hash: ab8b4069661e390017f605d07438c0297460e952576b73dcd9f3070d97f365c7
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF.hs:
+  hash: 107f76db41d9559e5fa65abc4e1aa2b8e065a6621a8474c132f68c26aa3853a1
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/BDF.hs:
+  hash: 7c931601b1594240a31e80ce7c893c5db3b31f3cfc04effd2af49ced81c5101b
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/CSDF.hs:
+  hash: 052d1045280048fc6f5629ceff8ce99e03ff8fadb9d0fd08d57bab4c90534af4
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/Core.hs:
+  hash: 1411b5ee3aa08575c9a7e389b3b9b8518364ae416ed01aac4b00bd68fe046f3d
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/Interface.hs:
+  hash: 073b1b09772aa12d7535b18acb921735e5c5492068a5ffa28c95b32a157d7d18
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/SADF.hs:
+  hash: 671538a40440b985815bf4cf2f9f7ed582c88001a9dea3316d173597d3f4028d
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/SADFDemo.hs:
+  hash: f21a94b90151c80fcedf22303f0beae3203baf13d860d792336f6e5d1968bba8
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SDF/SDF.hs:
+  hash: 7f05ff4055d850ee3eff4d87cd70a9e184d0b9a24c782fb59e3939a26a5d507b
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SY.hs:
+  hash: b5379fb5bcc1b69b305e485f43cae0627be7a749dbf1c130a661bad8b35a6e74
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SY/Clocked.hs:
+  hash: 4ad929f19911bfed4e202b1768ea4973993f13e6efe029915fa7b56c23c454f4
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SY/Core.hs:
+  hash: 4f23b57910a2498aa8e9693fc8e9a47ab69aee79d55a38e89118ca92a26cab55
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SY/Hybrid.hs:
+  hash: cbeb9ea7c7c4a5f9416359283a9c5c769670b527ca7cc216be1c38d5784118b5
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SY/Interface.hs:
+  hash: 4cf6b9ef350ca66c7d7bda06791de7006abaaeb11370237843cd44a067954abf
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/SY/Lib.hs:
+  hash: 637d82020333528c550c364b799ad5a46f37222a17332556448f26044cdcdc48
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/Stream.hs:
+  hash: 35129e51f5ad5af12fa92afa689b8a43f2462bc2b5400528d52567b28b51ed46
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/Time.hs:
+  hash: b2d181d6049d28198ee575237e34450726474361b425472d4f41797c6ae497f7
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/MoC/TimeStamp.hs:
+  hash: 3de2fadf4a4dd5ded38c0410f325849ec629944d6dc2307a832dff05f1926d75
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Prob.hs:
+  hash: 8c09fa7eee6e2cc17f4f1f01620b1b291f8930cf072db7089891307e41e29aed
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Prob/Normal.hs:
+  hash: 00fed38f8c57d01bd172c46d82b9315ae17457f5b35cab21c1998f89b2a5686c
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Prob/Uniform.hs:
+  hash: af9e734bca4e116d9fd67782aae8e1a1f13423fe2c2eacdc1af33f6e733be992
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel.hs:
+  hash: d922259a6d18e778bf4cc805fcaba224d98a2b275d171bf245f0a9ea8e685cb5
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/FastVector.hs:
+  hash: 48a49516272e76b196fff0ec9c61c0ae04253e5ee212a99287658ca23d93b852
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/FastVector/Cube.hs:
+  hash: bb55b0753b22e8099f87b4b6d823aef4432a67931c9dd482f4d2f6a22cacb1af
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/FastVector/DSP.hs:
+  hash: b2e19f84759cd47c1817308de9bc712fbb024980b9360e03e1476619e7cbce94
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/FastVector/Interface.hs:
+  hash: d8e47e126bcf3bfd0ff4b9011c237db75b5049419defe1bb5fa0078bbf7177ba
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/FastVector/Lib.hs:
+  hash: 69a6f3fc8425bcf9ead0cdd7e0e41bfc61e8e9390badad7bcb40568202650982
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/FastVector/Matrix.hs:
+  hash: b8c25bd43b398d55abe6fee3b8c4f122406a5d1b73787ba0fdac9b7e45e27ffb
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector.hs:
+  hash: 46c7c21e7201015b8b9a8762b39afbed8765d24c321a64fdcbc9bcb404f6faac
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector/Core.hs:
+  hash: 4c108f5b571c44f3f73f1f4788bdb487059357a246bf0740f0322c4e76a3a6a5
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector/Cube.hs:
+  hash: dccd30d523e82c0cc1a39312a1c07636c5fd5767515cca0faeee8903f2cefe29
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector/DSP.hs:
+  hash: 09e3d9edf03add208ec24a5b96cd247ddbb4b40cbc4d3cab80d741bcb9eeb078
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector/Interface.hs:
+  hash: df03feb02bf1b844ff109ae330f2054b7a2e16ebb4c48c0942542cae58ab3e77
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector/Lib.hs:
+  hash: bf44301a4c33e1146f611c6ceb7117fdd08f7d16d95695f4c643f0ee7dd962f6
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Skel/Vector/Matrix.hs:
+  hash: 977d6c2bec78f24efe6a88ad5db572e5814407dea0f38753408cb23278b8f64f
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Utility/Plot.hs:
+  hash: c16563b23cd8e0f520f207558b2934eaffbcea2f3a5d7b90ebaf09e4e4241b2e
+/home/marcello-costa/workspace/ImageProcessing/src/ForSyDe/Atom/Utility/Tuple.hs:
+  hash: 750a10f00d4f25b599bba39332d041919fd8d31caa73ab13397efb101ebe43dc

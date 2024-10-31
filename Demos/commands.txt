@@ -1,0 +1,9 @@
+   RUN CODE USING THE TERMINAL (Linux):
+   1. Install the threadscope
+   sudo apt install threadscope  
+   
+   2. Create the executable file
+   ghc -O2 Demo_Parallel.hs -threaded -rtsopts -eventlog
+   
+   3. Run
+   ./Demo_Parallel demo.1.txt +RTS -N4 -ls; threadscope Demo_Parallel.eventlog
