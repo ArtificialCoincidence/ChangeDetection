@@ -7,6 +7,7 @@ package types is
     -- CONSTANTS
 
     -- DATA TYPES
+    type bus_array is array(15 downto 0) of signed (7 downto 0);
 
 end package;
 

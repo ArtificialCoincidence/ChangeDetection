@@ -208,7 +208,7 @@ procMatrix1 dimx dimy dat = cm1
         
 
 -- 4-lags test
-procMatrix :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double) 
+procMatrix :: Int -> Int -> ForSyDe.Shallow.Vector (Signal (ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double) 
 procMatrix dimx dimy dat = cms !! head sorList
         where
 

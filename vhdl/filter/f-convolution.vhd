@@ -65,3 +65,13 @@ begin
 
     end process;
 end behavioral;
+
+-- -- Solution, resize the result
+-- Y7 <= resize (
+--  arg => Y7 + A,
+--  size_res => Y7,
+--  overflow_style => fixed_saturate,
+--  -- fixed_wrap
+--  round_style => fixed_round
+--  -- fixed_truncate
+--  );
