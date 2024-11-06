@@ -17,7 +17,7 @@ import Control.Monad
 import Data.Maybe
 import Data.Vector.Unboxed qualified as U
 import Data.Massiv.Array
-import Data.Massiv.Array.IO
+--import Data.Massiv.Array.IO
 
 
 
