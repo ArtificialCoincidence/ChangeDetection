@@ -18,12 +18,17 @@ private:
 public:
 	Matrix(size_t r, size_t c) :row(r), col(c), data(r* c) {}
 	double& operator()(size_t r, size_t c);//r and c start from 0.
-	void operator+(Matrix& m);
-	void readData(string filename);
-	friend double Pearson(Matrix& a, Matrix& b);
+	const double& operator()(size_t r, size_t c)const;
+	Matrix& operator+(Matrix &m);
+	Matrix& operator=(const Matrix &m);
+	void readData(const string& filename);
+	void writeData(const string& filename);
+	void scale(double rho);
+	friend double Pearson( Matrix& a, Matrix& b);
 	friend Matrix* SpatialFilter(Matrix& a);
 	friend void AnomalyDetection(Matrix& a);
-	void scale(double rho);
+	friend Matrix Scale(Matrix& a,double rho);
+
 };
 
 

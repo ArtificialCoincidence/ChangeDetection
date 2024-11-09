@@ -1,21 +1,32 @@
 #include"matrix.h"
-double& Matrix::operator()(size_t r, size_t c)//r and c start from 0
+double& Matrix::operator()(size_t r, size_t c)  //r and c start from 0
 {
 	if (r >= row || r < 0 || c >= col || c < 0)
 		throw out_of_range("Index out of bound");
 	return data[row * r + c];
 }
 
+const double& Matrix::operator()(size_t r, size_t c)const
+{
+	if (r >= row || r < 0 || c >= col || c < 0)
+		throw out_of_range("Index out of bound");
+	return data[row * r + c];
 
-void Matrix::operator+(Matrix& m) {
+}
+Matrix& Matrix::operator+(Matrix&m) {
 	int n = data.size();
 	for (int i = 0; i < n; ++i)
 		data[i] += m.data[i];
-	return;
+	return *this;
 }
 
+Matrix& Matrix::operator=(const Matrix& m)
+{
+	this->data = m.data;
+	return *this;
+}
 
-void Matrix::readData(string filename) {
+void Matrix::readData(const string& filename) {
 	ifstream in(filename);
 	try {
 		if (!in.is_open())
@@ -28,17 +39,47 @@ void Matrix::readData(string filename) {
 	for (int i = 0; i < row * col; ++i) {
 		in >> data[i];
 	}
+	in.close();
 
 }
+
+void Matrix::writeData(const string& filename) {
+	ofstream out(filename);
+	try {
+		if(!out.is_open())
+			throw runtime_error("Failed to open file: " + filename);
+
+	}
+	catch (const runtime_error& e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
+	for (int i = 0; i < row; ++i)
+	{
+		for (int j = 0; j < col; ++j) {
+			out << (*this)(i, j)<<" ";
+		}
+		out << endl;
+	}
+	out.close();
+
+}
+
 
 void Matrix::scale(double rho) {
 	for (int i = 0; i < data.size(); ++i)
 		data[i] *= rho;
 }
 
+Matrix Scale(Matrix& a,double rho) {
+	Matrix tmp = a;
+	for (int i = 0; i < tmp.data.size(); ++i)
+		tmp.data[i] *= rho;
+	return tmp;
+}
+
 double Pearson(Matrix& a, Matrix& b) {
-	vector<double>& x = a.data;
-	vector<double>& y = b.data;
+	const vector<double>& x = a.data;
+	const vector<double>& y = b.data;
 	if (x.size() != y.size())
 		throw std::invalid_argument("Vectors x and y must have the same size.");
 	int n = x.size();
@@ -55,8 +96,13 @@ double Pearson(Matrix& a, Matrix& b) {
 		sumY2 += dy * dy;
 	}
 	double denominator = sqrt(sumX2) * sqrt(sumY2);
-	if (denominator == 0) {
-		throw runtime_error("Division by zero in correlation calculation");
+	try {
+		if (denominator == 0) {
+			throw runtime_error("Division by zero in correlation calculation");
+		}
+	}
+	catch (const std::runtime_error& e) {
+		cerr << "Error: " << e.what() << std::endl;
 	}
 	return sumXY / denominator;
 	
@@ -93,18 +139,36 @@ Matrix* SpatialFilter(Matrix& a)
 	
 }
 
+static double quantile(vector<double>& data, double q)
+{
+	int n = data.size();
+	double quantile = q * (n - 1.0);
+	int lower = static_cast<int>(quantile);
+	int upper = lower + 1;
+	if (upper >= 1) return data[lower];
+	double fraction = quantile - lower;
+	return fraction * data[upper] + (1 - fraction) * data[lower];
+}
+
+static double MidSpread(vector<double>& data, int q) {//to be verified
+	sort(data.begin(), data.end());
+	return quantile(data, 1.0 / q) - quantile(data, (q - 1.0) / q);
+}
+
+
 void AnomalyDetection(Matrix& a) {
 	vector <double> data = a.data;
-	sort(data.begin(), data.end());
-	double thresholdUp,thresholdDown;
-	//need tobe modify
-	//
-	//
-	//
-	//
+	double thresholdDown = MidSpread(data, 16);
+	double thresholdUp = MidSpread(data, 12);
 	for (double& v : a.data)
-		if (v > thresholdDown && v < thresholdDown)
+		if (v > thresholdUp && v < thresholdDown)
 			v = 0;
 	return;
 
 }
+
+
+
+
+
+
