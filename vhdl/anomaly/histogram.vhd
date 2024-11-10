@@ -5,37 +5,39 @@ use ieee.std_logic_arith.all;
 
 entity histogram is
     generic(
-        IM_SIZE : integer := 250
+        IM_SIZE     : integer := 250;
+        ADDR_SIZE   : integer := 32;
+        WORD_SIZE   : integer := 32
     );
     port (
-        clk : in std_logic;
-        rstram : in std_logic; -- rst
-        start_cntr : in std_logic; -- data valid in
-        wren : out std_logic;  -- write RAM enable, use to pause stream
+        clk         : in std_logic;
+        rstram      : in std_logic; -- rst
+        start_cntr  : in std_logic; -- data valid in
+        wren        : out std_logic;  -- write RAM enable, use to pause stream
 
-        addrin : in std_logic_vector(14 downto 0) ; -- device data as address for RAM
-        datain : in std_logic_vector (14 downto 0); -- RAM data out
-        data_out : out std_logic_vector(14 downto 0); -- RAM data in
-        ramwraddr : out std_logic_vector(14 downto 0) -- BRAM write address: delayed addrin or ramp
+        addrin      : in std_logic_vector(ADDR_SIZE-1 downto 0) ; -- device data as address for RAM
+        datain      : in std_logic_vector (WORD_SIZE-1 downto 0); -- RAM data out
+        data_out    : out std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data in
+        ramwraddr   : out std_logic_vector(ADDR_SIZE-1 downto 0) -- BRAM write address: delayed addrin or ramp
 	);
 end histogram;
 
 architecture hlsm of histogram is
 
-    constant cntr_value : integer := IM_SIZE*IM_SIZE;
+    constant cntr_value : std_logic_vector(6 downto 0) := "1100100";
 
-    signal wr_addr, wr_addr1 : std_logic_vector(14 downto 0);
-    signal pre_cntr, next_cntr : std_logic_vector(14 downto 0); -- count num of samples for which histogram to be computed.
-    signal pre_addrcnt, next_addrcnt: std_logic_vector(14 downto 0);
-    signal addr : std_logic_vector(14 downto 0);
+    signal wr_addr, wr_addr1 : std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal pre_cntr, next_cntr : std_logic_vector(ADDR_SIZE-1 downto 0); -- count num of samples for which histogram to be computed.
+    signal pre_addrcnt, next_addrcnt: std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal addr : std_logic_vector(ADDR_SIZE-1 downto 0);
 
 begin
     addr <= pre_addrcnt when rstram = '1' else addrin; 
 
-    process(clk,rstram)
+    process(clk, rstram)
     begin
         if rising_edge(clk) then
-            if(rstram = '1') then
+            if(rstram = '1' or start_cntr = '0') then
                 pre_cntr <= (others => '0');
             else 
                 pre_cntr <= next_cntr;
@@ -62,17 +64,17 @@ begin
             next_cntr <= pre_cntr + '1';
         end if;
 
-        if(rstram = '1') then
+        if(rstram = '1' or start_cntr = '0') then
             data_out <= (others => '0');
         else
-            if(datain = "111111111111110") then -- prevent overflow
+            if(datain = "1110") then -- prevent overflow
                 data_out <= datain;
             else
                 data_out <= datain + '1';
             end if;
         end if;
 
-        ramwraddr <= wr_addr1;
+        ramwraddr <= wr_addr;
     end process;
 
     process(start_cntr, pre_addrcnt) -- generate ramp to clear BRAM

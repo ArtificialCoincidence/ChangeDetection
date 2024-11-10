@@ -3,10 +3,10 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use ieee.fixed_pkg.all;
 
-entity TB_avg_filter is
-end TB_avg_filter;
+entity tb_avg_filter is
+end tb_avg_filter;
 
-architecture test of TB_avg_filter is
+architecture test of tb_avg_filter is
 
   component avg_filter is
     generic(

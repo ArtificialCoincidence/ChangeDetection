@@ -3,23 +3,22 @@ use ieee.std_logic_1164.all;
 use ieee.std_logic_unsigned.all;
 use ieee.std_logic_arith.all;
 
--- TO DO: 
--- add pulse gen?
+-- TO DO:
 -- calculate quantile index
 -- generate data out
--- redo structure
-
 
 entity anomaly is
     generic(
-        IM_SIZE : integer := 250 
+        IM_SIZE : integer := 250;
+		ADDR_SIZE : integer := 32;
+		WORD_SIZE : integer := 32
     );
     port (
-			clk 		: in std_logic;
-			rst			: in std_logic;	
-			data_valid	: in std_logic;
-			img_data_i	: in std_logic_vector(15 downto 0); -- pixel data in
-			img_data_o	: out std_logic_vector(15 downto 0) -- pixel data out
+		clk 		: in std_logic;
+		rst			: in std_logic;
+		data_valid	: in std_logic;
+		img_data_i	: in std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data in
+		img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0) -- pixel data out
 	);
 end anomaly;
 
@@ -27,7 +26,9 @@ architecture rtl of anomaly is
 
 	component histogram is
 		generic(
-			IM_SIZE : integer := 250
+			IM_SIZE : integer := 250;
+			ADDR_SIZE : integer := 32;
+			WORD_SIZE : integer := 32
 		);
 		port (
 			clk : in std_logic;
@@ -35,38 +36,42 @@ architecture rtl of anomaly is
 			start_cntr : in std_logic; -- data valid in
 			wren : out std_logic;  -- write RAM enable, use to pause stream
 	
-			addrin : in std_logic_vector(14 downto 0) ; -- device data as address for RAM
-			datain : in std_logic_vector (15 downto 0); -- RAM data out
-			data_out : out std_logic_vector(15 downto 0); -- RAM data in
-			ramwraddr : out std_logic_vector(14 downto 0) -- BRAM write address: delayed addrin or ramp
+			addrin : in std_logic_vector(ADDR_SIZE-1 downto 0) ; -- device data as address for RAM
+			datain : in std_logic_vector (WORD_SIZE-1 downto 0); -- RAM data out
+			data_out : out std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data in
+			ramwraddr : out std_logic_vector(ADDR_SIZE-1 downto 0) -- BRAM write address: delayed addrin or ramp
 		);
 	end component;
 	
-	component BRAM_histogram is
+	component bram_histogram is
+		generic(
+			ADDR_SIZE : integer := 32;
+			WORD_SIZE : integer := 32
+		);
 		port (
-			clock		: IN STD_LOGIC;
-			data		: IN STD_LOGIC_VECTOR (15 DOWNTO 0);
-			rdaddress	: IN STD_LOGIC_VECTOR (14 DOWNTO 0);
-			wraddress	: IN STD_LOGIC_VECTOR (14 DOWNTO 0);
-			wren		: IN STD_LOGIC;
-			q			: OUT STD_LOGIC_VECTOR (15 DOWNTO 0)
+			clk 			: in std_logic;
+			data_valid		: in std_logic;
+			data			: in std_logic_vector(WORD_SIZE-1 downto 0);
+			rdaddress		: in std_logic_vector(ADDR_SIZE-1 downto 0);
+			wraddress		: in std_logic_vector(ADDR_SIZE-1 downto 0);
+			wren			: in std_logic;
+			q				: out std_logic_vector(WORD_SIZE-1 downto 0)
 		);
 	end component;
 	
-	signal ram_data_o, ram_data_i : std_logic_vector (15 downto 0);
-	signal wraddress, input_data_res : std_logic_vector (14 downto 0);
-	signal wren, rstram : std_logic; 
+	signal ram_data_o, ram_data_i : std_logic_vector (WORD_SIZE-1 downto 0);
+	signal wraddress : std_logic_vector (ADDR_SIZE-1 downto 0);
+	signal wren : std_logic; 
 	
 begin
-
-	input_data_res <= img_data_i(15 downto 1);
 	
 	HIST: histogram
-	generic map(IM_SIZE)
-	port map(clk, rstram, data_valid, wren, input_data_res, ram_data_o, ram_data_i, wraddress);
+	generic map(IM_SIZE, ADDR_SIZE, WORD_SIZE)
+	port map(clk, rst, data_valid, wren, img_data_i, ram_data_o, ram_data_i, wraddress);
 	
-	BRAM: BRAM_histogram
-	port map(clk, ram_data_i, input_data_res, wraddress, wren, ram_data_o);
+	BRAM: bram_histogram
+	generic map(ADDR_SIZE, WORD_SIZE)
+	port map(clk, data_valid, ram_data_i, img_data_i, wraddress, wren, ram_data_o);
 	
 end rtl;
 	
