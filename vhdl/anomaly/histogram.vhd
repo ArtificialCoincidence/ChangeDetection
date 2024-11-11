@@ -49,8 +49,7 @@ begin
                 pre_addrcnt <= next_addrcnt;
             end if;
 
-            wr_addr1 <= addr;	
-            wr_addr <= wr_addr1; -- delay write address by 2 clock
+            wr_addr <= addr; -- delay write address
         end if;
     end process;
 

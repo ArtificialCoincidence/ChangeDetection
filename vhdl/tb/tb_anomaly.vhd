@@ -30,7 +30,6 @@ architecture test of tb_anomaly is
             WORD_SIZE	    : integer := 16;
             ADDR_SIZE	    : integer := 16
         );
-
         port(
             clk         : in std_logic;
             rst         : in std_logic;
@@ -40,8 +39,8 @@ architecture test of tb_anomaly is
         );
     end component;
 
-    constant WORD_SIZE : integer := 4;
-    constant ADDR_SIZE : integer := 4;
+    constant WORD_SIZE : integer := 8;
+    constant ADDR_SIZE : integer := 8;
 
     signal clk_tb       : std_logic := '1';
     signal rst_tb       : std_logic := '0';
