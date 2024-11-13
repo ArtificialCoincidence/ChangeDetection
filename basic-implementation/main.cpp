@@ -32,7 +32,7 @@ int main() {
 
 		Matrix* res = new Matrix(500, 500);
 		Matrix tmp1 = Scale(*reference, rho);
-		Matrix tmp2 = Scale(testMatrix, rho);
+		Matrix tmp2 = Scale(testMatrix, rho_y);
 		*res = tmp1 + tmp2;
 
 		//-----------SpatialFilter and AnomalyDetection--------
