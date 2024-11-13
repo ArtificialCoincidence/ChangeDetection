@@ -5,9 +5,9 @@ use ieee.std_logic_arith.all;
 
 entity histogram is
     generic(
-        IM_SIZE     : integer := 250;
-        ADDR_SIZE   : integer := 32;
-        WORD_SIZE   : integer := 32
+        IM_SIZE     : integer;
+        ADDR_SIZE   : integer;
+        WORD_SIZE   : integer
     );
     port (
         clk         : in std_logic;
@@ -24,12 +24,12 @@ end histogram;
 
 architecture hlsm of histogram is
 
-    constant cntr_value : std_logic_vector(6 downto 0) := "1100100";
+    constant cntr_value : std_logic_vector(6 downto 0) := "1100100";   -- make it generic
 
-    signal wr_addr, wr_addr1 : std_logic_vector(ADDR_SIZE-1 downto 0);
-    signal pre_cntr, next_cntr : std_logic_vector(ADDR_SIZE-1 downto 0); -- count num of samples for which histogram to be computed.
-    signal pre_addrcnt, next_addrcnt: std_logic_vector(ADDR_SIZE-1 downto 0);
-    signal addr : std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal wr_addr                      : std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal pre_cntr, next_cntr          : std_logic_vector(ADDR_SIZE-1 downto 0); -- num of samples for which histogram is computed.
+    signal pre_addrcnt, next_addrcnt    : std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal addr                         : std_logic_vector(ADDR_SIZE-1 downto 0);
 
 begin
     addr <= pre_addrcnt when rstram = '1' else addrin; 

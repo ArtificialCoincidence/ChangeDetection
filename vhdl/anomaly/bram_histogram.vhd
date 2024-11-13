@@ -6,8 +6,8 @@ use IEEE.math_real.all;
 
 entity bram_histogram is
     generic(
-        ADDR_SIZE : integer := 32;
-        WORD_SIZE : integer := 32
+        ADDR_SIZE : integer;
+        WORD_SIZE : integer
     );
 	port(
 		clk 			: in std_logic;

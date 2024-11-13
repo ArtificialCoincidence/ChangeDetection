@@ -10,8 +10,8 @@ use ieee.std_logic_arith.all;
 entity anomaly is
     generic(
         IM_SIZE : integer := 250;
-		ADDR_SIZE : integer := 32;
-		WORD_SIZE : integer := 32
+		ADDR_SIZE : integer := 16;
+		WORD_SIZE : integer := 16
     );
     port (
 		clk 		: in std_logic;
@@ -19,6 +19,7 @@ entity anomaly is
 		data_valid	: in std_logic;
 		img_data_i	: in std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data in
 		img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0) -- pixel data out
+		-- rdaddr  		: in std_logic_vector(ADDR_SIZE-1 downto 0);    -- address (pixel index)
 	);
 end anomaly;
 
@@ -26,9 +27,9 @@ architecture rtl of anomaly is
 
 	component histogram is
 		generic(
-			IM_SIZE : integer := 250;
-			ADDR_SIZE : integer := 32;
-			WORD_SIZE : integer := 32
+			IM_SIZE : integer;
+			ADDR_SIZE : integer;
+			WORD_SIZE : integer
 		);
 		port (
 			clk : in std_logic;
@@ -45,8 +46,8 @@ architecture rtl of anomaly is
 	
 	component bram_histogram is
 		generic(
-			ADDR_SIZE : integer := 32;
-			WORD_SIZE : integer := 32
+			ADDR_SIZE : integer;
+			WORD_SIZE : integer
 		);
 		port (
 			clk 			: in std_logic;
