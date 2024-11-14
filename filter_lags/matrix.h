@@ -26,8 +26,8 @@ public:
 	void readData(const string& filename);
 	void writeData(const string& filename);
 	friend double Pearson( Matrix& a, Matrix& b);
-	friend void SpatialFilter(double* d_data,int rank);
-	Matrix* spatialFilter(Matrix&a);
+	friend __global__ void SpatialFilter(double* d_data,int size);
+	Matrix* spatialFilter();
 	friend void AnomalyDetection(Matrix& a);
 	friend Matrix Scale(Matrix& a,double rho);
 

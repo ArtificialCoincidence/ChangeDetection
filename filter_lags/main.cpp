@@ -37,7 +37,7 @@ int main() {
 
 		//-----------SpatialFilter and AnomalyDetection--------
 
-		res = SpatialFilter(*res);
+		res = res->spatialFilter();
 		AnomalyDetection(*res);
 		ref2.push_back(res);
 

@@ -103,43 +103,46 @@ double Pearson(Matrix& a, Matrix& b) {
 	
 }
 
-__global__ void SpatialFilter(double*d_data,int size)
+__global__ void SpatialFilter(double* d_data, int size)
 {
 	const int rank = 3;//3x3 kernel
+	const int row = 500;
+	const int col = 500;
 	const int kernelSize = rank * rank;
 	int offset[rank];
 	int minOffset = -((rank - 1) >> 1);
 	for (int i = 0; i < rank; ++i)
 		offset[i] = minOffset++;//{-1,0,1}
-	int index=blockIdx.x*blockDim.x+threadIdx.x;
-			double sum = 0;
-			for (auto di : offset) {
-				for (auto dj : offset) {
-					int r = max(0, i + di);
-					int c= max(0, j + dj);
-					r = min(static_cast<int>(a.row - 1), r);
-					c = min(static_cast<int>(a.col - 1), c);
-					sum +=a(r, c);
-				}
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+	if (index < size) {
+		int i=index/col;
+		int j=index%col;
+		double sum = 0;
+		for (auto di : offset) {
+			for (auto dj : offset) {
+				int r = max(0, i + di);
+				int c = max(0, j + dj);
+				r = min(static_cast<int>(row - 1), r);
+				c = min(static_cast<int>(col - 1), c);
+				sum += d_data[r*col+c];
 			}
-			(*res)(i, j) = sum / kernelSize;
+		}
 
-		
-	
-
-	return res;
-	
+		int tmp = sum / kernelSize;
+		__syncthreads();
+		d_data[index]=tmp;
+	}
 }
-Matrix* Matrix::spatialFilter(Matrix&a){
-
-	Matrix* res = new Matrix(a.row,a.col);
-	cudaMalloc(&d_data,a.row*a.col*sizeof(double));
-	cudaMemcpy(d_data,a.data(),a.row*a.col*sizeof(double),cudaMemcpyHostToDevice);
+Matrix* Matrix::spatialFilter(){
+	size_t size=row*col;
+	Matrix* res = new Matrix(row,col);
+	cudaMalloc(&d_data,size*sizeof(double));
+	cudaMemcpy(d_data,data.data(),size*sizeof(double),cudaMemcpyHostToDevice);
 	int blockSize=512;
-	int gridSize=(blocksize-1+a.row*a.col)/blockSize;
-	SpatialFilter<<<blockSize,gridSize>>> (d_data,a.row*a.col);
+	int gridSize=(blockSize-1+size)/blockSize;
+	SpatialFilter<<<gridSize,blockSize>>> (d_data,size);
 	
-	cudaMemcpy(res.data(),d_data,a.row*a.col*sizeof(double),cudaMemcpyHostToDevice);
+	cudaMemcpy(res->data.data(),d_data,size*sizeof(double),cudaMemcpyDeviceToHost);
 	cudaFree(d_data);
 	return res;
 
