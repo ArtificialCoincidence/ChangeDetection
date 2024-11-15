@@ -16,7 +16,7 @@ entity histogram is
         wren        : out std_logic;  -- write RAM enable, use to pause stream
 
         addrin      : in std_logic_vector(ADDR_SIZE-1 downto 0) ; -- device data as address for RAM
-        datain      : in std_logic_vector (WORD_SIZE-1 downto 0); -- RAM data out
+        data_in      : in std_logic_vector (WORD_SIZE-1 downto 0); -- RAM data out
         data_out    : out std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data in
         ramwraddr   : out std_logic_vector(ADDR_SIZE-1 downto 0) -- BRAM write address: delayed addrin or ramp
 	);
@@ -53,7 +53,7 @@ begin
         end if;
     end process;
 
-    process(datain, rstram, pre_cntr)
+    process(data_in, rstram, pre_cntr)
     begin
         if(pre_cntr >= cntr_value) then
             next_cntr <= pre_cntr;
@@ -66,10 +66,10 @@ begin
         if(rstram = '1' or start_cntr = '0') then
             data_out <= (others => '0');
         else
-            if(datain = "1110") then -- prevent overflow
-                data_out <= datain;
+            if(data_in = "1110") then -- prevent overflow
+                data_out <= data_in;
             else
-                data_out <= datain + '1';
+                data_out <= data_in + '1';
             end if;
         end if;
 

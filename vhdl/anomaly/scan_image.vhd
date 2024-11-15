@@ -25,7 +25,11 @@ begin
 	begin
         if rising_edge(clk) then
             if enable = '1' then
-                data_out <= data_in when outlayer = '1' else (others=>'0');
+                if outlayer = '1' then
+                    data_out <= data_in;
+                else 
+                    data_out <= (others=>'0');
+                end if;
             end if;
         end if;
 	end process;

@@ -12,7 +12,7 @@ entity threshold_cdf is
         clk         : in  std_logic;
         rst         : in  std_logic;
         enable      : in  std_logic;    -- histogram complete, start executing
-        read_value  : out std_logic;    -- high between 3rd and 4th quantile, flag
+        outlayer    : out std_logic;    -- high between 3rd and 4th quantile, flag
         datain      : in  std_logic_vector(WORD_SIZE-1 downto 0);  -- Histogram value from BRAM
         rdaddr      : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- Output threshold value (address)
     );
@@ -34,7 +34,7 @@ begin
             address_ramp   <= (others => '0');
         elsif rising_edge(clk) then
             if enable = '1' then
-                rdaddr <= std_logic_vector(pixel_count);
+                rdaddr <= std_logic_vector(to_unsigned(pixel_count, rdaddr'length));
                 if pixel_count >= tot_pixels then
                     pixel_count := 0;
                 end if;
@@ -43,21 +43,21 @@ begin
     end process;
 
     process(datain)
-        variable cumulative : unsigned(BIN_WIDTH-1 downto 0);
-        constant 3quantile : integer := tot_pixels*3/4;
-        constant 4quantile : integer := tot_pixels;
+        variable cumulative : unsigned(WORD_SIZE-1 downto 0);
+        constant quantile3 : integer := tot_pixels*3/4;
+        constant quantile4 : integer := tot_pixels;
     begin
         if rst = '1' then
             cumulative_sum <= (others => '0');
-            read_value     <= '0';
+            outlayer       <= '0';
         else
             cumulative := cumulative + unsigned(datain);
-            if cumulative >= 3quantile and cumulative <= 4quantile then
-                read_value <= '1';
+            if cumulative >= quantile3 and cumulative <= quantile4 then
+                outlayer <= '1';
             end if;
         end if;
 
-        cumulative_sum <= std_logic_vector(cumulative);
+        cumulative_sum <= cumulative;
     end process;
 
 end behavioral;
