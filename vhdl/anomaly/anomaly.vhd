@@ -5,9 +5,9 @@ use ieee.std_logic_arith.all;
 
 entity anomaly is
     generic(
-        IM_SIZE 	: integer := 500;
-		ADDR_SIZE 	: integer := 16;
-		WORD_SIZE 	: integer := 16
+        IM_SIZE 	: integer;
+		ADDR_SIZE 	: integer;
+		WORD_SIZE 	: integer
     );
     port (
 		clk 		: in  std_logic;

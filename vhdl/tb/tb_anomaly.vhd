@@ -10,7 +10,7 @@ architecture test of tb_anomaly is
 
     component anomaly is
         generic(
-            IM_SIZE     : integer := 100;
+            IM_SIZE     : integer := 500;
             ADDR_SIZE   : integer := 16;
             WORD_SIZE   : integer := 16
         );
@@ -26,7 +26,7 @@ architecture test of tb_anomaly is
     component read_data is
         generic(
             file_path   : string := "";
-            ENTRIES		: integer := 100;
+            ENTRIES		: integer := 500;
             WORD_SIZE	: integer := 16;
             ADDR_SIZE	: integer := 16
         );
@@ -41,6 +41,7 @@ architecture test of tb_anomaly is
 
     constant WORD_SIZE  : integer := 8;
     constant ADDR_SIZE  : integer := 8;
+    constant IM_SIZE    : integer := 100;
 
     signal clk_tb       : std_logic := '1';
     signal rst_tb       : std_logic := '0';
@@ -54,7 +55,7 @@ begin
   
   dut: anomaly
     generic map(
-        IM_SIZE         => 100,
+        IM_SIZE         => IM_SIZE,
         ADDR_SIZE       => ADDR_SIZE,
         WORD_SIZE       => WORD_SIZE
     )
@@ -68,8 +69,8 @@ begin
 
   dmem: read_data
     generic map(
-        file_path       => "tb/files/datafile1.mem",
-        ENTRIES         => 100,
+        file_path       => "tb/files/AROutputs/AR1_Outputs_Changes/Sc_inref1.txt",
+        ENTRIES         => IM_SIZE,
         WORD_SIZE       => WORD_SIZE,
         ADDR_SIZE       => ADDR_SIZE
     )
@@ -92,7 +93,7 @@ begin
         address <= (others => '0');
         wait for 10.5 ns;
 
-        for i in 0 to 98 loop
+        for i in 0 to IM_SIZE-2 loop
             address <= std_logic_vector(unsigned(address) + 1);
             wait for 1 ns;
         end loop;
@@ -102,7 +103,7 @@ begin
         data_valid <= '0';
         wait for 1.5 ns;
         
-        for i in 0 to 98 loop
+        for i in 0 to IM_SIZE-2 loop
             address <= std_logic_vector(unsigned(address) + 1);
             wait for 1 ns;
         end loop;
