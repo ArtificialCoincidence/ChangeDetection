@@ -10,13 +10,12 @@ entity histogram is
         WORD_SIZE   : integer
     );
     port (
-        clk         : in std_logic;
-        rstram      : in std_logic; -- rst
-        start_cntr  : in std_logic; -- data valid in
-        wren        : out std_logic;  -- write RAM enable, use to pause stream
-
-        addrin      : in std_logic_vector(ADDR_SIZE-1 downto 0) ; -- device data as address for RAM
-        data_in      : in std_logic_vector (WORD_SIZE-1 downto 0); -- RAM data out
+        clk         : in  std_logic;
+        rstram      : in  std_logic; -- rst
+        start_cntr  : in  std_logic; -- data valid in
+        wren        : out std_logic; -- write RAM enable, use to pause stream
+        addrin      : in  std_logic_vector(ADDR_SIZE-1 downto 0); -- device data as address for RAM
+        data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data out
         data_out    : out std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data in
         ramwraddr   : out std_logic_vector(ADDR_SIZE-1 downto 0) -- BRAM write address: delayed addrin or ramp
 	);
@@ -24,7 +23,7 @@ end histogram;
 
 architecture hlsm of histogram is
 
-    constant cntr_value : std_logic_vector(6 downto 0) := "1100100";   -- make it generic
+    constant cntr_value : integer := IM_SIZE;
 
     signal wr_addr                      : std_logic_vector(ADDR_SIZE-1 downto 0);
     signal pre_cntr, next_cntr          : std_logic_vector(ADDR_SIZE-1 downto 0); -- num of samples for which histogram is computed.
@@ -66,11 +65,7 @@ begin
         if(rstram = '1' or start_cntr = '0') then
             data_out <= (others => '0');
         else
-            if(data_in = "1110") then -- prevent overflow
-                data_out <= data_in;
-            else
-                data_out <= data_in + '1';
-            end if;
+            data_out <= data_in + '1';
         end if;
 
         ramwraddr <= wr_addr;
