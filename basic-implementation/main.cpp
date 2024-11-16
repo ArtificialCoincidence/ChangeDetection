@@ -14,10 +14,10 @@ int main() {
 	vector<Matrix*> ref = { &refMatrix,&refMatrix2,&refMatrix3 };
 
 	//Modify the file path if the file is moved.
-	testMatrix.readData("C:/Users/chang/Desktop/Demos/SampleData/test0/Itest0.dat");
-	refMatrix.readData("C:/Users/chang/Desktop/Demos/SampleData/test0/Iref0A.dat");
-	refMatrix2.readData("C:/Users/chang/Desktop/Demos/SampleData/test0/Iref0B.dat");
-	refMatrix3.readData("C:/Users/chang/Desktop/Demos/SampleData/test0/Iref0C.dat");
+	testMatrix.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Itest0.dat");
+	refMatrix.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Iref0A.dat");
+	refMatrix2.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Iref0B.dat");
+	refMatrix3.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Iref0C.dat");
 
 	auto t2 = high_resolution_clock::now();
 	duration<double> duration = t2 - t1;
