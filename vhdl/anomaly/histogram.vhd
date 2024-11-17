@@ -17,7 +17,7 @@ entity histogram is
         addrin      : in  std_logic_vector(ADDR_SIZE-1 downto 0); -- device data as address for RAM
         data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data out
         data_out    : out std_logic_vector(WORD_SIZE-1 downto 0); -- RAM data in
-        ramwraddr   : out std_logic_vector(ADDR_SIZE-1 downto 0) -- BRAM write address: delayed addrin or ramp
+        ramwraddr   : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- BRAM write address: delayed addrin or ramp
 	);
 end histogram;
 

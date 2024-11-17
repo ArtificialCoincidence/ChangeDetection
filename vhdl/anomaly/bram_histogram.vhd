@@ -10,12 +10,12 @@ entity bram_histogram is
         WORD_SIZE : integer
     );
 	port(
-		clk 			: in std_logic;
-        data_valid      : in std_logic;
-		data			: in std_logic_vector(WORD_SIZE-1 downto 0);
-		rdaddress		: in std_logic_vector(ADDR_SIZE-1 downto 0);
-		wraddress		: in std_logic_vector(ADDR_SIZE-1 downto 0);
-		wren			: in std_logic;
+		clk 			: in  std_logic;
+        data_valid      : in  std_logic;
+		data			: in  std_logic_vector(WORD_SIZE-1 downto 0);
+		rdaddress		: in  std_logic_vector(ADDR_SIZE-1 downto 0);
+		wraddress		: in  std_logic_vector(ADDR_SIZE-1 downto 0);
+		wren			: in  std_logic;
 		q				: out std_logic_vector(WORD_SIZE-1 downto 0)
 	);
 end bram_histogram;
@@ -25,7 +25,9 @@ architecture behavioral of bram_histogram is
     -- memory
     subtype RAM_ADDR is natural range 0 to (2**ADDR_SIZE-1);
     type RAM_ARRAY is array(RAM_ADDR) of std_logic_vector(WORD_SIZE-1 downto 0);
-    signal memory : RAM_ARRAY := (others => (others => '0'));
+
+    signal memory   : RAM_ARRAY := (others => (others => '0'));
+    signal addr_pre : std_logic_vector(ADDR_SIZE-1 downto 0);
 
 begin
 	
@@ -33,12 +35,17 @@ begin
 	begin
 		if rising_edge(clk) then
             if wren = '1' and data_valid = '1' then
+                addr_pre <= rdaddress;
                 -- WRITE TO MEMORY
-                memory(to_integer(unsigned(wraddress))) <= data(WORD_SIZE-1 downto 0); 
+                memory(to_integer(unsigned(wraddress))) <= data; 
             end if;
-
-            -- READ MEMORY
-            q <= memory(to_integer(unsigned(rdaddress))); 
+            
+            if rdaddress = addr_pre and data_valid = '1' then
+                q <= data;
+            else
+                -- READ MEMORY
+                q <= memory(to_integer(unsigned(rdaddress)));
+            end if;
         end if;
 	end process;
 
