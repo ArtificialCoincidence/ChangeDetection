@@ -14,7 +14,8 @@ entity anomaly is
 		rst			: in  std_logic;
 		data_valid	: in  std_logic;
 		img_data_i	: in  std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data in
-		img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0) -- pixel data out
+		img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data out
+		e_o_i		: out std_logic
 	);
 end anomaly;
 
@@ -56,38 +57,42 @@ architecture rtl of anomaly is
 
 	component threshold_cdf is
 		generic (
-			IM_SIZE	   	: integer;
-			WORD_SIZE  	: integer;    -- Width of each histogram bin (number of bits)
-			ADDR_SIZE  	: integer     -- Log of number of histogram bins
+			IM_SIZE     : integer;
+			WORD_SIZE   : integer;    -- Width of each histogram bin (number of bits)
+			ADDR_SIZE   : integer     -- Log of number of histogram bins
 		);
 		port (
 			clk         : in  std_logic;
 			rst         : in  std_logic;
-			enable      : in  std_logic;   	-- histogram complete, start executing, use negated data valid(complementary to histogram)
-			outlayer    : out std_logic;    -- high between 3rd and 4th quantile, flag
-			datain      : in  std_logic_vector(WORD_SIZE-1 downto 0);  	-- Histogram value from BRAM
-			rdaddr      : out std_logic_vector(ADDR_SIZE-1 downto 0)  	-- Output threshold value (address)
+			enable      : in  std_logic;    -- histogram complete, start executing, use negated data valid
+			start_scan  : out std_logic;    -- values calulated, start scanning image
+			thrs1       : out std_logic_vector(ADDR_SIZE-1 downto 0);
+			datain      : in  std_logic_vector(WORD_SIZE-1 downto 0);  -- Histogram value from BRAM
+			rdaddr      : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- Output threshold value (address)
 		);
 	end component;
 
 	component scan_image is
 		generic(
-			IM_SIZE    	: integer;
-			ADDR_SIZE  	: integer;
-			WORD_SIZE  	: integer
+			IM_SIZE     : integer;
+			ADDR_SIZE   : integer;
+			WORD_SIZE   : integer
 		);
 		port(
-			clk 		: in  std_logic;
+			clk 	    : in  std_logic;
+			rst         : in  std_logic;
 			enable		: in  std_logic;     -- data valid signal negated
-			outlayer	: in  std_logic;     -- connected to read_value (thresholds)
-			data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0);  	-- from memory (original image)
+			start       : in  std_logic;
+			thrs1       : in  std_logic_vector(ADDR_SIZE-1 downto 0);
+			data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0);    -- from memory (original image)
 			data_out	: out std_logic_vector(WORD_SIZE-1 downto 0)    -- back to memory
+			e_o_i		: out std_logic;
 		);
 	end component;
 	
-	signal ram_data_o, ram_data_i 				: std_logic_vector (WORD_SIZE-1 downto 0);
-	signal wraddress, rdaddress, rdaddr_mux		: std_logic_vector (ADDR_SIZE-1 downto 0);
-	signal wren, outlayer						: std_logic; 
+	signal ram_data_o, ram_data_i 					: std_logic_vector (WORD_SIZE-1 downto 0);
+	signal wraddress, rdaddress, rdaddr_mux, thrs1	: std_logic_vector (ADDR_SIZE-1 downto 0);
+	signal wren, start								: std_logic;
 	
 begin
 	
@@ -101,13 +106,12 @@ begin
 
 	THRS: threshold_cdf
 	generic map(IM_SIZE, ADDR_SIZE, WORD_SIZE)
-	port map(clk, rst, data_valid, outlayer, ram_data_o, rdaddress);
+	port map(clk, rst, data_valid, start, thrs1, ram_data_o, rdaddress);
 
 	SCAN: scan_image
 	generic map(IM_SIZE, ADDR_SIZE, WORD_SIZE)
-	port map(clk, data_valid, outlayer, img_data_i, img_data_o);
+	port map(clk, rst, data_valid, start, thrs1, img_data_i, img_data_o, e_o_i);
 
 	rdaddr_mux <= img_data_i when data_valid = '1' else rdaddress;
 	
 end rtl;
-	

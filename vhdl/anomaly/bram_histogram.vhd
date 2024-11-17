@@ -37,7 +37,7 @@ begin
             if wren = '1' and data_valid = '1' then
                 addr_pre <= rdaddress;
                 -- WRITE TO MEMORY
-                memory(to_integer(unsigned(wraddress))) <= data; 
+                memory(to_integer(unsigned(wraddress))) <= data;
             end if;
             
             if rdaddress = addr_pre and data_valid = '1' then

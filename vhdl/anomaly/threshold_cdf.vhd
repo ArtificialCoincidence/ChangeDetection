@@ -1,6 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
+use ieee.fixed_pkg.all;
 
 entity threshold_cdf is
     generic (
@@ -11,8 +12,9 @@ entity threshold_cdf is
     port (
         clk         : in  std_logic;
         rst         : in  std_logic;
-        enable      : in  std_logic;    -- histogram complete, start executing, use negated data valid(complementary to histogram)
-        outlayer    : out std_logic;    -- high between 3rd and 4th quantile, flag
+        enable      : in  std_logic;    -- histogram complete, start executing, use negated data valid
+        start_scan  : out std_logic;    -- values calulated, start scanning image
+        thrs1       : out std_logic_vector(ADDR_SIZE-1 downto 0);
         datain      : in  std_logic_vector(WORD_SIZE-1 downto 0);  -- Histogram value from BRAM
         rdaddr      : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- Output threshold value (address)
     );
@@ -24,6 +26,7 @@ architecture behavioral of threshold_cdf is
 
     signal address_ramp     : unsigned(ADDR_SIZE-1 downto 0) := (others => '0');
     signal cumulative_sum   : unsigned(WORD_SIZE-1 downto 0) := (others => '0');
+    signal outlayer         : std_logic;
 
 begin
 
@@ -63,6 +66,19 @@ begin
         end if;
 
         cumulative_sum <= to_unsigned(cumulative, cumulative_sum'length);
+    end process;
+
+    process(outlayer, rst)
+    begin
+        if rst = '1' then
+            thrs1 <= (others => '0');
+            start_scan <= '0';
+        else
+            if rising_edge(outlayer) then
+                thrs1 <= std_logic_vector(address_ramp - 1);
+                start_scan <= '1';
+            end if;
+        end if;
     end process;
 
 end behavioral;

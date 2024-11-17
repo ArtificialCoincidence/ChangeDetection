@@ -11,24 +11,51 @@ entity scan_image is
     );
 	port(
 		clk 	    : in  std_logic;
+        rst         : in  std_logic;
 		enable		: in  std_logic;     -- data valid signal negated
-		outlayer	: in  std_logic;     -- connected to read_value (thresholds)
+        start       : in  std_logic;
+        thrs1       : in  std_logic_vector(ADDR_SIZE-1 downto 0);
 		data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0);    -- from memory (original image)
-		data_out	: out std_logic_vector(WORD_SIZE-1 downto 0)    -- back to memory
+		data_out	: out std_logic_vector(WORD_SIZE-1 downto 0);    -- back to memory
+        e_o_i       : out std_logic
 	);
 end scan_image;
 
 architecture behavioral of scan_image is
+
+    -- memory
+    subtype BUFFER_ADDR is natural range 0 to (IM_SIZE-1);
+    type BUFFER_ARRAY is array(BUFFER_ADDR) of std_logic_vector(WORD_SIZE-1 downto 0);
+
+    signal buffer_im    : BUFFER_ARRAY := (others => (others => '0'));
+
 begin
 	
-    process(clk) 
+    process(clk)
+        variable cntr_store, cntr_scan : integer := 0;
 	begin
-        if rising_edge(clk) then
+        if rst = '1' then
+            cntr_store := 0;
+            cntr_scan := 0;
+            e_o_i <= '0';
+        elsif rising_edge(clk) then
             if enable = '0' then
-                if outlayer = '1' then
-                    data_out <= data_in;
+                if cntr_store <= IM_SIZE-1 then
+                    buffer_im(cntr_store) <= data_in; 
+                    cntr_store := cntr_store + 1;
+                end if;
+            end if;
+            
+            if start = '1' then
+                if data_in >= thrs1 then
+                    if cntr_scan <= IM_SIZE-1 then
+                        data_out <= buffer_im(cntr_scan);
+                        cntr_scan := cntr_scan + 1;
+                    else
+                        e_o_i <= '1';
+                    end if;
                 else 
-                    data_out <= (others=>'0');
+                    data_out <= (others => '0');
                 end if;
             end if;
         end if;

@@ -39,9 +39,9 @@ architecture test of tb_anomaly is
         );
     end component;
 
-    constant WORD_SIZE  : integer := 8;
-    constant ADDR_SIZE  : integer := 8;
-    constant IM_SIZE    : integer := 100;
+    constant WORD_SIZE  : integer := 16;
+    constant ADDR_SIZE  : integer := 16;
+    constant IM_SIZE    : integer := 500;
 
     signal clk_tb       : std_logic := '1';
     signal rst_tb       : std_logic := '0';
@@ -107,6 +107,8 @@ begin
             address <= std_logic_vector(unsigned(address) + 1);
             wait for 1 ns;
         end loop;
+
+        report "END of IMAGE";
         wait;
 
     end process stim;

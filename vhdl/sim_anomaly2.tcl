@@ -1,3 +1,3 @@
 add wave *
 log -r /*
-run 220 ns
+run 1500 ns
