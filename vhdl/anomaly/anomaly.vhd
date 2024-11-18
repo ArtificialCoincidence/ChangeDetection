@@ -15,7 +15,9 @@ entity anomaly is
 		data_valid	: in  std_logic;
 		img_data_i	: in  std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data in
 		img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data out
-		e_o_i		: out std_logic
+		addr_out 	: out std_logic_vector(ADDR_SIZE-1 downto 0); -- needed? (for testbench)
+		e_o_i		: out std_logic;
+		start		: out std_logic 	-- for testbench
 	);
 end anomaly;
 
@@ -85,14 +87,15 @@ architecture rtl of anomaly is
 			start       : in  std_logic;
 			thrs1       : in  std_logic_vector(ADDR_SIZE-1 downto 0);
 			data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0);    -- from memory (original image)
-			data_out	: out std_logic_vector(WORD_SIZE-1 downto 0)    -- back to memory
-			e_o_i		: out std_logic;
+			data_out	: out std_logic_vector(WORD_SIZE-1 downto 0);    -- back to memory
+			addr_out    : out std_logic_vector(ADDR_SIZE-1 downto 0);   -- write address
+			e_o_i		: out std_logic
 		);
 	end component;
 	
 	signal ram_data_o, ram_data_i 					: std_logic_vector (WORD_SIZE-1 downto 0);
 	signal wraddress, rdaddress, rdaddr_mux, thrs1	: std_logic_vector (ADDR_SIZE-1 downto 0);
-	signal wren, start								: std_logic;
+	signal wren										: std_logic;
 	
 begin
 	
@@ -110,7 +113,7 @@ begin
 
 	SCAN: scan_image
 	generic map(IM_SIZE, ADDR_SIZE, WORD_SIZE)
-	port map(clk, rst, data_valid, start, thrs1, img_data_i, img_data_o, e_o_i);
+	port map(clk, rst, data_valid, start, thrs1, img_data_i, img_data_o, addr_out, e_o_i);
 
 	rdaddr_mux <= img_data_i when data_valid = '1' else rdaddress;
 	

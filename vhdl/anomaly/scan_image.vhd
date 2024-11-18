@@ -15,8 +15,9 @@ entity scan_image is
 		enable		: in  std_logic;     -- data valid signal negated
         start       : in  std_logic;
         thrs1       : in  std_logic_vector(ADDR_SIZE-1 downto 0);
-		data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0);    -- from memory (original image)
-		data_out	: out std_logic_vector(WORD_SIZE-1 downto 0);    -- back to memory
+		data_in     : in  std_logic_vector(WORD_SIZE-1 downto 0);   -- from memory (original image)
+		data_out	: out std_logic_vector(WORD_SIZE-1 downto 0);   -- back to memory
+        addr_out    : out std_logic_vector(ADDR_SIZE-1 downto 0);   -- write address
         e_o_i       : out std_logic
 	);
 end scan_image;
@@ -38,6 +39,7 @@ begin
             cntr_store := 0;
             cntr_scan := 0;
             e_o_i <= '0';
+            addr_out <= (others => '0');
         elsif rising_edge(clk) then
             if enable = '0' then
                 if cntr_store <= IM_SIZE-1 then
@@ -47,18 +49,20 @@ begin
             end if;
             
             if start = '1' then
-                if data_in >= thrs1 then
-                    if cntr_scan <= IM_SIZE-1 then
+                if cntr_scan < IM_SIZE-1 then
+                    if data_in >= thrs1 then
                         data_out <= buffer_im(cntr_scan);
-                        cntr_scan := cntr_scan + 1;
                     else
-                        e_o_i <= '1';
+                        data_out <= (others => '0');
                     end if;
+                    cntr_scan := cntr_scan + 1;
                 else 
-                    data_out <= (others => '0');
+                    e_o_i <= '1';
                 end if;
             end if;
         end if;
+
+        addr_out <= std_logic_vector(to_unsigned(cntr_scan, addr_out'length));
 	end process;
 
 end behavioral;

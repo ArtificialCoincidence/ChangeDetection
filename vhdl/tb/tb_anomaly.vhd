@@ -19,7 +19,10 @@ architecture test of tb_anomaly is
             rst			: in  std_logic;	
             data_valid	: in  std_logic;
             img_data_i	: in  std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data in
-            img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0) -- pixel data out
+            img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data out
+            addr_out 	: out std_logic_vector(ADDR_SIZE-1 downto 0); -- not sure if needed
+            e_o_i		: out std_logic;
+            start		: out std_logic
         );
     end component;
 
@@ -39,6 +42,22 @@ architecture test of tb_anomaly is
         );
     end component;
 
+    component write_data is
+        generic(
+            file_path   	: string := "";
+            ENTRIES			: integer := 100;
+            WORD_SIZE		: integer := 16;
+            ADDR_SIZE		: integer := 16
+            );
+        port (
+            CLK				: in std_logic;
+            RST             : in std_logic;
+            ADDR		    : in std_logic_vector(ADDR_SIZE-1 downto 0);
+            ENABLE			: in std_logic;
+            DATA_IN         : in std_logic_vector(WORD_SIZE-1 downto 0)
+            );
+    end component;
+
     constant WORD_SIZE  : integer := 16;
     constant ADDR_SIZE  : integer := 16;
     constant IM_SIZE    : integer := 500;
@@ -49,7 +68,9 @@ architecture test of tb_anomaly is
     signal enable       : std_logic;
     signal data_valid   : std_logic;
     signal data_out_tb  : std_logic_vector(WORD_SIZE-1 downto 0); --ufixed(-1 downto -32);
-    signal address      : std_logic_vector(WORD_SIZE-1 downto 0);
+    signal address      : std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal addressw     : std_logic_vector(ADDR_SIZE-1 downto 0);
+    signal start_tb     : std_logic;
   
 begin
   
@@ -64,10 +85,12 @@ begin
         rst			    => rst_tb,
         data_valid	    => data_valid,
         img_data_i	    => data_in_tb,
-        img_data_o      => data_out_tb
+        img_data_o      => data_out_tb,
+        addr_out        => addressw,
+        start           => start_tb
     );
 
-  dmem: read_data
+    rmem: read_data
     generic map(
         file_path       => "tb/files/AROutputs/AR1_Outputs_NoChanges/St_inref1.txt",
         ENTRIES         => IM_SIZE,
@@ -80,6 +103,21 @@ begin
         addr            => address,
         enable          => enable,
         data_out        => data_in_tb
+    );
+
+    wmem: write_data
+    generic map(
+        file_path       => "tb/files/anomalyOutputs/anomaly_Outputs_NoChanges/St_inref1.txt",
+        ENTRIES         => IM_SIZE,
+        WORD_SIZE       => WORD_SIZE,
+        ADDR_SIZE       => ADDR_SIZE
+    )
+    port map(
+        clk             => clk_tb,
+        rst             => rst_tb,
+        addr            => addressw,
+        enable          => start_tb,
+        data_in         => data_out_tb
     );
 
     clk_tb <= not clk_tb after 0.5 ns;
