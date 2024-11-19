@@ -38,7 +38,7 @@ import rasterio.plot
 from rasterio.plot import show
 import matplotlib.pyplot as plt
 from rasterio.plot import show_hist
-from osgeo import gdal
+#from osgeo import gdal
 import numpy as np
 import time
 from numpy import zeros,sqrt, mean,linspace,concatenate, cumsum
@@ -176,7 +176,7 @@ def generate_plot(ax, df):
 if __name__ == "__main__":
   
     
-    path = '/home/marcello-costa/workspace/Demos/IPC2/AR1_Outputs_Changes/'
+    path = '/home/gwebber/ChangeDetection/vhdl/tb/files/AROutputs/AR1_Outputs_Changes' 
       
         
     files = os.listdir(path+'/')
@@ -243,7 +243,7 @@ if __name__ == "__main__":
     ############################## NoChanges
     
     
-    path = '/home/marcello-costa/workspace/Demos/IPC2/AR1_Outputs_NoChanges/'
+    path = '/home/gwebber/ChangeDetection/vhdl/tb/files/AROutputs/AR1_Outputs_NoChanges/'
       
         
     files = os.listdir(path+'/')

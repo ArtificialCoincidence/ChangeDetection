@@ -50,7 +50,7 @@ begin
             
             if start = '1' then
                 if cntr_scan < IM_SIZE-1 then
-                    if data_in >= thrs1 then
+                    if buffer_im(cntr_scan) >= thrs1 then
                         data_out <= buffer_im(cntr_scan);
                     else
                         data_out <= (others => '0');
