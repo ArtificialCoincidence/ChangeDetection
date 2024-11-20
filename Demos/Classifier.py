@@ -93,7 +93,7 @@ def Classifier(ICD,tp,pfa, TestType, pair):
             plt.axis("off")
             
             # path='/home/marcello-costa/workspace/Demo1/class/'
-            path = 'c:/Users/webbe/OneDrive/Documents/KTH/ESDP/ChangeDetection/Demos/class/'
+            path = '/home/gwebber/ChangeDetection/Demos/class/'
             f.savefig(path + 'Class_%s_%s.png'%(TestType, pair), dpi=350,bbox_inches='tight',transparent=True, pad_inches=0)
             f.tight_layout()
             
@@ -107,7 +107,7 @@ if __name__ == "__main__":
     
     
     # path = '/home/marcello-costa/workspace/Demo1/Out/'
-    path = 'c:/Users/webbe/OneDrive/Documents/KTH/ESDP/ChangeDetection/Demos/Out/'
+    path = '/home/gwebber/ChangeDetection/Demos/Out/'
     
     files = os.listdir(path+'/')
     files_images = [i for i in files if i.endswith('.txt')]
@@ -158,7 +158,7 @@ if __name__ == "__main__":
     
     
     # pathTargetsPosition = '/home/marcello-costa/workspace/Demo1/SampleData/data/targets/'
-    pathTargetsPosition = 'c:/Users/webbe/OneDrive/Documents/KTH/ESDP/ChangeDetection/Demos/SampleData/data/targets/'
+    pathTargetsPosition = '/home/gwebber/ChangeDetection/Demos/SampleData/data/targets/'
     
     # pad for original size 3k x 2k
     if pair==0 or pair==1 or pair==2 or pair==3 or pair==4 or pair==5:

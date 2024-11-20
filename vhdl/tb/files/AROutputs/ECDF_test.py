@@ -1,97 +1,27 @@
 from __future__ import division
 import numpy as np
-import time
+
 from matplotlib import pyplot as plt
-import array
-import scipy.io
 import scipy.io as io
-import cv2
-import seaborn as sns
 import os
-
-import pyprind
 import re
-import scipy.io as sio
-from Classifier import Classifier
-import datetime
-import rasterio
-import pandas as pd
 import matplotlib.pyplot as plt
-from scipy import stats
-import scipy.io as sio
-from PIL import Image
-from skimage import data
-from skimage.morphology import disk
-from skimage.filters.rank import median
-import cv2
-
-from scipy.stats import norm
-from statsmodels.distributions.empirical_distribution import ECDF
-from numpy import inf
-import cv2
-from torch.multiprocessing import Pool, set_start_method, freeze_support
-from concurrent.futures import ProcessPoolExecutor
-
 import numpy as np
 from matplotlib.patches import Rectangle
-import rasterio.plot
-from rasterio.plot import show
-import matplotlib.pyplot as plt
-from rasterio.plot import show_hist
-#from osgeo import gdal
 import numpy as np
 import time
 from numpy import zeros,sqrt, mean,linspace,concatenate, cumsum
-from scipy.stats import norm
-import cv2
-from matplotlib import pyplot as plt
 import scipy.io as sio
-from PIL import Image
-from skimage import data
-from skimage.morphology import disk
-from skimage.filters.rank import median
-import cv2
-
-from scipy.spatial import distance
-from scipy.spatial.distance import cdist
 from matplotlib.widgets  import RectangleSelector
 import matplotlib.patches as patches
 import scienceplots
 from matplotlib.collections import LineCollection
 import matplotlib.pyplot as plt
 from scipy import stats
-import scipy.io as sio
-from PIL import Image
-from skimage import data
-from skimage.morphology import disk
-from skimage.filters.rank import median
-import cv2
-
 from scipy.stats import norm
 from statsmodels.distributions.empirical_distribution import ECDF
 from numpy import inf
-import cv2
-from torch.multiprocessing import Pool, set_start_method, freeze_support
-from concurrent.futures import ProcessPoolExecutor
-
-
-
-
-
-#------------------------- Multiplexer Function ------------------------#
-def moving_average(im):
-    kernel1 = np.ones((7,7),np.float32)/49
-    Filtered_data = cv2.filter2D(src=im, ddepth=-1, kernel=kernel1) 
-    return Filtered_data
-
-#------------------------- Split Image ------------------------#
-def subarrays(arr, nrows, ncols):
-    h, w = arr.shape
-    assert h % nrows == 0, f"{h} rows is not evenly divisible by {nrows}"
-    assert w % ncols == 0, f"{w} cols is not evenly divisible by {ncols}"
-    return (arr.reshape(h//nrows, nrows, -1, ncols)
-               .swapaxes(1,2)
-               .reshape(-1, nrows, ncols))
+import pandas as pd
 
 
 #create CDF definition
@@ -176,12 +106,12 @@ def generate_plot(ax, df):
 if __name__ == "__main__":
   
     
-    path = '/home/gwebber/ChangeDetection/vhdl/tb/files/AROutputs/AR1_Outputs_Changes' 
+    path = '/home/gwebber/ChangeDetection/vhdl/tb/files/AROutputs/AR1_Outputs_Changes/'
       
         
     files = os.listdir(path+'/')
     files_images = [i for i in files if i.endswith('.txt')]
-    files_images = sorted(files_images, key=lambda s: int(re.search(r'\d+', s).group()[-2:]))
+    #files_images = sorted(files_images, key=lambda s: int(re.search(r'\d+', s).group()[-2:]))
     
     
     
@@ -324,6 +254,3 @@ axes[1].set_title('target-clutter: 9AR(1)')
 fig.tight_layout()
 
 plt.show()
-
-
-
