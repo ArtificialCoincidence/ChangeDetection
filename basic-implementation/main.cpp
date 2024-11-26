@@ -1,59 +1,75 @@
 #include"matrix.h"
 using namespace std;
 using namespace std::chrono;
+#include <iomanip> 
+#define LAG 15
+#define PATH "C:/Users/chang/Desktop/Demos/SampleData/test6/"
 
 int main() {
+
+	/*
+	1. done------modify the filter from 3x3->9x9
+	2. done------modify the anomaly detection with the ecdf.py
+	3. ask oscar for the demo2 container and verify the result step by step
+	4. use different lags select the lag whose corelation of result and testImage is the biggest(or smallest?) confirm from marcello again
+	 	4.1 which reference images for which area
+	5. parallelize the lags part 
+	6. ask marcello how to plot the result
+	7. profiling which part consume most of the time and further optimize
+	8. write the report 
+	*/
+
+	/*
+	possible errors
+	1.anomaly detection,outliers???
+	*/
 
 	auto t1 = high_resolution_clock::now();
 
 	//-------------------Read Data------------------------
-	Matrix testMatrix(500,500);
+	Matrix testMatrix(500, 500);
 	Matrix refMatrix(500, 500);
-	Matrix refMatrix2(500, 500);
-	Matrix refMatrix3(500, 500);
-	vector<Matrix*> ref = { &refMatrix,&refMatrix2,&refMatrix3 };
+	testMatrix.readData(string(PATH)+"Itest6.dat");
 
-	//Modify the file path if the file is moved.
-	testMatrix.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Itest0.dat");
-	refMatrix.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Iref0A.dat");
-	refMatrix2.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Iref0B.dat");
-	refMatrix3.readData("/home/jiahuaz/ChangeDetection/Demos/SampleData/Iref0C.dat");
+	double minRho = 1.0;
+	Matrix finalRes(500,500);
+	Matrix* res = new Matrix(500, 500);
+	for (int i = 0; i < LAG; ++i) {
+		string path = string(PATH)+"Iref6"+string(1,'A'+i) + ".dat";
+		refMatrix.readData(path);
 
-	auto t2 = high_resolution_clock::now();
-	duration<double> duration = t2 - t1;
-	std::cout << "Data read time: " << duration.count() << " seconds" << std::endl;
+		//auto t2 = high_resolution_clock::now();
+		//duration<double> duration = t2 - t1;
+		//std::cout << "Data read time: " << duration.count() << " seconds" << std::endl;
 
-	vector<Matrix*> ref2;
-	for (Matrix* reference : ref) {
-		//--------------------------AR(1)----------------------
-		double rho = Pearson(testMatrix, *reference);
-		std::cout << "Pearson correlation: " << rho << std::endl;
+		//-----------------------AR(1)-------------------------
+		double rho = Pearson(testMatrix, refMatrix);
+		std::cout << "Pearson correlation: " <<fixed<<std::setprecision(10)<< rho << std::endl;
 		double rho_y = sqrt(1 - rho * rho);
-
-		Matrix* res = new Matrix(500, 500);
-		Matrix tmp1 = Scale(*reference, rho);
-		Matrix tmp2 = Scale(testMatrix, rho_y);
+		Matrix tmp1 = Scale(refMatrix, rho_y);
+		Matrix tmp2 = Scale(testMatrix, rho);
 		*res = tmp1 + tmp2;
-
+		
 		//-----------SpatialFilter and AnomalyDetection--------
 
 		res = SpatialFilter(*res);
+		res->writeData(string(PATH) + "sf.txt");
 		AnomalyDetection(*res);
-		ref2.push_back(res);
+
+		//-----------update the result--------
+		double r = Pearson(*res, testMatrix);
+		minRho = min(minRho, r);
+		finalRes = r == minRho ? *res : finalRes;
+
 
 	}
 
-	vector<double>c;
-	for (auto p : ref2)
-		c.push_back(Pearson(*p, testMatrix));
-
 	auto t3 = high_resolution_clock::now();
-	duration = t3 - t2;
+	duration<double> duration = t3 - t1;
 	std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
-
 	//-----------------------Write Data--------------------
-	//res->writeData("C:/Users/chang/Desktop/Demos/SampleData/test0/res.dat");
+	//finalRes.writeData(string(PATH)+"res.txt");
 
 
 	return 0;

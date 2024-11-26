@@ -13,7 +13,7 @@ const double& Matrix::operator()(size_t r, size_t c)const
 	return data[row * r + c];
 
 }
-Matrix& Matrix::operator+(Matrix&m) {
+Matrix& Matrix::operator+(Matrix& m) {
 	int n = data.size();
 	for (int i = 0; i < n; ++i)
 		data[i] += m.data[i];
@@ -46,20 +46,23 @@ void Matrix::readData(const string& filename) {
 void Matrix::writeData(const string& filename) {
 	ofstream out(filename);
 	try {
-		if(!out.is_open())
+		if (!out.is_open())
 			throw runtime_error("Failed to open file: " + filename);
 
 	}
 	catch (const runtime_error& e) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
-	for (int i = 0; i < row; ++i)
+	/*for (int i = 0; i < row; ++i)
 	{
 		for (int j = 0; j < col; ++j) {
-			out << (*this)(i, j)<<" ";
+			out << (*this)(i, j) << " ";
 		}
 		out << endl;
-	}
+	}*/
+	for (int i = 0; i < 250000; ++i)
+		out << data[i] << ",";
+	out << endl;
 	out.close();
 
 }
@@ -70,7 +73,7 @@ void Matrix::scale(double rho) {
 		data[i] *= rho;
 }
 
-Matrix Scale(Matrix& a,double rho) {
+Matrix Scale(Matrix& a, double rho) {
 	Matrix tmp = a;
 	for (int i = 0; i < tmp.data.size(); ++i)
 		tmp.data[i] *= rho;
@@ -105,18 +108,21 @@ double Pearson(Matrix& a, Matrix& b) {
 		cerr << "Error: " << e.what() << std::endl;
 	}
 	return sumXY / denominator;
-	
+
 }
 
 Matrix* SpatialFilter(Matrix& a)
 {
-	Matrix* res = new Matrix(a.row,a.col);
-	const int rank = 3;//3x3 kernel
+	Matrix* res = new Matrix(a.row, a.col);
+	const int rank = 9;//9x9 kernel
 	const int kernelSize = rank * rank;
 	int offset[rank];
 	int minOffset = -((rank - 1) >> 1);
 	for (int i = 0; i < rank; ++i)
-		offset[i] = minOffset++;//{-1,0,1}
+		offset[i] = minOffset++;
+	/*
+	-4 -3 -2 -1 0 1 2 3 4
+	*/
 
 	for (int i = 0; i < a.row; ++i) {
 		for (int j = 0; j < a.col; ++j) {
@@ -124,10 +130,10 @@ Matrix* SpatialFilter(Matrix& a)
 			for (auto di : offset) {
 				for (auto dj : offset) {
 					int r = max(0, i + di);
-					int c= max(0, j + dj);
+					int c = max(0, j + dj);
 					r = min(static_cast<int>(a.row - 1), r);
 					c = min(static_cast<int>(a.col - 1), c);
-					sum +=a(r, c);
+					sum += a(r, c);
 				}
 			}
 			(*res)(i, j) = sum / kernelSize;
@@ -136,32 +142,21 @@ Matrix* SpatialFilter(Matrix& a)
 	}
 
 	return res;
-	
-}
 
-static double quantile(vector<double>& data, double q)
-{
-	int n = data.size();
-	double quantile = q * (n - 1.0);
-	int lower = static_cast<int>(quantile);
-	int upper = lower + 1;
-	if (upper >= 1) return data[lower];
-	double fraction = quantile - lower;
-	return fraction * data[upper] + (1 - fraction) * data[lower];
-}
-
-static double MidSpread(vector<double>& data, int q) {//to be verified
-	sort(data.begin(), data.end());
-	return quantile(data, 1.0 / q) - quantile(data, (q - 1.0) / q);
 }
 
 
 void AnomalyDetection(Matrix& a) {
 	vector <double> data = a.data;
-	double thresholdDown = MidSpread(data, 16);
-	double thresholdUp = MidSpread(data, 12);
+	size_t size = a.row * a.col;
+	sort(data.begin(), data.end());
+	double percentileLow = 0.25;
+	double percentileHigh = 0.9;
+	double iqr = data[percentileHigh * size] - data[percentileLow * size];
+	double thresholdDown = data[percentileLow * size]-1.5*iqr;
+	double thresholdUp = data[percentileHigh * size]+1.5*iqr;
 	for (double& v : a.data)
-		if (v > thresholdUp && v < thresholdDown)
+		if (v<thresholdDown||v>thresholdUp)//not sure
 			v = 0;
 	return;
 
