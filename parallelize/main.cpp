@@ -13,8 +13,9 @@ int main() {
     double* testMatrix = nullptr;
     double* refMatrix = nullptr;
     double* finalRes = nullptr;
+    double* rho=nullptr;
     double minRho = 1.0;
-
+    cudaMallocManaged(&rho,sizeof(double));
     cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
     cudaMallocManaged(&refMatrix, SIZE * sizeof(double));
     cudaMallocManaged(&finalRes, SIZE * sizeof(double));
@@ -29,17 +30,17 @@ int main() {
 
 
         //-----------------------AR(1)-------------------------
-        double rho = Pearson(testMatrix, refMatrix);
+	Pearson<<<128,512>>>(testMatrix, refMatrix,rho);
         std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << rho << std::endl;
-        Add(refMatrix, testMatrix,rho);
+        Add(refMatrix, testMatrix,*rho);
         //-----------SpatialFilter and AnomalyDetection--------
         SpatialFilter(refMatrix);
         AnomalyDetection(refMatrix);
 
         //-----------update the result--------
-        double r = Pearson(refMatrix, testMatrix);
-        if (r < minRho) {
-            minRho = r;
+	Pearson<<<128,512>>>(refMatrix, testMatrix,rho);
+        if (*rho < minRho) {
+            minRho = *rho;
             memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
         }
 

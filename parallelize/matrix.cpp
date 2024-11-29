@@ -1,5 +1,9 @@
 #include"matrix.h"
-
+__device__ double gMeanX=0.0;
+__device__ double gMeanY=0.0;
+__device__ double gSumXY=0.0;
+__device__ double gSumX2=0.0;
+__device__ double gSumY2=0.0
 void ReadData(const string& filename, double* data) {
 	ifstream in(filename);
 	try {
@@ -18,29 +22,39 @@ void ReadData(const string& filename, double* data) {
 }
 
 
-double Pearson(double *x, double* y) {
-	//double meanX = accumulate(x, x+SIZE, 0.0)/static_cast<double>SIZE;
-	double meanX = accumulate(x, x+SIZE, 0.0)/SIZE;
-	double meanY = accumulate(y, y+SIZE, 0.0)/SIZE;
-	double sumXY = 0.0, sumX2 = 0.0, sumY2 = 0.0;
-	for (int i = 0; i < SIZE; ++i) {
-		double dx = x[i] - meanX;
-		double dy = y[i] - meanY;
-		sumXY += dx * dy;
-		sumX2 += dx * dx;
-		sumY2 += dy * dy;
+double Pearson(double *x, double* y,double* rho) {
+	int idx=blockDim.x*blockIdx.x+threadIdx.x;
+	double lSumX=0.0,lSumY=0.0;
+	for(int i=idx;i<SIZE;i+=blockDim.x*gridDim.x)
+	{
+		lSumX+=x[i];
+		lSumY+=y[i];
 	}
-	double denominator = sqrt(sumX2) * sqrt(sumY2);
-	try {
-		if (denominator == 0) {
-			throw runtime_error("Division by zero in correlation calculation");
-		}
+	atomicAdd(&gMeanX,lSumX);
+	atomicAdd(&gMeanY,lSumY);
+	__syncthreads();
+	if(idx==0){
+		gMeanX/=SIZE;
+		gMeanY/=SIZE;
 	}
-	catch (const std::runtime_error& e) {
-		cerr << "Error: " << e.what() << std::endl;
+	__syncthreads();
+	double lSumXY = 0.0, lSumX2 = 0.0, lSumY2 = 0.0;
+	for(int i=idx;i<SIZE;i+=blockDim.x*gridDim.x)
+	{
+		double dx = x[i] - gMeanX;
+		double dy = y[i] - gMeanY;
+		lSumXY += dx * dy;
+		lSumX2 += dx * dx;
+		lSumY2 += dy * dy;
 	}
-	return sumXY / denominator;
-
+	atomicAdd(&gSumX2,lSumX2);
+	atomicAdd(&gSumY2,lSumY2);
+	atomicAdd(&gSumXY,lSumXY);
+	__syncthreads();
+	if(idx==0){	
+		double denominator = sqrt(gSumX2) * sqrt(gSumY2);
+		*rho= gSumXY / denominator;
+	}
 }
 
 
