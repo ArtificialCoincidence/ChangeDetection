@@ -15,10 +15,12 @@ int main() {
     double* finalRes = nullptr;
     double minRho = 1.0;
 
-    cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
-    cudaMallocManaged(&refMatrix, SIZE * sizeof(double));
-    cudaMallocManaged(&finalRes, SIZE * sizeof(double));
-    
+//    cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
+//    cudaMallocManaged(&refMatrix, SIZE * sizeof(double));
+//    cudaMallocManaged(&finalRes, SIZE * sizeof(double));
+    testMatrix=(double*)malloc(sizeof(double)*SIZE);
+    refMatrix=(double*)malloc(sizeof(double)*SIZE);
+    finalRes=(double*)malloc(sizeof(double)*SIZE);
     ReadData(string(PATH) + "Itest6.dat",testMatrix);
 
 
