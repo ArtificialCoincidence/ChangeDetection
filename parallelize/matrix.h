@@ -16,7 +16,7 @@
 #define SIZE 250000
 using namespace std;
 void ReadData(const string& filename, double* data);
-void Pearson(double* a, double* b,double* rho);
+__global__ void Pearson(double* a, double* b,double* rho);
 void Add(double* a, double*b,double rho);
 void SpatialFilter(double* a);
 void AnomalyDetection(double* a);

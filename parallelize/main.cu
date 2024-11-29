@@ -31,7 +31,8 @@ int main() {
 
         //-----------------------AR(1)-------------------------
 	Pearson<<<128,512>>>(testMatrix, refMatrix,rho);
-        std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << rho << std::endl;
+	cudaDeviceSynchronize();
+	std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << rho << std::endl;
         Add(refMatrix, testMatrix,*rho);
         //-----------SpatialFilter and AnomalyDetection--------
         SpatialFilter(refMatrix);
@@ -39,6 +40,7 @@ int main() {
 
         //-----------update the result--------
 	Pearson<<<128,512>>>(refMatrix, testMatrix,rho);
+	cudaDeviceSynchronize();
         if (*rho < minRho) {
             minRho = *rho;
             memcpy(finalRes, refMatrix, sizeof(double) * SIZE);

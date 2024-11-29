@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = nvcc
-CXXFLAGS = -g -Xcompiler -O0 -Xcompiler -Wall
+CXXFLAGS = -arch=sm_90 -g -G
 
 # Target executable
 TARGET = main
@@ -20,4 +20,4 @@ $(TARGET): $(OBJS)
 
 # Clean up build files
 clean:
-
+	rm -rf main

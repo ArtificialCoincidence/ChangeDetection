@@ -3,7 +3,7 @@ __device__ double gMeanX=0.0;
 __device__ double gMeanY=0.0;
 __device__ double gSumXY=0.0;
 __device__ double gSumX2=0.0;
-__device__ double gSumY2=0.0
+__device__ double gSumY2=0.0;
 void ReadData(const string& filename, double* data) {
 	ifstream in(filename);
 	try {
@@ -22,7 +22,7 @@ void ReadData(const string& filename, double* data) {
 }
 
 
-double Pearson(double *x, double* y,double* rho) {
+__global__ void Pearson(double *x, double* y,double* rho) {
 	int idx=blockDim.x*blockIdx.x+threadIdx.x;
 	double lSumX=0.0,lSumY=0.0;
 	for(int i=idx;i<SIZE;i+=blockDim.x*gridDim.x)
@@ -36,8 +36,10 @@ double Pearson(double *x, double* y,double* rho) {
 	if(idx==0){
 		gMeanX/=SIZE;
 		gMeanY/=SIZE;
+		printf("gMeanX:%lf,gMeanY:%lf\n",gMeanX,gMeanY);
 	}
 	__syncthreads();
+	
 	double lSumXY = 0.0, lSumX2 = 0.0, lSumY2 = 0.0;
 	for(int i=idx;i<SIZE;i+=blockDim.x*gridDim.x)
 	{
@@ -54,6 +56,7 @@ double Pearson(double *x, double* y,double* rho) {
 	if(idx==0){	
 		double denominator = sqrt(gSumX2) * sqrt(gSumY2);
 		*rho= gSumXY / denominator;
+		gMeanX=gMeanY=gSumXY=gSumX2=gSumY2=0;
 	}
 }
 
