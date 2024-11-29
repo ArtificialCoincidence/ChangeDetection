@@ -36,7 +36,7 @@ __global__ void Pearson(double *x, double* y,double* rho) {
 	if(idx==0){
 		gMeanX/=SIZE;
 		gMeanY/=SIZE;
-		printf("gMeanX:%lf,gMeanY:%lf\n",gMeanX,gMeanY);
+		//printf("gMeanX:%lf,gMeanY:%lf\n",gMeanX,gMeanY);
 	}
 	__syncthreads();
 	
@@ -48,6 +48,7 @@ __global__ void Pearson(double *x, double* y,double* rho) {
 		lSumXY += dx * dy;
 		lSumX2 += dx * dx;
 		lSumY2 += dy * dy;
+		//if(idx==0) printf("intermidiatelSumxy:%lf,sumx2:%lf,sumy2:%lf\b",lSumXY,lSumX2,lSumY2);
 	}
 	atomicAdd(&gSumX2,lSumX2);
 	atomicAdd(&gSumY2,lSumY2);
@@ -56,6 +57,7 @@ __global__ void Pearson(double *x, double* y,double* rho) {
 	if(idx==0){	
 		double denominator = sqrt(gSumX2) * sqrt(gSumY2);
 		*rho= gSumXY / denominator;
+		//printf("gSumXY:%lf,gSUMX2:%lf,gSumY2:%lf\n",gSumXY,gSumX2,gSumY2);
 		gMeanX=gMeanY=gSumXY=gSumX2=gSumY2=0;
 	}
 }
