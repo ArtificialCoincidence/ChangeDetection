@@ -63,7 +63,7 @@ __global__ void Pearson(double *x, double* y,double* rho) {
 }
 
 
-void SpatialFilter(double* a)
+__global__ void SpatialFilter(double* a)
 {
 	const int rank = 9;//9x9 kernel
 	const int kernelSize = rank * rank;
@@ -74,22 +74,22 @@ void SpatialFilter(double* a)
 	/*
 	-4 -3 -2 -1 0 1 2 3 4
 	*/
-
-	for (int i = 0; i < ROW; ++i) {
-		for (int j = 0; j < COL; ++j) {
-			double sum = 0;
-			for (auto di : offset) {
-				for (auto dj : offset) {
-					int r = max(0, i + di);
-					int c = max(0, j + dj);
-					r = min(static_cast<int>(ROW - 1), r);
-					c = min(static_cast<int>(COL - 1), c);
-					sum += a[r*COL+c];
-				}
+	int idx=blockIdx.x*blockDim.x+threadIdx.x;
+	for (int tmp = idx; tmp < SIZE; tmp+=gridDim.x*blockDim.x) {
+		int i=idx/COL;
+		int j=idx%COL;
+		double sum = 0;
+		for (auto di : offset) {
+			for (auto dj : offset) {
+				int r = max(0, i + di);
+				int c = max(0, j + dj);
+				r = min(static_cast<int>(ROW - 1), r);
+				c = min(static_cast<int>(COL - 1), c);
+				sum += a[r*COL+c];
 			}
-			a[i*COL+j] = sum / kernelSize;
-
 		}
+		a[idx] = sum / kernelSize;
+
 	}
 	return ;
 
