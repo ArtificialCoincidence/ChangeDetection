@@ -76,8 +76,8 @@ __global__ void SpatialFilter(double* a)
 	*/
 	int idx=blockIdx.x*blockDim.x+threadIdx.x;
 	for (int tmp = idx; tmp < SIZE; tmp+=gridDim.x*blockDim.x) {
-		int i=idx/COL;
-		int j=idx%COL;
+		int i=tmp/COL;
+		int j=tmp%COL;
 		double sum = 0;
 		for (auto di : offset) {
 			for (auto dj : offset) {
@@ -86,10 +86,12 @@ __global__ void SpatialFilter(double* a)
 				r = min(static_cast<int>(ROW - 1), r);
 				c = min(static_cast<int>(COL - 1), c);
 				sum += a[r*COL+c];
+	//			if(tmp==idx&&idx==1)
+		//			printf("%lf,",a[r*COL+c]);
 			}
 		}
-		a[idx] = sum / kernelSize;
-
+		a[tmp] = sum / kernelSize;
+		//if(idx==1) printf("idx:%d,sum:%lf\n",tmp,a[tmp]);
 	}
 	return ;
 

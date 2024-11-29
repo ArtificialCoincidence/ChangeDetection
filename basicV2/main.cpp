@@ -34,7 +34,8 @@ int main() {
         Add(refMatrix, testMatrix,rho);
         //-----------SpatialFilter and AnomalyDetection--------
         SpatialFilter(refMatrix);
-        AnomalyDetection(refMatrix);
+
+	AnomalyDetection(refMatrix);
 
         //-----------update the result--------
         double r = Pearson(refMatrix, testMatrix);

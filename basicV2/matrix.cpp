@@ -66,6 +66,8 @@ void SpatialFilter(double* a)
 					r = min(static_cast<int>(ROW - 1), r);
 					c = min(static_cast<int>(COL - 1), c);
 					sum += a[r*COL+c];
+			//		if(i==0&&j==1) 
+			//			printf("%lf,",a[r*COL+c]);
 				}
 			}
 			a[i*COL+j] = sum / kernelSize;

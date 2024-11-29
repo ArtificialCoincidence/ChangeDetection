@@ -34,9 +34,11 @@ int main() {
 	cudaDeviceSynchronize();
 	std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << *rho << std::endl;
         Add(refMatrix, testMatrix,*rho);
+	//if(i==0) printf("%lf,%lf,%lf,%lf",refMatrix[0],refMatrix[1],refMatrix[2],refMatrix[100]);
         //-----------SpatialFilter and AnomalyDetection--------
         SpatialFilter<<<128,512>>>(refMatrix);
 	cudaDeviceSynchronize();
+//	if(i==0) printf("%lf,%lf,%lf,%lf",refMatrix[0],refMatrix[1],refMatrix[2],refMatrix[4]);
         AnomalyDetection(refMatrix);
 
         //-----------update the result--------
