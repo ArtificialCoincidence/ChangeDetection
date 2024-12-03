@@ -21,8 +21,7 @@ architecture test of tb_anomaly is
             img_data_i	: in  std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data in
             img_data_o	: out std_logic_vector(WORD_SIZE-1 downto 0); -- pixel data out
             addr_out 	: out std_logic_vector(ADDR_SIZE-1 downto 0); -- not sure if needed
-            e_o_i		: out std_logic;
-            start		: out std_logic
+            e_o_i		: out std_logic
         );
     end component;
 
@@ -64,13 +63,12 @@ architecture test of tb_anomaly is
 
     signal clk_tb       : std_logic := '1';
     signal rst_tb       : std_logic := '0';
-    signal data_in_tb   : std_logic_vector(WORD_SIZE-1 downto 0); --ufixed(-1 downto -32);
+    signal data_in_tb   : std_logic_vector(WORD_SIZE-1 downto 0);
     signal enable       : std_logic;
     signal data_valid   : std_logic;
-    signal data_out_tb  : std_logic_vector(WORD_SIZE-1 downto 0); --ufixed(-1 downto -32);
+    signal data_out_tb  : std_logic_vector(WORD_SIZE-1 downto 0);
     signal address      : std_logic_vector(ADDR_SIZE-1 downto 0);
     signal addressw     : std_logic_vector(ADDR_SIZE-1 downto 0);
-    signal start_tb     : std_logic;
   
 begin
   
@@ -86,8 +84,7 @@ begin
         data_valid	    => data_valid,
         img_data_i	    => data_in_tb,
         img_data_o      => data_out_tb,
-        addr_out        => addressw,
-        start           => start_tb
+        addr_out        => addressw
     );
 
     rmem: read_data
@@ -116,7 +113,7 @@ begin
         clk             => clk_tb,
         rst             => rst_tb,
         addr            => addressw,
-        enable          => start_tb,
+        enable          => enable,
         data_in         => data_out_tb
     );
 
@@ -145,7 +142,6 @@ begin
             address <= std_logic_vector(unsigned(address) + 1);
             wait for 1 ns;
         end loop;
-
         report "END of IMAGE";
         wait;
 

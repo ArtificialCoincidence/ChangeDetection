@@ -1,7 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.fixed_pkg.all;
 
 entity threshold_cdf is
     generic (
@@ -15,8 +14,8 @@ entity threshold_cdf is
         enable      : in  std_logic;    -- histogram complete, start executing, use negated data valid
         start_scan  : out std_logic;    -- values calulated, start scanning image
         thrs1       : out std_logic_vector(ADDR_SIZE-1 downto 0);
-        datain      : in  std_logic_vector(WORD_SIZE-1 downto 0);  -- Histogram value from BRAM
-        rdaddr      : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- Output threshold value (address)
+        datain      : in  std_logic_vector(WORD_SIZE-1 downto 0);  	-- Histogram value from BRAM
+        rdaddr      : out std_logic_vector(ADDR_SIZE-1 downto 0) 		-- Output threshold value (address)
     );
 end threshold_cdf;
 

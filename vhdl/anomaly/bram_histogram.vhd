@@ -11,7 +11,6 @@ entity bram_histogram is
     );
 	port(
 		clk 			: in  std_logic;
-        data_valid      : in  std_logic;
 		data			: in  std_logic_vector(WORD_SIZE-1 downto 0);
 		rdaddress		: in  std_logic_vector(ADDR_SIZE-1 downto 0);
 		wraddress		: in  std_logic_vector(ADDR_SIZE-1 downto 0);
@@ -34,13 +33,13 @@ begin
     process(clk) 
 	begin
 		if rising_edge(clk) then
-            if wren = '1' and data_valid = '1' then
+            if wren = '1' then
                 addr_pre <= rdaddress;
                 -- WRITE TO MEMORY
                 memory(to_integer(unsigned(wraddress))) <= data;
             end if;
             
-            if rdaddress = addr_pre and data_valid = '1' then
+            if rdaddress = addr_pre then
                 q <= data;
             else
                 -- READ MEMORY
