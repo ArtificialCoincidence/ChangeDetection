@@ -7,7 +7,7 @@ end hist_tb;
 
 architecture test of hist_tb is
 
-   component anomaly_fsm is
+   component histogram is
 	generic(
 		ADDR_SIZE   : integer := 16;
 		WORD_SIZE   : integer := 16
@@ -33,7 +33,7 @@ architecture test of hist_tb is
    
 begin
   
-	dut: anomaly_fsm
+	dut: histogram
 	generic map(
 		ADDR_SIZE     => 16,
 		WORD_SIZE     => 16

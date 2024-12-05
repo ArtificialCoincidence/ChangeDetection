@@ -1,0 +1,121 @@
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity control_fsm is
+  generic (
+    addrwidth : positive := 9
+  );
+  port (
+    clk        : in std_logic;
+    rst        : in std_logic;
+    VALID      : in std_logic;
+    THRESHOLD  : in std_logic;
+    WRADRR     : out std_logic_vector(addrwidth-1 downto 0);
+    RDADRR     : out std_logic_vector(addrwidth-1 downto 0);
+    READY      : out std_logic;
+    EN_TRHES   : out std_logic;
+    EN_HIST    : out std_logic;
+    EN_BRAM    : out std_logic;
+    EN_SCAN    : out std_logic
+  );
+end control_fsm;
+
+architecture Behavioral of TotalFSM is
+  type state_type is (S0, S1, S2, S3);
+  signal state, next_state : state_type;
+
+  signal counter_receive : unsigned(31 downto 0) := (others => '0');
+  signal counter_scan    : unsigned(31 downto 0) := (others => '0');
+
+begin
+
+  -- State Register
+  process(clk, rst)
+  begin
+    if rst = '1' then
+      state <= S0;
+    elsif rising_edge(clk) then
+      state <= next_state;
+    end if;
+  end process;
+
+  -- Next State Logic
+  process(state, VALID, counter_receive, counter_scan, THRESHOLD)
+  begin
+    case state is
+      when S0 =>
+        if VALID = '1' then
+          next_state <= S1;
+        else
+          next_state <= S0;
+        end if;
+
+      when S1 =>
+        if counter_receive < 500 then
+          next_state <= S1;
+        elsif counter_receive = 500 then
+          next_state <= S2;
+        end if;
+
+      when S2 =>
+        if THRESHOLD = '1' then
+          next_state <= S3;
+        else
+          next_state <= S2;
+        end if;
+
+      when S3 =>
+        if counter_scan < 500 then
+          next_state <= S3;
+        elsif counter_scan = 500 then
+          next_state <= S0;
+        end if;
+
+      when others =>
+        next_state <= S0;
+    end case;
+  end process;
+
+  -- Output Logic and Counter Updates
+  process(state, counter_receive, counter_scan)
+  begin
+    -- Default values
+    READY <= '0';
+    EN_TRHES <= '0';
+    EN_HIST <= '0';
+    EN_BRAM <= '0';
+    EN_SCAN <= '0';
+    WRADRR <= (others => '0');
+    RDADRR <= (others => '0');
+
+    case state is
+      when S0 =>
+        counter_receive <= (others => '0');
+        counter_scan <= (others => '0');
+        READY <= '1';
+
+      when S1 =>
+        counter_receive <= counter_receive + 1;
+        WRADRR <= std_logic_vector(counter_receive);
+        READY <= '1';
+        EN_HIST <= '1';
+        EN_BRAM <= '1';
+        EN_SCAN <= '1';
+
+      when S2 =>
+        EN_TRHES <= '1';
+
+      when S3 =>
+        counter_scan <= counter_scan + 1;
+        RDADRR <= std_logic_vector(counter_scan);
+        EN_SCAN <= '1';
+
+      when others =>
+        -- Do nothing
+        null;
+    end case;
+  end process;
+
+end architecture Behavioral;
