@@ -134,6 +134,7 @@ void writeData(const string& filename,double *data ) {
 			out << std::fixed << std::setprecision(10);
 			out<<data[i]<<",";
 		}
+		if(i>=249999) printf("index:%d",i);
 
 	}
 	out << endl;
