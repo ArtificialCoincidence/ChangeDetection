@@ -273,19 +273,25 @@ main = do
     m2 <- newEmptyMVar
     m3 <- newEmptyMVar
     m4 <- newEmptyMVar
+    m5 <- newEmptyMVar
+    m6 <- newEmptyMVar
+    m7 <- newEmptyMVar
+    m8 <- newEmptyMVar
+    m9 <- newEmptyMVar
 
     ----- Dataset Arrangement---------------------------------------------------------------------------------------------
     let dimx =500; dimy = 500
+
+    test <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Itest6.dat" ReadMode; contentsTest <- hGetContents test
+    let
+        (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest
+        st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st])
 
     timeParallelStart <- getCurrentTime
 
     tid1 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 1"
-        test <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Itest6.dat" ReadMode; contentsTest <- hGetContents test
-        let
-            (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest
-            st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st])
         ref1 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6A.dat" ReadMode; contentsRef1 <- hGetContents ref1
         let
             (dimX1, dimY1, imageStreamRef1) = readDat contentsRef1; inrefMat1 = matrix dimX1 dimY1 imageStreamRef1
@@ -293,7 +299,7 @@ main = do
             u1 = vector [intest,inref1]
             m = zipWithxSY (procAR1 dimx dimy) u1
         writeFile "IPC2/proc1.txt" (show m)
-        putMVar m1 (intest, m)
+        putMVar m1 m
         
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 1 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
@@ -301,10 +307,6 @@ main = do
     tid2 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 2"
-        test <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Itest6.dat" ReadMode; contentsTest <- hGetContents test
-        let
-            (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest
-            st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st])
         ref2 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6B.dat" ReadMode; contentsRef2 <- hGetContents ref2
         let
             (dimX2, dimY2, imageStreamRef2) = readDat contentsRef2; inrefMat2 = matrix dimX2 dimY2 imageStreamRef2
@@ -320,10 +322,6 @@ main = do
     tid3 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 3"
-        test <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Itest6.dat" ReadMode; contentsTest <- hGetContents test
-        let
-            (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest
-            st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st])
         ref3 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6C.dat" ReadMode; contentsRef3 <- hGetContents ref3
         let
             (dimX3, dimY3, imageStreamRef3) = readDat contentsRef3; inrefMat3 = matrix dimX3 dimY3 imageStreamRef3
@@ -339,10 +337,6 @@ main = do
     tid4 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 4"
-        test <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Itest6.dat" ReadMode; contentsTest <- hGetContents test
-        let
-            (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest
-            st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st])
         ref4 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6D.dat" ReadMode; contentsRef4 <- hGetContents ref4
         let
             (dimX4, dimY4, imageStreamRef4) = readDat contentsRef4; inrefMat4 = matrix dimX4 dimY4 imageStreamRef4
@@ -355,16 +349,97 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 4 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
 
-    (intest, m1) <- takeMVar m1
+    tid5 <- forkIO $ do
+        myTid <- myThreadId
+        labelThread myTid "parallelism 5"
+        ref5 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6E.dat" ReadMode; contentsRef5 <- hGetContents ref5
+        let
+            (dimX5, dimY5, imageStreamRef5) = readDat contentsRef5; inrefMat5 = matrix dimX5 dimY5 imageStreamRef5
+            sr5 = signal [inrefMat5]; inref5 = mapSY (chunks dimx dimy)  (signal [sr5])
+            u5 = vector [intest,inref5]
+            m = zipWithxSY (procAR1 dimx dimy) u5
+        writeFile "IPC2/proc5.txt" (show m)
+        putMVar m5 m
+        
+        timeParallelEnd <- getCurrentTime
+        putStrLn $ "parallelism 5 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
+
+    tid6 <- forkIO $ do
+        myTid <- myThreadId
+        labelThread myTid "parallelism 6"
+        ref6 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6F.dat" ReadMode; contentsRef6 <- hGetContents ref6
+        let
+            (dimX6, dimY6, imageStreamRef6) = readDat contentsRef6; inrefMat6 = matrix dimX6 dimY6 imageStreamRef6
+            sr6 = signal [inrefMat6]; inref6 = mapSY (chunks dimx dimy)  (signal [sr6])
+            u6 = vector [intest,inref6]
+            m = zipWithxSY (procAR1 dimx dimy) u6
+        writeFile "IPC2/proc6.txt" (show m)
+        putMVar m6 m
+        
+        timeParallelEnd <- getCurrentTime
+        putStrLn $ "parallelism 6 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
+
+    tid7 <- forkIO $ do
+        myTid <- myThreadId
+        labelThread myTid "parallelism 7"
+        ref7 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6G.dat" ReadMode; contentsRef7 <- hGetContents ref7
+        let
+            (dimX7, dimY7, imageStreamRef7) = readDat contentsRef7; inrefMat7 = matrix dimX7 dimY7 imageStreamRef7
+            sr7 = signal [inrefMat7]; inref7 = mapSY (chunks dimx dimy)  (signal [sr7])
+            u7 = vector [intest,inref7]
+            m = zipWithxSY (procAR1 dimx dimy) u7
+        writeFile "IPC2/proc7.txt" (show m)
+        putMVar m7 m
+        
+        timeParallelEnd <- getCurrentTime
+        putStrLn $ "parallelism 7 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
+
+    tid8 <- forkIO $ do
+        myTid <- myThreadId
+        labelThread myTid "parallelism 8"
+        ref8 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6H.dat" ReadMode; contentsRef8 <- hGetContents ref8
+        let
+            (dimX8, dimY8, imageStreamRef8) = readDat contentsRef8; inrefMat8 = matrix dimX8 dimY8 imageStreamRef8
+            sr8 = signal [inrefMat8]; inref8 = mapSY (chunks dimx dimy)  (signal [sr8])
+            u8 = vector [intest,inref8]
+            m = zipWithxSY (procAR1 dimx dimy) u8
+        writeFile "IPC2/proc8.txt" (show m)
+        putMVar m8 m
+        
+        timeParallelEnd <- getCurrentTime
+        putStrLn $ "parallelism 8 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
+
+    tid9 <- forkIO $ do
+        myTid <- myThreadId
+        labelThread myTid "parallelism 9"
+        ref9 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/test6/Iref6I.dat" ReadMode; contentsRef9 <- hGetContents ref9
+        let
+            (dimX9, dimY9, imageStreamRef9) = readDat contentsRef9; inrefMat9 = matrix dimX9 dimY9 imageStreamRef9
+            sr9 = signal [inrefMat9]; inref9 = mapSY (chunks dimx dimy)  (signal [sr9])
+            u9 = vector [intest,inref9]
+            m = zipWithxSY (procAR1 dimx dimy) u9
+        writeFile "IPC2/proc9.txt" (show m)
+        putMVar m9 m
+        
+        timeParallelEnd <- getCurrentTime
+        putStrLn $ "parallelism 9 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
+
+
+    m1 <- takeMVar m1
     m2 <- takeMVar m2
     m3 <- takeMVar m3
     m4 <- takeMVar m4
+    m5 <- takeMVar m5
+    m6 <- takeMVar m6
+    m7 <- takeMVar m7
+    m8 <- takeMVar m8
+    m9 <- takeMVar m9
 
     threadDelay 10
     -- modify end
 
     -- MC Probabilities Matrix  (skeleton)
-    let out = vector [intest,m1,intest, m2, intest,m3,intest, m4]
+    let out = vector [intest,m1,intest, m2, intest,m3,intest, m4, intest, m5, intest, m6, intest, m7, intest, m8, intest, m9]
     let res = zipWithxSY (probMatrix dimx dimy) out
 
 

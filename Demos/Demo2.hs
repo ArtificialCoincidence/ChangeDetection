@@ -16,7 +16,6 @@ import Control.Monad
 import Data.Maybe
 import Data.Vector.Unboxed qualified as U
 import Data.Massiv.Array
-import Data.Massiv.Array.IO
 
 
 
@@ -352,26 +351,26 @@ main = do
 
 
 
-    test <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Itest0.dat" ReadMode; contentsTest <- hGetContents test
+    test <- openFile "SampleData/test18/Itest18.dat" ReadMode; contentsTest <- hGetContents test
 
-    ref1 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0A.dat" ReadMode; contentsRef1 <- hGetContents ref1
-    ref2 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0B.dat" ReadMode; contentsRef2 <- hGetContents ref2
-    ref3 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0C.dat" ReadMode; contentsRef3 <- hGetContents ref3
-    ref4 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0D.dat" ReadMode; contentsRef4 <- hGetContents ref4
-    ref5 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0E.dat" ReadMode; contentsRef5 <- hGetContents ref5
-    ref6 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0F.dat" ReadMode; contentsRef6 <- hGetContents ref6
-    ref7 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0G.dat" ReadMode; contentsRef7 <- hGetContents ref7
-    ref8 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0H.dat" ReadMode; contentsRef8 <- hGetContents ref8
-    ref9 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0I.dat" ReadMode; contentsRef9 <- hGetContents ref9
-    ref10 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0J.dat" ReadMode; contentsRef10 <- hGetContents ref10
-    ref11 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0K.dat" ReadMode; contentsRef11 <- hGetContents ref11
-    ref12 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0L.dat" ReadMode; contentsRef12 <- hGetContents ref12
-    ref13 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0M.dat" ReadMode; contentsRef13 <- hGetContents ref13
-    ref14 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0N.dat" ReadMode; contentsRef14 <- hGetContents ref14
-    ref15 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0O.dat" ReadMode; contentsRef15 <- hGetContents ref15
-    ref16 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0P.dat" ReadMode; contentsRef16 <- hGetContents ref16
-    ref17 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0Q.dat" ReadMode; contentsRef17 <- hGetContents ref17
-    ref18 <- openFile "/home/marcello-costa/workspace/AR1MoC/DataMC/Iref0R.dat" ReadMode; contentsRef18 <- hGetContents ref18
+    ref1 <- openFile "SampleData/test18/Iref18A.dat" ReadMode; contentsRef1 <- hGetContents ref1
+    -- ref2 <- openFile "SampleData/test18/Iref18B.dat" ReadMode; contentsRef2 <- hGetContents ref2
+    ref3 <- openFile "SampleData/test18/Iref18C.dat" ReadMode; contentsRef3 <- hGetContents ref3
+    -- ref4 <- openFile "SampleData/test18/Iref18D.dat" ReadMode; contentsRef4 <- hGetContents ref4
+    ref5 <- openFile "SampleData/test18/Iref18E.dat" ReadMode; contentsRef5 <- hGetContents ref5
+    -- ref6 <- openFile "SampleData/test18/Iref18F.dat" ReadMode; contentsRef6 <- hGetContents ref6
+    ref7 <- openFile "SampleData/test18/Iref18G.dat" ReadMode; contentsRef7 <- hGetContents ref7
+    -- ref8 <- openFile "SampleData/test18/Iref18H.dat" ReadMode; contentsRef8 <- hGetContents ref8
+    ref9 <- openFile "SampleData/test18/Iref18I.dat" ReadMode; contentsRef9 <- hGetContents ref9
+    -- ref10 <- openFile "SampleData/test18/Iref18J.dat" ReadMode; contentsRef10 <- hGetContents ref10
+    ref11 <- openFile "SampleData/test18/Iref18K.dat" ReadMode; contentsRef11 <- hGetContents ref11
+    -- ref12 <- openFile "SampleData/test18/Iref18L.dat" ReadMode; contentsRef12 <- hGetContents ref12
+    ref13 <- openFile "SampleData/test18/Iref18M.dat" ReadMode; contentsRef13 <- hGetContents ref13
+    -- ref14 <- openFile "SampleData/test18/Iref18N.dat" ReadMode; contentsRef14 <- hGetContents ref14
+    ref15 <- openFile "SampleData/test18/Iref18O.dat" ReadMode; contentsRef15 <- hGetContents ref15
+    -- ref16 <- openFile "SampleData/test18/Iref18P.dat" ReadMode; contentsRef16 <- hGetContents ref16
+    ref17 <- openFile "SampleData/test18/Iref18Q.dat" ReadMode; contentsRef17 <- hGetContents ref17
+    -- ref18 <- openFile "SampleData/test18/Iref18R.dat" ReadMode; contentsRef18 <- hGetContents ref18
    
      
      ----- Dataset Arrangement---------------------------------------------------------------------------------------------
@@ -379,58 +378,58 @@ main = do
     let dimx =500; dimy = 500
         (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest 
         (dimX1, dimY1, imageStreamRef1) = readDat contentsRef1; inrefMat1 = matrix dimX1 dimY1 imageStreamRef1
-        (dimX2, dimY2, imageStreamRef2) = readDat contentsRef2; inrefMat2 = matrix dimX1 dimY1 imageStreamRef2
+        -- (dimX2, dimY2, imageStreamRef2) = readDat contentsRef2; inrefMat2 = matrix dimX1 dimY1 imageStreamRef2
         (dimX3, dimY3, imageStreamRef3) = readDat contentsRef3; inrefMat3 = matrix dimX1 dimY1 imageStreamRef3
-        (dimX4, dimY4, imageStreamRef4) = readDat contentsRef4; inrefMat4 = matrix dimX1 dimY1 imageStreamRef4
+        -- (dimX4, dimY4, imageStreamRef4) = readDat contentsRef4; inrefMat4 = matrix dimX1 dimY1 imageStreamRef4
         (dimX5, dimY5, imageStreamRef5) = readDat contentsRef5; inrefMat5 = matrix dimX1 dimY1 imageStreamRef5
-        (dimX6, dimY6, imageStreamRef6) = readDat contentsRef6; inrefMat6 = matrix dimX1 dimY1 imageStreamRef6
+        -- (dimX6, dimY6, imageStreamRef6) = readDat contentsRef6; inrefMat6 = matrix dimX1 dimY1 imageStreamRef6
         (dimX7, dimY7, imageStreamRef7) = readDat contentsRef7; inrefMat7 = matrix dimX1 dimY1 imageStreamRef7
-        (dimX8, dimY8, imageStreamRef8) = readDat contentsRef8; inrefMat8 = matrix dimX1 dimY1 imageStreamRef8
+        -- (dimX8, dimY8, imageStreamRef8) = readDat contentsRef8; inrefMat8 = matrix dimX1 dimY1 imageStreamRef8
         (dimX9, dimY9, imageStreamRef9) = readDat contentsRef9; inrefMat9 = matrix dimX1 dimY1 imageStreamRef9
-        (dimX10, dimY10, imageStreamRef10) = readDat contentsRef10; inrefMat10 = matrix dimX1 dimY1 imageStreamRef10
+        -- (dimX10, dimY10, imageStreamRef10) = readDat contentsRef10; inrefMat10 = matrix dimX1 dimY1 imageStreamRef10
         (dimX11, dimY11, imageStreamRef11) = readDat contentsRef11; inrefMat11 = matrix dimX1 dimY1 imageStreamRef11
-        (dimX12, dimY12, imageStreamRef12) = readDat contentsRef12; inrefMat12 = matrix dimX1 dimY1 imageStreamRef12
+        -- (dimX12, dimY12, imageStreamRef12) = readDat contentsRef12; inrefMat12 = matrix dimX1 dimY1 imageStreamRef12
         (dimX13, dimY13, imageStreamRef13) = readDat contentsRef13; inrefMat13 = matrix dimX1 dimY1 imageStreamRef13
-        (dimX14, dimY14, imageStreamRef14) = readDat contentsRef14; inrefMat14 = matrix dimX1 dimY1 imageStreamRef14
+        -- (dimX14, dimY14, imageStreamRef14) = readDat contentsRef14; inrefMat14 = matrix dimX1 dimY1 imageStreamRef14
         (dimX15, dimY15, imageStreamRef15) = readDat contentsRef15; inrefMat15 = matrix dimX1 dimY1 imageStreamRef15
-        (dimX16, dimY16, imageStreamRef16) = readDat contentsRef16; inrefMat16 = matrix dimX1 dimY1 imageStreamRef16
+        -- (dimX16, dimY16, imageStreamRef16) = readDat contentsRef16; inrefMat16 = matrix dimX1 dimY1 imageStreamRef16
         (dimX17, dimY17, imageStreamRef17) = readDat contentsRef17; inrefMat17 = matrix dimX1 dimY1 imageStreamRef17
-        (dimX18, dimY18, imageStreamRef18) = readDat contentsRef18; inrefMat18 = matrix dimX1 dimY1 imageStreamRef18
+        -- (dimX18, dimY18, imageStreamRef18) = readDat contentsRef18; inrefMat18 = matrix dimX1 dimY1 imageStreamRef18
 
         st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st]) 
         sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
-        sr2 = signal [inrefMat2]; inref2 = mapSY (chunks dimx dimy)  (signal [sr2])
+        -- sr2 = signal [inrefMat2]; inref2 = mapSY (chunks dimx dimy)  (signal [sr2])
         sr3 = signal [inrefMat3]; inref3 = mapSY (chunks dimx dimy)  (signal [sr3]) 
-        sr4 = signal [inrefMat4]; inref4 = mapSY (chunks dimx dimy)  (signal [sr4])
+        -- sr4 = signal [inrefMat4]; inref4 = mapSY (chunks dimx dimy)  (signal [sr4])
         sr5 = signal [inrefMat5]; inref5 = mapSY (chunks dimx dimy)  (signal [sr5])
-        sr6 = signal [inrefMat6]; inref6 = mapSY (chunks dimx dimy)  (signal [sr6])
+        -- sr6 = signal [inrefMat6]; inref6 = mapSY (chunks dimx dimy)  (signal [sr6])
         sr7 = signal [inrefMat7]; inref7 = mapSY (chunks dimx dimy)  (signal [sr7])
-        sr8 = signal [inrefMat8]; inref8 = mapSY (chunks dimx dimy)  (signal [sr8])
+        -- sr8 = signal [inrefMat8]; inref8 = mapSY (chunks dimx dimy)  (signal [sr8])
         sr9 = signal [inrefMat9]; inref9 = mapSY (chunks dimx dimy)    (signal [sr9])
-        sr10 = signal [inrefMat10]; inref10 = mapSY (chunks dimx dimy)  (signal [sr10])
+        -- sr10 = signal [inrefMat10]; inref10 = mapSY (chunks dimx dimy)  (signal [sr10])
         sr11 = signal [inrefMat11]; inref11 = mapSY (chunks dimx dimy)  (signal [sr11])
-        sr12 = signal [inrefMat12]; inref12 = mapSY (chunks dimx dimy)  (signal [sr12])
+        -- sr12 = signal [inrefMat12]; inref12 = mapSY (chunks dimx dimy)  (signal [sr12])
         sr13 = signal [inrefMat13]; inref13 = mapSY (chunks dimx dimy)  (signal [sr13])
-        sr14 = signal [inrefMat14]; inref14 = mapSY (chunks dimx dimy)  (signal [sr14])
+        -- sr14 = signal [inrefMat14]; inref14 = mapSY (chunks dimx dimy)  (signal [sr14])
         sr15 = signal [inrefMat15]; inref15 = mapSY (chunks dimx dimy)  (signal [sr15])
-        sr16 = signal [inrefMat16]; inref16 = mapSY (chunks dimx dimy)  (signal [sr16])
+        -- sr16 = signal [inrefMat16]; inref16 = mapSY (chunks dimx dimy)  (signal [sr16])
         sr17 = signal [inrefMat17]; inref17 = mapSY (chunks dimx dimy)  (signal [sr17])
-        sr18 = signal [inrefMat18];inref18 = mapSY (chunks dimx dimy)  (signal [sr18])
+        -- sr18 = signal [inrefMat18];inref18 = mapSY (chunks dimx dimy)  (signal [sr18])
 
         
-        u1 = vector [intest,inref1]
-        u3 = vector [intest,inref1,intest, inref3, intest, inref7]
-        u6 = vector [intest,inref1,intest, inref3, intest, inref5, intest, inref7, intest, inref9, intest, inref11]
+        -- u1 = vector [intest,inref1]
+        -- u3 = vector [intest,inref1,intest, inref3, intest, inref7]
+        -- u6 = vector [intest,inref1,intest, inref3, intest, inref5, intest, inref7, intest, inref9, intest, inref11]
         u9 = vector [intest,inref1,intest, inref3, intest, inref5, intest, inref7, intest, inref9, intest, inref11, 
                     intest, inref13, intest, inref15, intest, inref17]
 
     
   
     ----- AR(n) + MC ------------------------------------------------------------------------------------------------
-    --let m = zipWithxSY (procMatrix1 dimx dimy) u1
-    --let m = zipWithxSY (procMatrix3 dimx dimy) u3
-    let m = zipWithxSY (procMatrix6 dimx dimy) u6
-    --let m = zipWithxSY (procMatrix9 dimx dimy) u9
+    -- let m = zipWithxSY (procMatrix1 dimx dimy) u1
+    -- let m = zipWithxSY (procMatrix3 dimx dimy) u3
+    -- let m = zipWithxSY (procMatrix6 dimx dimy) u6
+    let m = zipWithxSY (procMatrix9 dimx dimy) u9
     let v = lengthS m
     let m1 = fromSignal m !! 0; cm1 = m1 `atV` 0
     let w = sizeMat m1
@@ -438,7 +437,7 @@ main = do
 
 
     ----- Output File ------------------------------------------------------------------------------------------------
-    writeFile "/home/marcello-costa/workspace/AR1MoC/Out/CD0.txt" (show m)
-    -- writeFile "/home/marcello-costa/workspace/AR1MoC/Out/Test1.txt" (show intest)
-    -- writeFile "/home/marcello-costa/workspace/AR1MoC/Out/Iref2.txt" (show inref) 
+    writeFile "Out/CD0.txt" (show m)
+    -- writeFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/AR1MoC/Out/Test1.txt" (show intest)
+    -- writeFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/AR1MoC/Out/Iref2.txt" (show inref) 
     

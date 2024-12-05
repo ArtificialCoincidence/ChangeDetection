@@ -21,8 +21,7 @@ from ast import literal_eval
 def Classifier(ICD,tp,pfa, TestType, pair):
 
             radius = 12
-            if TestType == 'CD_demo':
-              Imc=np.array(ICD)*1
+            Imc=np.array(ICD)*10
             th=pfa
             ImAMax = Imc.max(axis=0).max(axis=0)
             (thresh, im_bw) = cv2.threshold(Imc, th, ImAMax, cv2.THRESH_BINARY)
@@ -80,6 +79,14 @@ def Classifier(ICD,tp,pfa, TestType, pair):
 
             if pair==0 or pair==1 or pair==2 or pair==3 or pair==4 or pair==5:
               start=400; end = 1000; Start=-400
+            elif pair==6 or pair==7 or pair==8 or pair==9 or pair==10 or pair==11:
+              start=200; end = 800; Start=-200
+              
+            elif pair==12 or pair==13 or pair==14 or pair==15 or pair==16 or pair==17:
+              start=2070; end = 2570 ; Start=-2070
+              
+            elif pair==18 or pair==19 or pair==20 or pair==21 or pair==22 or pair==23:
+              start=2330; end = 2830 ; Start=-2330
             
             f, ax = plt.subplots()
             for k in outlines_idx:
@@ -92,7 +99,7 @@ def Classifier(ICD,tp,pfa, TestType, pair):
                 ax.add_patch(circleDetected)
             plt.axis("off")
             
-            path='/home/marcello-costa/workspace/Demo1/class/'
+            path='/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/plots/FigClass/'
             f.savefig(path + 'Class_%s_%s.png'%(TestType, pair), dpi=350,bbox_inches='tight',transparent=True, pad_inches=0)
             f.tight_layout()
             
@@ -103,20 +110,44 @@ def Classifier(ICD,tp,pfa, TestType, pair):
 
 
 if __name__ == "__main__":
+  
+    idtest = 3; idlag = 1
+    test = ['S1', 'K1', 'F1','AF1']
+    Lag = [1, 6, 9]
     
     
-    path = '/home/marcello-costa/workspace/Demo1/Out/'
-    
+    if test[idtest] == 'AF1':
+      path = 'Out/'
+    #   path = '/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/Out/AF1/Lag%s/'%Lag[idlag]
+      TestName = test[idtest]+'_'+'MC'+str(Lag[idlag])+'AR1'
+      pair = 18
+      pfa = 1.35
+      
+    elif test[idtest] == 'K1':
+      path = '/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/Out/K1/Lag%s/'%Lag[idlag]
+      TestName = test[idtest]+'_'+'MC'+str(Lag[idlag])+'AR1'
+      pair = 6
+      pfa = 0.8
+      
+    elif test[idtest] == 'F1':
+      path = '/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/Out/F1/Lag%s/'%Lag[idlag]
+      TestName = test[idtest]+'_'+'MC'+str(Lag[idlag])+'AR1'
+      pair = 12
+      pfa =  1.95       #0.65 false alarm bound
+      
+    elif test[idtest] == 'S1':
+      path = '/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/Out/S1/Lag%s/'%Lag[idlag]
+      TestName = test[idtest]+'_'+'MC'+str(Lag[idlag])+'AR1'
+      pair = 0
+      pfa =  0.9      #1.7 bound for pd
+      
+        
     files = os.listdir(path+'/')
     files_images = [i for i in files if i.endswith('.txt')]
     files_images = sorted(files_images, key=lambda s: int(re.search(r'\d+', s).group()))
     
     n = 500; W =500
-    lags = 1
-    pfa =0.6 # or 0.45 to 0.7 best average PD/Pfa compromises over all dataset
-    
-    
-    # .dat to dict of arrays
+
     im= []
     for m in range(len(files_images)):
        dct = {}
@@ -149,26 +180,56 @@ if __name__ == "__main__":
         REC.append(np.vstack((Im)))
         
 
-    test_type = ['CD_demo']
-    test_type  = test_type[0] 
-    pair = 0
- 
     
     
-    pathTargetsPosition = '/home/marcello-costa/workspace/Demo1/SampleData/data/targets/'
+    pathTargetsPosition = '/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demos/SampleData/data/targets/'
     
     # pad for original size 3k x 2k
     if pair==0 or pair==1 or pair==2 or pair==3 or pair==4 or pair==5:
       tp=sio.loadmat(pathTargetsPosition+'S1.mat'); tp=tp['S1']; tp = np.fliplr(tp)
       OUT=np.pad(REC[0], ((450,0),(350,0)), mode='constant')
-      ICD=np.pad(OUT, ((0,2050),(0,850)), mode='constant')
+      ICD=np.pad(OUT, ((0,2050),(0,1150)), mode='constant')
+      
+      #start1=250; end1 = 750; start2=350; end2 = 850 # K1 
+    elif pair==6 or pair==7 or pair==8 or pair==9 or pair==10 or pair==11:
+      tp=sio.loadmat(pathTargetsPosition+'K1.mat'); tp=tp['K1']; tp = np.fliplr(tp)
+      OUT=np.pad(REC[0], ((250,0),(350,0)), mode='constant')
+      ICD=np.pad(OUT, ((0,2250),(0,1150)), mode='constant')
+      
+      
+      
+    elif pair==12 or pair==13 or pair==14 or pair==15 or pair==16 or pair==17:
+      tp=sio.loadmat(pathTargetsPosition+'F1.mat'); tp=tp['F1']; tp = np.fliplr(tp)
+      OUT=np.pad(REC[0], ((2050,0),(1100,0)), mode='constant')
+      ICD=np.pad(OUT, ((0,450),(0,400)), mode='constant')
+      
+    elif pair==18 or pair==19 or pair==20 or pair==21 or pair==22 or pair==23:
+      tp=sio.loadmat(pathTargetsPosition+'AF1.mat'); tp=tp['AF1']; tp = np.fliplr(tp)
+      OUT=np.pad(REC[0], ((2350,0),(950,0)), mode='constant')
+      ICD=np.pad(OUT, ((0,150),(0,550)), mode='constant')
+
+    print(ICD.shape)
+    
+   
+     
+    # fig = plt.figure('test')
+    # #plt.suptitle('Binarizada')
+    
+    # ax = fig.add_subplot(1, 1, 1)
+    # plt.imshow(ICD, cmap = plt.cm.gray)
+    # ax.set_title("Test Detection")
+    # plt.axis("off")
+    
+   
+    
+    # plt.show() 
       
          
-    # classification
-    [detected_targets, falseAlarm, mission_targets]=Classifier(ICD,tp,pfa, test_type, pair)
+    # #classification
+    [detected_targets, falseAlarm, mission_targets]=Classifier(ICD,tp,pfa, TestName, pair)
 
     # Detection summary
-    print('Pair:', pair, ' ', 'Test:',test_type )
+    print('Pair:', pair, ' ', 'Test:',TestName)
     print('Detected Target:', detected_targets)
     print('False Alarms:', falseAlarm)
     

@@ -80,18 +80,18 @@ main :: IO ()
 main = do
 
 
-    test <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Itest0.dat" ReadMode; contentsTest <- hGetContents test
+    test <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Itest0.dat" ReadMode; contentsTest <- hGetContents test
 
-    ref1 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0A.dat" ReadMode; contentsRef1 <- hGetContents ref1
-    ref2 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0B.dat" ReadMode; contentsRef2 <- hGetContents ref2
-    ref3 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0C.dat" ReadMode; contentsRef3 <- hGetContents ref3
-    ref5 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0E.dat" ReadMode; contentsRef5 <- hGetContents ref5
-    ref7 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0G.dat" ReadMode; contentsRef7 <- hGetContents ref7
-    ref9 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0I.dat" ReadMode; contentsRef9 <- hGetContents ref9
-    ref11 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0K.dat" ReadMode; contentsRef11 <- hGetContents ref11
-    ref13 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0M.dat" ReadMode; contentsRef13 <- hGetContents ref13
-    ref15 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0O.dat" ReadMode; contentsRef15 <- hGetContents ref15
-    ref17 <- openFile "/home/marcello-costa/workspace/Demo1/SampleData/Iref0Q.dat" ReadMode; contentsRef17 <- hGetContents ref17
+    ref1 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0A.dat" ReadMode; contentsRef1 <- hGetContents ref1
+    ref2 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0B.dat" ReadMode; contentsRef2 <- hGetContents ref2
+    ref3 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0C.dat" ReadMode; contentsRef3 <- hGetContents ref3
+    ref5 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0E.dat" ReadMode; contentsRef5 <- hGetContents ref5
+    ref7 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0G.dat" ReadMode; contentsRef7 <- hGetContents ref7
+    ref9 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0I.dat" ReadMode; contentsRef9 <- hGetContents ref9
+    ref11 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0K.dat" ReadMode; contentsRef11 <- hGetContents ref11
+    ref13 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0M.dat" ReadMode; contentsRef13 <- hGetContents ref13
+    ref15 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0O.dat" ReadMode; contentsRef15 <- hGetContents ref15
+    ref17 <- openFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/SampleData/Iref0Q.dat" ReadMode; contentsRef17 <- hGetContents ref17
     
      
     ----- Dataset Arrangement (odd references) ------------------------------------------------------------------------------------
@@ -129,9 +129,9 @@ main = do
 
 
     ----- Output File ------------------------------------------------------------------------------------------------
-    writeFile "/home/marcello-costa/workspace/Demo1/Out/CD0.txt" (show m)
-    --writeFile "/home/marcello-costa/workspace/Demo1/Out/Test1.txt" (show intest)
-    --writeFile "/home/marcello-costa/workspace/Demo1/Out/Iref2.txt" (show inref17) 
+    writeFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/Out/CD0.txt" (show m)
+    --writeFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/Out/Test1.txt" (show intest)
+    --writeFile "/Users/dairuijia/Documents/EmbeddedSystemsProject/code/ChangeDetection/Demo1/Out/Iref2.txt" (show inref17) 
 
 
     ---- GHC terminal ----------------------------------------------------------------------------------------------
