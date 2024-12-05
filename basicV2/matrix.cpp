@@ -124,16 +124,18 @@ void writeData(const string& filename,double *data ) {
 	}
 	for (int i = 0; i < SIZE; ++i)
 	{
-	
-		if(data[i]==0.0){
+
+		if(i==249999) {
+			out<<data[i];
+		}	
+		else if(data[i]==0.0){
 			out << std::fixed << std::setprecision(1);
 			out << data[i] << ",";
 		}
 		else{
 
 			out << std::fixed << std::setprecision(10);
-			if(i!=249999) out<<data[i]<<",";
-			else  out<<data[i];
+			out<<data[i]<<",";
 		}
 
 	}
