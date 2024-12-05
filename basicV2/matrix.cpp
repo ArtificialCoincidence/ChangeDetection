@@ -125,9 +125,10 @@ void writeData(const string& filename,double *data ) {
 	for (int i = 0; i < SIZE; ++i)
 	{
 	
-		if(data[i]==0.0)
-			{out << std::fixed << std::setprecision(1);
-			out << data[i] << ",";}
+		if(data[i]==0.0){
+			out << std::fixed << std::setprecision(1);
+			out << data[i] << ",";
+		}
 		else{
 
 			out << std::fixed << std::setprecision(10);
