@@ -1,6 +1,6 @@
 # Compiler and flags
-CXX = nvcc
-CXXFLAGS = -g -Xcompiler -O0 -Xcompiler -Wall
+CXX = g++
+CXXFLAGS = -O0
 
 # Target executable
 TARGET = main

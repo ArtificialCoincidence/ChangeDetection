@@ -1,5 +1,5 @@
 #include"matrix.h"
-
+#include <iomanip>
 void ReadData(const string& filename, double* data) {
 	ifstream in(filename);
 	try {
@@ -83,8 +83,12 @@ void SpatialFilter(double* a)
 
 void Add(double* ref, double* test, double rho) {
 	double rho_y = sqrt(1 - rho * rho);
-	for (int i = 0; i < SIZE; ++i)
-		ref[i] = ref[i] * rho_y + test[i] * rho;
+	for (int i = 0; i < SIZE; ++i){
+		double refi=ref[i]*rho_y;
+	       double testi=test[i]*rho;	
+		
+		ref[i] = testi>refi?testi+refi:0;
+	}
 	return;
 
 }
@@ -119,7 +123,18 @@ void writeData(const string& filename,double *data ) {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 	for (int i = 0; i < SIZE; ++i)
-		out << data[i] << ",";
+	{
+	
+		if(data[i]==0.0)
+			{out << std::fixed << std::setprecision(1);
+			out << data[i] << ",";}
+		else{
+
+			out << std::fixed << std::setprecision(10);
+			out<<data[i]<<",";
+		}
+
+	}
 	out << endl;
 	out.close();
 
