@@ -1,0 +1,137 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/intelFPGA_lite/18.1/projects/anomaly_detection/simulation/modelsim
+Eanomaly_fsm
+Z1 w1733405704
+Z2 DPx4 ieee 11 numeric_std 0 22 :ASDNFgHXf_ih3J@9F3Ze1
+Z3 DPx4 ieee 15 std_logic_arith 0 22 [G314=:2zXJ`VORJe1J@Z1
+Z4 DPx4 ieee 18 std_logic_unsigned 0 22 ;eZjO2D4ZDz<]0>8AL<ne1
+Z5 DPx3 std 6 textio 0 22 zE1`LPoLg^DX3Oz^4Fj1K3
+Z6 DPx4 ieee 14 std_logic_1164 0 22 eNV`TJ_GofJTzYa?f<@Oe1
+R0
+Z7 8C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd
+Z8 FC:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd
+l0
+L6
+V4T2`9_;NTCR1H9a1P4R1`2
+!s100 VFGR8G]=QP=QSdXd83<;W0
+Z9 OV;C;10.5b;63
+31
+Z10 !s110 1733405746
+!i10b 1
+Z11 !s108 1733405746.000000
+Z12 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd|
+Z13 !s107 C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd|
+!i113 1
+Z14 o-93 -work work
+Z15 tExplicit 1 CvgOpt 0
+Artl
+R2
+R3
+R4
+R5
+R6
+DEx4 work 11 anomaly_fsm 0 22 4T2`9_;NTCR1H9a1P4R1`2
+l46
+L22
+Vi>0K;1zMSE4DBaQ9En=4`1
+!s100 lN^E?L`U`TBn=i5>SkD^;0
+R9
+31
+R10
+!i10b 1
+R11
+R12
+R13
+!i113 1
+R14
+R15
+Ebram_histogram
+Z16 w1733405720
+Z17 DPx9 altera_mf 20 altera_mf_components 0 22 gV:l9C^?PSb6]b5V?_jR@3
+R5
+R6
+R0
+Z18 8C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd
+Z19 FC:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd
+l0
+L42
+V_P5VZ44md>kW4V1E9b7nD0
+!s100 ;k_U_B>RnAQLJc]Ie8k@93
+R9
+31
+R10
+!i10b 1
+R11
+Z20 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd|
+Z21 !s107 C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd|
+!i113 1
+R14
+R15
+Asyn
+R17
+R5
+R6
+DEx4 work 14 bram_histogram 0 22 _P5VZ44md>kW4V1E9b7nD0
+l59
+L55
+V:YHDzFA5l9>T:l407XkKM1
+!s100 ZjW`=kMjd=T@CY]2TiF1i1
+R9
+31
+R10
+!i10b 1
+R11
+R20
+R21
+!i113 1
+R14
+R15
+Ehist_tb
+Z22 w1733405116
+R2
+R5
+R6
+R0
+Z23 8C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd
+Z24 FC:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd
+l0
+L5
+Vc6fDH?Icc]@azP>YU3@E40
+!s100 zF]ACIb^PR=beA2_ZRRXM1
+R9
+31
+Z25 !s110 1733405747
+!i10b 1
+R11
+Z26 !s90 -reportprogress|300|-93|-work|work|C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd|
+Z27 !s107 C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd|
+!i113 1
+R14
+R15
+Atest
+R2
+R5
+R6
+DEx4 work 7 hist_tb 0 22 c6fDH?Icc]@azP>YU3@E40
+l34
+L8
+V7jo[jPo82H[gAQW`>06^10
+!s100 A[UC8CV`UT2W?;503:ChJ3
+R9
+31
+R25
+!i10b 1
+R11
+R26
+R27
+!i113 1
+R14
+R15
