@@ -310,7 +310,7 @@ main = do
             
             --C E H J N P -- worst sub-lags
     
-        let readpath = "./SampleData/test" ++ target; 
+        let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag6/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
@@ -409,7 +409,7 @@ main = do
             
             --C E H J N P -- worst sub-lags
     
-        let readpath = "./SampleData/test" ++ target; 
+        let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag6/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
@@ -507,7 +507,7 @@ main = do
             
             --C E H J N P -- worst sub-lags
     
-        let readpath = "./SampleData/test" ++ target; 
+        let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag6/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
@@ -605,7 +605,7 @@ main = do
             
             --C E H J N P -- worst sub-lags
     
-        let readpath = "./SampleData/test" ++ target; 
+        let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag6/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"

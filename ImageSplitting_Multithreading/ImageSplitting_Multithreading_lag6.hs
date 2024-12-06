@@ -306,7 +306,7 @@ main = do
         
         --C E H J N P -- worst sub-lags
  
-    let readpath = "./SampleData/test" ++ target; 
+    let readpath = "./../SampleData/test" ++ target; 
     let writepath = "./Out/" ++ mission ++ "/Lag6/ImageSplitting" 
 
         readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"

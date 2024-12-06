@@ -308,7 +308,7 @@ if __name__ == "__main__":
       
         
       
-    pathTargetsPosition = './SampleData/data/targets/'
+    pathTargetsPosition = './../SampleData/data/targets/'
     
     # pad for original size 3k x 2k
     if pair==0 or pair==1 or pair==2 or pair==3 or pair==4 or pair==5:
