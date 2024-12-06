@@ -1,0 +1,160 @@
+Info: Starting: Create block symbol file (.bsf)
+Info: qsys-generate C:\intelFPGA_lite\18.1\projects\anomaly_detection\dma_platform.qsys --block-symbol-file --output-directory=C:\intelFPGA_lite\18.1\projects\anomaly_detection\dma_platform --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading anomaly_detection/dma_platform.qsys
+Progress: Reading input file
+Progress: Adding ARM_A9_HPS [altera_hps 18.1]
+Progress: Parameterizing module ARM_A9_HPS
+Progress: Adding Anomaly_Detection [anomaly_detection 1.0]
+Progress: Parameterizing module Anomaly_Detection
+Progress: Adding Change_Detection_Mem_to_Stream_DMA [altera_up_avalon_video_dma_controller 18.0]
+Progress: Parameterizing module Change_Detection_Mem_to_Stream_DMA
+Progress: Adding Change_Detection_Mem_to_Stream_Translator [altera_up_avalon_video_dma_ctrl_addr_trans 18.0]
+Progress: Parameterizing module Change_Detection_Mem_to_Stream_Translator
+Progress: Adding Change_Detection_Stream_to_Mem_DMA [altera_up_avalon_video_dma_controller 18.0]
+Progress: Parameterizing module Change_Detection_Stream_to_Mem_DMA
+Progress: Adding Change_Detection_Stream_to_Mem_Translator [altera_up_avalon_video_dma_ctrl_addr_trans 18.0]
+Progress: Parameterizing module Change_Detection_Stream_to_Mem_Translator
+Progress: Adding Edge_Detector [altera_up_avalon_video_edge_detection 18.0]
+Progress: Parameterizing module Edge_Detector
+Progress: Adding Grayscale_to_RGB24 [altera_up_avalon_video_csc 18.0]
+Progress: Parameterizing module Grayscale_to_RGB24
+Progress: Adding RGB24_to_Grayscale [altera_up_avalon_video_csc 18.0]
+Progress: Parameterizing module RGB24_to_Grayscale
+Progress: Adding SDRAM [altera_avalon_new_sdram_controller 18.1]
+Progress: Parameterizing module SDRAM
+Progress: Adding System_PLL [altera_up_avalon_sys_sdram_pll 18.0]
+Progress: Parameterizing module System_PLL
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: dma_platform.ARM_A9_HPS: HPS Main PLL counter settings: n = 0  m = 73
+Info: dma_platform.ARM_A9_HPS: HPS peripherial PLL counter settings: n = 0  m = 39
+Warning: dma_platform.ARM_A9_HPS: "Configuration/HPS-to-FPGA user 0 clock frequency" (desired_cfg_clk_mhz) requested 100.0 MHz, but only achieved 97.368421 MHz
+Warning: dma_platform.ARM_A9_HPS: "QSPI clock frequency" (desired_qspi_clk_mhz) requested 400.0 MHz, but only achieved 370.0 MHz
+Warning: dma_platform.ARM_A9_HPS: 1 or more output clock frequencies cannot be achieved precisely, consider revising desired output clock frequencies.
+Warning: dma_platform.Change_Detection_Mem_to_Stream_Translator.master: Master needs a minimum address width of 3 bits (has 2)
+Warning: dma_platform.Change_Detection_Stream_to_Mem_Translator.master: Master needs a minimum address width of 3 bits (has 2)
+Info: dma_platform.SDRAM: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: dma_platform.System_PLL: Refclk Freq: 50.0
+Info: qsys-generate succeeded.
+Info: Finished: Create block symbol file (.bsf)
+Info: 
+Info: Starting: Create HDL design files for synthesis
+Info: qsys-generate C:\intelFPGA_lite\18.1\projects\anomaly_detection\dma_platform.qsys --synthesis=VHDL --output-directory=C:\intelFPGA_lite\18.1\projects\anomaly_detection\dma_platform\synthesis --family="Cyclone V" --part=5CSXFC6D6F31C6
+Progress: Loading anomaly_detection/dma_platform.qsys
+Progress: Reading input file
+Progress: Adding ARM_A9_HPS [altera_hps 18.1]
+Progress: Parameterizing module ARM_A9_HPS
+Progress: Adding Anomaly_Detection [anomaly_detection 1.0]
+Progress: Parameterizing module Anomaly_Detection
+Progress: Adding Change_Detection_Mem_to_Stream_DMA [altera_up_avalon_video_dma_controller 18.0]
+Progress: Parameterizing module Change_Detection_Mem_to_Stream_DMA
+Progress: Adding Change_Detection_Mem_to_Stream_Translator [altera_up_avalon_video_dma_ctrl_addr_trans 18.0]
+Progress: Parameterizing module Change_Detection_Mem_to_Stream_Translator
+Progress: Adding Change_Detection_Stream_to_Mem_DMA [altera_up_avalon_video_dma_controller 18.0]
+Progress: Parameterizing module Change_Detection_Stream_to_Mem_DMA
+Progress: Adding Change_Detection_Stream_to_Mem_Translator [altera_up_avalon_video_dma_ctrl_addr_trans 18.0]
+Progress: Parameterizing module Change_Detection_Stream_to_Mem_Translator
+Progress: Adding Edge_Detector [altera_up_avalon_video_edge_detection 18.0]
+Progress: Parameterizing module Edge_Detector
+Progress: Adding Grayscale_to_RGB24 [altera_up_avalon_video_csc 18.0]
+Progress: Parameterizing module Grayscale_to_RGB24
+Progress: Adding RGB24_to_Grayscale [altera_up_avalon_video_csc 18.0]
+Progress: Parameterizing module RGB24_to_Grayscale
+Progress: Adding SDRAM [altera_avalon_new_sdram_controller 18.1]
+Progress: Parameterizing module SDRAM
+Progress: Adding System_PLL [altera_up_avalon_sys_sdram_pll 18.0]
+Progress: Parameterizing module System_PLL
+Progress: Building connections
+Progress: Parameterizing connections
+Progress: Validating
+Progress: Done reading input file
+Info: dma_platform.ARM_A9_HPS: HPS Main PLL counter settings: n = 0  m = 73
+Info: dma_platform.ARM_A9_HPS: HPS peripherial PLL counter settings: n = 0  m = 39
+Warning: dma_platform.ARM_A9_HPS: "Configuration/HPS-to-FPGA user 0 clock frequency" (desired_cfg_clk_mhz) requested 100.0 MHz, but only achieved 97.368421 MHz
+Warning: dma_platform.ARM_A9_HPS: "QSPI clock frequency" (desired_qspi_clk_mhz) requested 400.0 MHz, but only achieved 370.0 MHz
+Warning: dma_platform.ARM_A9_HPS: 1 or more output clock frequencies cannot be achieved precisely, consider revising desired output clock frequencies.
+Warning: dma_platform.Change_Detection_Mem_to_Stream_Translator.master: Master needs a minimum address width of 3 bits (has 2)
+Warning: dma_platform.Change_Detection_Stream_to_Mem_Translator.master: Master needs a minimum address width of 3 bits (has 2)
+Info: dma_platform.SDRAM: SDRAM Controller will only be supported in Quartus Prime Standard Edition in the future release.
+Info: dma_platform.System_PLL: Refclk Freq: 50.0
+Info: dma_platform: Generating dma_platform "dma_platform" for QUARTUS_SYNTH
+Info: Interconnect is inserted between master Change_Detection_Mem_to_Stream_Translator.master and slave Change_Detection_Mem_to_Stream_DMA.avalon_dma_control_slave because the master has waitrequest signal 1 bit wide, but the slave is 0 bit wide.
+Info: Interconnect is inserted between master Change_Detection_Stream_to_Mem_Translator.master and slave Change_Detection_Stream_to_Mem_DMA.avalon_dma_control_slave because the master has waitrequest signal 1 bit wide, but the slave is 0 bit wide.
+Warning: ARM_A9_HPS.f2h_irq0: Cannot connect clock for irq_mapper.sender
+Warning: ARM_A9_HPS.f2h_irq0: Cannot connect reset for irq_mapper.sender
+Warning: ARM_A9_HPS.f2h_irq1: Cannot connect clock for irq_mapper_001.sender
+Warning: ARM_A9_HPS.f2h_irq1: Cannot connect reset for irq_mapper_001.sender
+Info: ARM_A9_HPS: "Running  for module: ARM_A9_HPS"
+Info: ARM_A9_HPS: HPS Main PLL counter settings: n = 0  m = 73
+Info: ARM_A9_HPS: HPS peripherial PLL counter settings: n = 0  m = 39
+Warning: ARM_A9_HPS: "Configuration/HPS-to-FPGA user 0 clock frequency" (desired_cfg_clk_mhz) requested 100.0 MHz, but only achieved 97.368421 MHz
+Warning: ARM_A9_HPS: "QSPI clock frequency" (desired_qspi_clk_mhz) requested 400.0 MHz, but only achieved 370.0 MHz
+Warning: ARM_A9_HPS: 1 or more output clock frequencies cannot be achieved precisely, consider revising desired output clock frequencies.
+Info: ARM_A9_HPS: "dma_platform" instantiated altera_hps "ARM_A9_HPS"
+Info: Anomaly_Detection: "dma_platform" instantiated anomaly_detection "Anomaly_Detection"
+Info: Change_Detection_Mem_to_Stream_DMA: Starting Generation of Video DMA Controller
+Info: Change_Detection_Mem_to_Stream_DMA: "dma_platform" instantiated altera_up_avalon_video_dma_controller "Change_Detection_Mem_to_Stream_DMA"
+Info: Change_Detection_Mem_to_Stream_Translator: "dma_platform" instantiated altera_up_avalon_video_dma_ctrl_addr_trans "Change_Detection_Mem_to_Stream_Translator"
+Info: Change_Detection_Stream_to_Mem_DMA: Starting Generation of Video DMA Controller
+Info: Change_Detection_Stream_to_Mem_DMA: "dma_platform" instantiated altera_up_avalon_video_dma_controller "Change_Detection_Stream_to_Mem_DMA"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_control_slave.v
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_memory.v
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_stream.v
+Info: SDRAM: Starting RTL generation for module 'dma_platform_SDRAM'
+Info: SDRAM:   Generation command is [exec C:/intelfpga_lite/18.1/quartus/bin64/perl/bin/perl.exe -I C:/intelfpga_lite/18.1/quartus/bin64/perl/lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/europa -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin/perl_lib -I C:/intelfpga_lite/18.1/quartus/sopc_builder/bin -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/common -I C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller -- C:/intelfpga_lite/18.1/quartus/../ip/altera/sopc_builder_ip/altera_avalon_new_sdram_controller/generate_rtl.pl --name=dma_platform_SDRAM --dir=C:/Users/webbe/AppData/Local/Temp/alt0063_3536020050272366475.dir/0006_SDRAM_gen/ --quartus_dir=C:/intelfpga_lite/18.1/quartus --verilog --config=C:/Users/webbe/AppData/Local/Temp/alt0063_3536020050272366475.dir/0006_SDRAM_gen//dma_platform_SDRAM_component_configuration.pl  --do_build_sim=0  ]
+Info: SDRAM: Done RTL generation for module 'dma_platform_SDRAM'
+Info: SDRAM: "dma_platform" instantiated altera_avalon_new_sdram_controller "SDRAM"
+Info: System_PLL: "dma_platform" instantiated altera_up_avalon_sys_sdram_pll "System_PLL"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_0: "dma_platform" instantiated altera_mm_interconnect "mm_interconnect_0"
+Info: avalon_st_adapter: Inserting error_adapter: error_adapter_0
+Info: avalon_st_adapter_001: Inserting error_adapter: error_adapter_0
+Info: mm_interconnect_1: "dma_platform" instantiated altera_mm_interconnect "mm_interconnect_1"
+Info: mm_interconnect_2: "dma_platform" instantiated altera_mm_interconnect "mm_interconnect_2"
+Info: mm_interconnect_3: "dma_platform" instantiated altera_mm_interconnect "mm_interconnect_3"
+Info: irq_mapper: "dma_platform" instantiated altera_irq_mapper "irq_mapper"
+Info: rst_controller: "dma_platform" instantiated altera_reset_controller "rst_controller"
+Info: fpga_interfaces: "ARM_A9_HPS" instantiated altera_interface_generator "fpga_interfaces"
+Info: hps_io: "ARM_A9_HPS" instantiated altera_hps_io "hps_io"
+Info: sys_pll: "System_PLL" instantiated altera_pll "sys_pll"
+Info: reset_from_locked: "System_PLL" instantiated altera_up_avalon_reset_from_locked_signal "reset_from_locked"
+Info: Change_Detection_Mem_to_Stream_DMA_avalon_dma_master_translator: "mm_interconnect_0" instantiated altera_merlin_master_translator "Change_Detection_Mem_to_Stream_DMA_avalon_dma_master_translator"
+Info: SDRAM_s1_translator: "mm_interconnect_0" instantiated altera_merlin_slave_translator "SDRAM_s1_translator"
+Info: ARM_A9_HPS_h2f_axi_master_agent: "mm_interconnect_0" instantiated altera_merlin_axi_master_ni "ARM_A9_HPS_h2f_axi_master_agent"
+Info: Change_Detection_Mem_to_Stream_DMA_avalon_dma_master_agent: "mm_interconnect_0" instantiated altera_merlin_master_agent "Change_Detection_Mem_to_Stream_DMA_avalon_dma_master_agent"
+Info: SDRAM_s1_agent: "mm_interconnect_0" instantiated altera_merlin_slave_agent "SDRAM_s1_agent"
+Info: SDRAM_s1_agent_rsp_fifo: "mm_interconnect_0" instantiated altera_avalon_sc_fifo "SDRAM_s1_agent_rsp_fifo"
+Info: router: "mm_interconnect_0" instantiated altera_merlin_router "router"
+Info: router_002: "mm_interconnect_0" instantiated altera_merlin_router "router_002"
+Info: router_004: "mm_interconnect_0" instantiated altera_merlin_router "router_004"
+Info: SDRAM_s1_burst_adapter: "mm_interconnect_0" instantiated altera_merlin_burst_adapter "SDRAM_s1_burst_adapter"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: cmd_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: rsp_demux: "mm_interconnect_0" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_mux: "mm_interconnect_0" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: ARM_A9_HPS_h2f_axi_master_wr_rsp_width_adapter: "mm_interconnect_0" instantiated altera_merlin_width_adapter "ARM_A9_HPS_h2f_axi_master_wr_rsp_width_adapter"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_address_alignment.sv
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+Info: avalon_st_adapter: "mm_interconnect_0" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: router: "mm_interconnect_1" instantiated altera_merlin_router "router"
+Info: router_002: "mm_interconnect_1" instantiated altera_merlin_router "router_002"
+Info: ARM_A9_HPS_h2f_lw_axi_master_wr_limiter: "mm_interconnect_1" instantiated altera_merlin_traffic_limiter "ARM_A9_HPS_h2f_lw_axi_master_wr_limiter"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_sc_fifo.v
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_st_pipeline_base.v
+Info: cmd_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "cmd_demux"
+Info: cmd_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "cmd_mux"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: rsp_demux: "mm_interconnect_1" instantiated altera_merlin_demultiplexer "rsp_demux"
+Info: rsp_mux: "mm_interconnect_1" instantiated altera_merlin_multiplexer "rsp_mux"
+Info: Reusing file C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv
+Info: avalon_st_adapter: "mm_interconnect_1" instantiated altera_avalon_st_adapter "avalon_st_adapter"
+Info: border: "hps_io" instantiated altera_interface_generator "border"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: error_adapter_0: "avalon_st_adapter" instantiated error_adapter "error_adapter_0"
+Info: dma_platform: Done "dma_platform" with 45 modules, 109 files
+Info: qsys-generate succeeded.
+Info: Finished: Create HDL design files for synthesis

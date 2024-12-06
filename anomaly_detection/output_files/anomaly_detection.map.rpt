@@ -1,5 +1,5 @@
-Analysis & Elaboration report for anomaly_detection
-Fri Dec 06 10:44:00 2024
+Analysis & Synthesis report for anomaly_detection
+Fri Dec 06 15:05:49 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -7,21 +7,33 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Elaboration Summary
-  3. Parallel Compilation
-  4. Analysis & Elaboration IP Cores Summary
-  5. Source assignments for histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated
-  6. Source assignments for bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated
-  7. Parameter Settings for User Entity Instance: Top-level Entity: |anomaly_detection
-  8. Parameter Settings for User Entity Instance: histogram:HIST
-  9. Parameter Settings for User Entity Instance: histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component
- 10. Parameter Settings for User Entity Instance: bram_row:BRAM|altsyncram:altsyncram_component
- 11. Parameter Settings for User Entity Instance: threshold_cdf:THRS
- 12. Parameter Settings for User Entity Instance: scan_image:SCAN
- 13. Parameter Settings for User Entity Instance: control_fsm:FSM
- 14. altsyncram Parameter Settings by Entity Instance
- 15. Analysis & Elaboration Settings
- 16. Analysis & Elaboration Messages
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis IP Cores Summary
+ 10. State Machine - |anomaly_detection|control_fsm:FSM|state
+ 11. User-Specified and Inferred Latches
+ 12. Registers Removed During Synthesis
+ 13. Removed Registers Triggering Further Register Optimizations
+ 14. General Register Statistics
+ 15. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 16. Source assignments for histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated
+ 17. Source assignments for bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated
+ 18. Parameter Settings for User Entity Instance: Top-level Entity: |anomaly_detection
+ 19. Parameter Settings for User Entity Instance: histogram:HIST
+ 20. Parameter Settings for User Entity Instance: histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component
+ 21. Parameter Settings for User Entity Instance: bram_row:BRAM|altsyncram:altsyncram_component
+ 22. Parameter Settings for User Entity Instance: threshold_cdf:THRS
+ 23. Parameter Settings for User Entity Instance: scan_image:SCAN
+ 24. Parameter Settings for User Entity Instance: control_fsm:FSM
+ 25. altsyncram Parameter Settings by Entity Instance
+ 26. Post-Synthesis Netlist Statistics for Top Partition
+ 27. Elapsed Time Per Partition
+ 28. Analysis & Synthesis Messages
 
 
 
@@ -44,22 +56,114 @@ refer to the applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------+
-; Analysis & Elaboration Summary                                              ;
-+-------------------------------+---------------------------------------------+
-; Analysis & Elaboration Status ; Successful - Fri Dec 06 10:44:00 2024       ;
-; Quartus Prime Version         ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
-; Revision Name                 ; anomaly_detection                           ;
-; Top-level Entity Name         ; anomaly_detection                           ;
-; Family                        ; Cyclone V                                   ;
-; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
-; Total registers               ; N/A until Partition Merge                   ;
-; Total pins                    ; N/A until Partition Merge                   ;
-; Total virtual pins            ; N/A until Partition Merge                   ;
-; Total block memory bits       ; N/A until Partition Merge                   ;
-; Total PLLs                    ; N/A until Partition Merge                   ;
-; Total DLLs                    ; N/A until Partition Merge                   ;
-+-------------------------------+---------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Fri Dec 06 15:05:49 2024       ;
+; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name                   ; anomaly_detection                           ;
+; Top-level Entity Name           ; anomaly_detection                           ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 106                                         ;
+; Total pins                      ; 42                                          ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 1,056,576                                   ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                             ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                          ; Setting            ; Default Value      ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                          ; 5CSXFC6D6F31C6     ;                    ;
+; Top-level entity name                                                           ; anomaly_detection  ; anomaly_detection  ;
+; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
+; Use smart compilation                                                           ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
+; Enable compact report table                                                     ; Off                ; Off                ;
+; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
+; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
+; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
+; Preserve fewer node names                                                       ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
+; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                        ; Auto               ; Auto               ;
+; Safe State Machine                                                              ; Off                ; Off                ;
+; Extract Verilog State Machines                                                  ; On                 ; On                 ;
+; Extract VHDL State Machines                                                     ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
+; Parallel Synthesis                                                              ; On                 ; On                 ;
+; DSP Block Balancing                                                             ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                              ; On                 ; On                 ;
+; Power-Up Don't Care                                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
+; Remove Duplicate Registers                                                      ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
+; Optimization Technique                                                          ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                              ; 70                 ; 70                 ;
+; Auto Carry Chains                                                               ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
+; Auto ROM Replacement                                                            ; On                 ; On                 ;
+; Auto RAM Replacement                                                            ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
+; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
+; Strict RAM Replacement                                                          ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                           ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
+; Report Parameter Settings                                                       ; On                 ; On                 ;
+; Report Source Assignments                                                       ; On                 ; On                 ;
+; Report Connectivity Checks                                                      ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
+; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
+; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
+; HDL message level                                                               ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
+; Clock MUX Protection                                                            ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
+; Block Design Naming                                                             ; Auto               ; Auto               ;
+; SDC constraint protection                                                       ; Off                ; Off                ;
+; Synthesis Effort                                                                ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
+; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
+; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
++---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
 +------------------------------------------+
@@ -71,21 +175,259 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 16          ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 16          ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processors 2-16        ;   0.0%      ;
 +----------------------------+-------------+
 
 
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                     ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                 ; Library ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
+; anomaly_detection.vhd            ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd      ;         ;
+; bram_row.vhd                     ; yes             ; User Wizard-Generated File   ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd               ;         ;
+; bram_histogram.vhd               ; yes             ; User Wizard-Generated File   ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd         ;         ;
+; threshold_cdf.vhd                ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd          ;         ;
+; histogram.vhd                    ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd              ;         ;
+; scan_image.vhd                   ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/scan_image.vhd             ;         ;
+; control_fsm.vhd                  ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd            ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
+; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc        ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc            ;         ;
+; altram.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc            ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc          ;         ;
+; db/altsyncram_l2v3.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_l2v3.tdf     ;         ;
+; db/decode_dla.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/decode_dla.tdf          ;         ;
+; db/mux_chb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/mux_chb.tdf             ;         ;
+; db/altsyncram_2ov3.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_2ov3.tdf     ;         ;
++----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimate of Logic utilization (ALMs needed) ; 147       ;
+;                                             ;           ;
+; Combinational ALUT usage for logic          ; 239       ;
+;     -- 7 input functions                    ; 0         ;
+;     -- 6 input functions                    ; 48        ;
+;     -- 5 input functions                    ; 11        ;
+;     -- 4 input functions                    ; 101       ;
+;     -- <=3 input functions                  ; 79        ;
+;                                             ;           ;
+; Dedicated logic registers                   ; 106       ;
+;                                             ;           ;
+; I/O pins                                    ; 42        ;
+; Total MLAB memory bits                      ; 0         ;
+; Total block memory bits                     ; 1056576   ;
+;                                             ;           ;
+; Total DSP Blocks                            ; 0         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 234       ;
+; Total fan-out                               ; 5358      ;
+; Average fan-out                             ; 9.35      ;
++---------------------------------------------+-----------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                     ; Entity Name       ; Library Name ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+; |anomaly_detection                           ; 239 (1)             ; 106 (0)                   ; 1056576           ; 0          ; 42   ; 0            ; |anomaly_detection                                                                                                                      ; anomaly_detection ; work         ;
+;    |bram_row:BRAM|                           ; 0 (0)               ; 0 (0)                     ; 8000              ; 0          ; 0    ; 0            ; |anomaly_detection|bram_row:BRAM                                                                                                        ; bram_row          ; work         ;
+;       |altsyncram:altsyncram_component|      ; 0 (0)               ; 0 (0)                     ; 8000              ; 0          ; 0    ; 0            ; |anomaly_detection|bram_row:BRAM|altsyncram:altsyncram_component                                                                        ; altsyncram        ; work         ;
+;          |altsyncram_2ov3:auto_generated|    ; 0 (0)               ; 0 (0)                     ; 8000              ; 0          ; 0    ; 0            ; |anomaly_detection|bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated                                         ; altsyncram_2ov3   ; work         ;
+;    |control_fsm:FSM|                         ; 51 (51)             ; 23 (23)                   ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|control_fsm:FSM                                                                                                      ; control_fsm       ; work         ;
+;    |histogram:HIST|                          ; 56 (16)             ; 3 (0)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST                                                                                                       ; histogram         ; work         ;
+;       |bram_histogram:BRAM|                  ; 40 (0)              ; 3 (0)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM                                                                                   ; bram_histogram    ; work         ;
+;          |altsyncram:altsyncram_component|   ; 40 (0)              ; 3 (0)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component                                                   ; altsyncram        ; work         ;
+;             |altsyncram_l2v3:auto_generated| ; 40 (0)              ; 3 (3)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated                    ; altsyncram_l2v3   ; work         ;
+;                |decode_dla:decode2|          ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|decode_dla:decode2 ; decode_dla        ; work         ;
+;                |mux_chb:mux3|                ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|mux_chb:mux3       ; mux_chb           ; work         ;
+;    |scan_image:SCAN|                         ; 16 (16)             ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|scan_image:SCAN                                                                                                      ; scan_image        ; work         ;
+;    |threshold_cdf:THRS|                      ; 115 (115)           ; 64 (64)                   ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|threshold_cdf:THRS                                                                                                   ; threshold_cdf     ; work         ;
++----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                    ;
++--------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+------+
+; Name                                                                                                         ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size    ; MIF  ;
++--------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+------+
+; bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated|ALTSYNCRAM                      ; AUTO ; Single Port      ; 500          ; 16           ; --           ; --           ; 8000    ; None ;
+; histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 65536        ; 16           ; 65536        ; 16           ; 1048576 ; None ;
++--------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+------+
+
+
 +--------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Elaboration IP Cores Summary                                                                                                    ;
+; Analysis & Synthesis IP Cores Summary                                                                                                      ;
 +--------+--------------+---------+--------------+--------------+-------------------------------------------------------+--------------------+
 ; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                                       ; IP Include File    ;
 +--------+--------------+---------+--------------+--------------+-------------------------------------------------------+--------------------+
 ; Altera ; RAM: 1-PORT  ; 18.1    ; N/A          ; N/A          ; |anomaly_detection|bram_row:BRAM                      ; bram_row.vhd       ;
 ; Altera ; RAM: 2-PORT  ; 18.1    ; N/A          ; N/A          ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM ; bram_histogram.vhd ;
 +--------+--------------+---------+--------------+--------------+-------------------------------------------------------+--------------------+
+
+
+Encoding Type:  One-Hot
++------------------------------------------------------------------------------------------+
+; State Machine - |anomaly_detection|control_fsm:FSM|state                                 ;
++-----------------+------------+------------+-----------------+---------------+------------+
+; Name            ; state.HOLD ; state.SCAN ; state.THRESHOLD ; state.RECEIVE ; state.IDLE ;
++-----------------+------------+------------+-----------------+---------------+------------+
+; state.IDLE      ; 0          ; 0          ; 0               ; 0             ; 0          ;
+; state.RECEIVE   ; 0          ; 0          ; 0               ; 1             ; 1          ;
+; state.THRESHOLD ; 0          ; 0          ; 1               ; 0             ; 1          ;
+; state.SCAN      ; 0          ; 1          ; 0               ; 0             ; 1          ;
+; state.HOLD      ; 1          ; 0          ; 0               ; 0             ; 1          ;
++-----------------+------------+------------+-----------------+---------------+------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                                            ;
++-----------------------------------------------------+---------------------------------+------------------------+
+; Latch Name                                          ; Latch Enable Signal             ; Free of Timing Hazards ;
++-----------------------------------------------------+---------------------------------+------------------------+
+; control_fsm:FSM|next_state.IDLE_345                 ; control_fsm:FSM|Selector16      ; yes                    ;
+; control_fsm:FSM|next_state.RECEIVE_327              ; control_fsm:FSM|Selector16      ; yes                    ;
+; control_fsm:FSM|next_state.SCAN_291                 ; control_fsm:FSM|Selector16      ; yes                    ;
+; threshold_cdf:THRS|outlayer                         ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; control_fsm:FSM|next_state.THRESHOLD_309            ; control_fsm:FSM|Selector16      ; yes                    ;
+; control_fsm:FSM|next_state.HOLD_273                 ; control_fsm:FSM|Selector16      ; yes                    ;
+; threshold_cdf:THRS|cumulative[0]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[1]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[2]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[3]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[4]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[5]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[6]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[7]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[8]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[9]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[10]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[11]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[12]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[13]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[14]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[15]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[16]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[17]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[18]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[19]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[20]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[21]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[22]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[23]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[24]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[25]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[26]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[27]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[28]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[29]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[30]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; threshold_cdf:THRS|cumulative[31]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
+; Number of user-specified and inferred latches = 38  ;                                 ;                        ;
++-----------------------------------------------------+---------------------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
+
+
++--------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                   ;
++----------------------------------------+---------------------------------------------+
+; Register name                          ; Reason for Removal                          ;
++----------------------------------------+---------------------------------------------+
+; histogram:HIST|ram_wr_add[0]           ; Stuck at GND due to stuck port clock_enable ;
+; histogram:HIST|\incr:counter[1..31]    ; Stuck at GND due to stuck port clock_enable ;
+; histogram:HIST|\incr:counter[0]        ; Stuck at VCC due to stuck port clock_enable ;
+; histogram:HIST|wr_add_del1[0..15]      ; Stuck at GND due to stuck port clear        ;
+; histogram:HIST|ram_data_in[0..15]      ; Stuck at GND due to stuck port clear        ;
+; histogram:HIST|ram_wr_add[1..15]       ; Stuck at GND due to stuck port clock_enable ;
+; Total Number of Removed Registers = 80 ;                                             ;
++----------------------------------------+---------------------------------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                         ;
++----------------------------------+--------------------------------+-----------------------------------------------------------------+
+; Register name                    ; Reason for Removal             ; Registers Removed due to This Register                          ;
++----------------------------------+--------------------------------+-----------------------------------------------------------------+
+; histogram:HIST|wr_add_del1[15]   ; Stuck at GND                   ; histogram:HIST|ram_data_in[7], histogram:HIST|ram_data_in[6],   ;
+;                                  ; due to stuck port clear        ; histogram:HIST|ram_data_in[5], histogram:HIST|ram_data_in[4],   ;
+;                                  ;                                ; histogram:HIST|ram_data_in[3], histogram:HIST|ram_data_in[2],   ;
+;                                  ;                                ; histogram:HIST|ram_data_in[1], histogram:HIST|ram_data_in[0],   ;
+;                                  ;                                ; histogram:HIST|ram_wr_add[15]                                   ;
+; histogram:HIST|\incr:counter[31] ; Stuck at GND                   ; histogram:HIST|ram_data_in[15], histogram:HIST|ram_data_in[14], ;
+;                                  ; due to stuck port clock_enable ; histogram:HIST|ram_data_in[13], histogram:HIST|ram_data_in[12], ;
+;                                  ;                                ; histogram:HIST|ram_data_in[11], histogram:HIST|ram_data_in[10], ;
+;                                  ;                                ; histogram:HIST|ram_data_in[9], histogram:HIST|ram_data_in[8]    ;
+; histogram:HIST|wr_add_del1[14]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[14]                                   ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[13]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[13]                                   ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[12]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[12]                                   ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[11]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[11]                                   ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[10]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[10]                                   ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[9]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[9]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[8]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[8]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[7]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[7]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[6]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[6]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[5]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[5]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[4]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[4]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[3]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[3]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[2]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[2]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
+; histogram:HIST|wr_add_del1[1]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[1]                                    ;
+;                                  ; due to stuck port clear        ;                                                                 ;
++----------------------------------+--------------------------------+-----------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 106   ;
+; Number of registers using Synchronous Clear  ; 34    ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 71    ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 82    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                                        ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; 4:1                ; 9 bits    ; 18 LEs        ; 0 LEs                ; 18 LEs                 ; Yes        ; |anomaly_detection|control_fsm:FSM|counter_receive[5]                                                                                                   ;
+; 4:1                ; 9 bits    ; 18 LEs        ; 0 LEs                ; 18 LEs                 ; Yes        ; |anomaly_detection|control_fsm:FSM|counter_scan[5]                                                                                                      ;
+; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|mux_chb:mux3|l3_w15_n0_mux_dataout ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------+
@@ -316,101 +658,55 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------------------+--------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Elaboration Settings                                                                                           ;
-+---------------------------------------------------------------------------------+--------------------+--------------------+
-; Option                                                                          ; Setting            ; Default Value      ;
-+---------------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                          ; 5CSXFC6D6F31C6     ;                    ;
-; Top-level entity name                                                           ; anomaly_detection  ; anomaly_detection  ;
-; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
-; Use smart compilation                                                           ; Off                ; Off                ;
-; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
-; Enable compact report table                                                     ; Off                ; Off                ;
-; Restructure Multiplexers                                                        ; Auto               ; Auto               ;
-; MLAB Add Timing Constraints For Mixed-Port Feed-Through Mode Setting Don't Care ; Off                ; Off                ;
-; Create Debugging Nodes for IP Cores                                             ; Off                ; Off                ;
-; Preserve fewer node names                                                       ; On                 ; On                 ;
-; Intel FPGA IP Evaluation Mode                                                   ; Enable             ; Enable             ;
-; Verilog Version                                                                 ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                                    ; VHDL_1993          ; VHDL_1993          ;
-; State Machine Processing                                                        ; Auto               ; Auto               ;
-; Safe State Machine                                                              ; Off                ; Off                ;
-; Extract Verilog State Machines                                                  ; On                 ; On                 ;
-; Extract VHDL State Machines                                                     ; On                 ; On                 ;
-; Ignore Verilog initial constructs                                               ; Off                ; Off                ;
-; Iteration limit for constant Verilog loops                                      ; 5000               ; 5000               ;
-; Iteration limit for non-constant Verilog loops                                  ; 250                ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                                         ; On                 ; On                 ;
-; Infer RAMs from Raw Logic                                                       ; On                 ; On                 ;
-; Parallel Synthesis                                                              ; On                 ; On                 ;
-; DSP Block Balancing                                                             ; Auto               ; Auto               ;
-; NOT Gate Push-Back                                                              ; On                 ; On                 ;
-; Power-Up Don't Care                                                             ; On                 ; On                 ;
-; Remove Redundant Logic Cells                                                    ; Off                ; Off                ;
-; Remove Duplicate Registers                                                      ; On                 ; On                 ;
-; Ignore CARRY Buffers                                                            ; Off                ; Off                ;
-; Ignore CASCADE Buffers                                                          ; Off                ; Off                ;
-; Ignore GLOBAL Buffers                                                           ; Off                ; Off                ;
-; Ignore ROW GLOBAL Buffers                                                       ; Off                ; Off                ;
-; Ignore LCELL Buffers                                                            ; Off                ; Off                ;
-; Ignore SOFT Buffers                                                             ; On                 ; On                 ;
-; Limit AHDL Integers to 32 Bits                                                  ; Off                ; Off                ;
-; Optimization Technique                                                          ; Balanced           ; Balanced           ;
-; Carry Chain Length                                                              ; 70                 ; 70                 ;
-; Auto Carry Chains                                                               ; On                 ; On                 ;
-; Auto Open-Drain Pins                                                            ; On                 ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                                           ; Off                ; Off                ;
-; Auto ROM Replacement                                                            ; On                 ; On                 ;
-; Auto RAM Replacement                                                            ; On                 ; On                 ;
-; Auto DSP Block Replacement                                                      ; On                 ; On                 ;
-; Auto Shift Register Replacement                                                 ; Auto               ; Auto               ;
-; Allow Shift Register Merging across Hierarchies                                 ; Auto               ; Auto               ;
-; Auto Clock Enable Replacement                                                   ; On                 ; On                 ;
-; Strict RAM Replacement                                                          ; Off                ; Off                ;
-; Allow Synchronous Control Signals                                               ; On                 ; On                 ;
-; Force Use of Synchronous Clear Signals                                          ; Off                ; Off                ;
-; Auto Resource Sharing                                                           ; Off                ; Off                ;
-; Allow Any RAM Size For Recognition                                              ; Off                ; Off                ;
-; Allow Any ROM Size For Recognition                                              ; Off                ; Off                ;
-; Allow Any Shift Register Size For Recognition                                   ; Off                ; Off                ;
-; Use LogicLock Constraints during Resource Balancing                             ; On                 ; On                 ;
-; Ignore translate_off and synthesis_off directives                               ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                         ; On                 ; On                 ;
-; Report Parameter Settings                                                       ; On                 ; On                 ;
-; Report Source Assignments                                                       ; On                 ; On                 ;
-; Report Connectivity Checks                                                      ; On                 ; On                 ;
-; Ignore Maximum Fan-Out Assignments                                              ; Off                ; Off                ;
-; Synchronization Register Chain Length                                           ; 3                  ; 3                  ;
-; Power Optimization During Synthesis                                             ; Normal compilation ; Normal compilation ;
-; HDL message level                                                               ; Level2             ; Level2             ;
-; Suppress Register Optimization Related Messages                                 ; Off                ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report                        ; 5000               ; 5000               ;
-; Number of Swept Nodes Reported in Synthesis Report                              ; 5000               ; 5000               ;
-; Number of Inverted Registers Reported in Synthesis Report                       ; 100                ; 100                ;
-; Clock MUX Protection                                                            ; On                 ; On                 ;
-; Auto Gated Clock Conversion                                                     ; Off                ; Off                ;
-; Block Design Naming                                                             ; Auto               ; Auto               ;
-; SDC constraint protection                                                       ; Off                ; Off                ;
-; Synthesis Effort                                                                ; Auto               ; Auto               ;
-; Shift Register Replacement - Allow Asynchronous Clear Signal                    ; On                 ; On                 ;
-; Pre-Mapping Resynthesis Optimization                                            ; Off                ; Off                ;
-; Analysis & Synthesis Message Level                                              ; Medium             ; Medium             ;
-; Disable Register Merging Across Hierarchies                                     ; Auto               ; Auto               ;
-; Resource Aware Inference For Block RAM                                          ; On                 ; On                 ;
-; Automatic Parallel Synthesis                                                    ; On                 ; On                 ;
-; Partial Reconfiguration Bitstream ID                                            ; Off                ; Off                ;
-+---------------------------------------------------------------------------------+--------------------+--------------------+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; arriav_ff             ; 106                         ;
+;     CLR               ; 21                          ;
+;     ENA               ; 32                          ;
+;     ENA CLR           ; 16                          ;
+;     ENA CLR SCLR      ; 34                          ;
+;     plain             ; 3                           ;
+; arriav_lcell_comb     ; 239                         ;
+;     arith             ; 81                          ;
+;         1 data inputs ; 35                          ;
+;         2 data inputs ; 3                           ;
+;         4 data inputs ; 43                          ;
+;     normal            ; 158                         ;
+;         0 data inputs ; 1                           ;
+;         1 data inputs ; 1                           ;
+;         2 data inputs ; 6                           ;
+;         3 data inputs ; 33                          ;
+;         4 data inputs ; 58                          ;
+;         5 data inputs ; 11                          ;
+;         6 data inputs ; 48                          ;
+; boundary_port         ; 42                          ;
+; stratixv_ram_block    ; 144                         ;
+;                       ;                             ;
+; Max LUT depth         ; 7.80                        ;
+; Average LUT depth     ; 4.94                        ;
++-----------------------+-----------------------------+
 
 
-+---------------------------------+
-; Analysis & Elaboration Messages ;
-+---------------------------------+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Elaboration
+Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri Dec 06 10:43:42 2024
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off anomaly_detection -c anomaly_detection --analysis_and_elaboration
+    Info: Processing started: Fri Dec 06 15:05:31 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off anomaly_detection -c anomaly_detection
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 2 design units, including 1 entities, in source file anomaly_detection.vhd
@@ -437,8 +733,11 @@ Info (12021): Found 2 design units, including 1 entities, in source file scan_im
 Info (12021): Found 2 design units, including 1 entities, in source file control_fsm.vhd
     Info (12022): Found design unit 1: control_fsm-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 36
     Info (12023): Found entity 1: control_fsm File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 5
+Info (12021): Found 2 design units, including 1 entities, in source file tb/anomaly_tb.vhd
+    Info (12022): Found design unit 1: anomaly_detection_tb-tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/anomaly_tb.vhd Line: 8
+    Info (12023): Found entity 1: anomaly_detection_tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/anomaly_tb.vhd Line: 5
 Info (12127): Elaborating entity "anomaly_detection" for the top level hierarchy
-Info (12128): Elaborating entity "histogram" for hierarchy "histogram:HIST" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 141
+Info (12128): Elaborating entity "histogram" for hierarchy "histogram:HIST" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 136
 Info (12128): Elaborating entity "bram_histogram" for hierarchy "histogram:HIST|bram_histogram:BRAM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd Line: 68
 Info (12128): Elaborating entity "altsyncram" for hierarchy "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 62
 Info (12130): Elaborated megafunction instantiation "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 62
@@ -502,7 +801,7 @@ Info (12128): Elaborating entity "decode_dla" for hierarchy "histogram:HIST|bram
 Info (12021): Found 1 design units, including 1 entities, in source file db/mux_chb.tdf
     Info (12023): Found entity 1: mux_chb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/mux_chb.tdf Line: 22
 Info (12128): Elaborating entity "mux_chb" for hierarchy "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|mux_chb:mux3" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_l2v3.tdf Line: 43
-Info (12128): Elaborating entity "bram_row" for hierarchy "bram_row:BRAM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 156
+Info (12128): Elaborating entity "bram_row" for hierarchy "bram_row:BRAM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 151
 Info (12128): Elaborating entity "altsyncram" for hierarchy "bram_row:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd Line: 62
 Info (12130): Elaborated megafunction instantiation "bram_row:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd Line: 62
 Info (12133): Instantiated megafunction "bram_row:BRAM|altsyncram:altsyncram_component" with the following parameter: File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd Line: 62
@@ -559,7 +858,7 @@ Info (12133): Instantiated megafunction "bram_row:BRAM|altsyncram:altsyncram_com
 Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_2ov3.tdf
     Info (12023): Found entity 1: altsyncram_2ov3 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_2ov3.tdf Line: 27
 Info (12128): Elaborating entity "altsyncram_2ov3" for hierarchy "bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "threshold_cdf" for hierarchy "threshold_cdf:THRS" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 166
+Info (12128): Elaborating entity "threshold_cdf" for hierarchy "threshold_cdf:THRS" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 161
 Warning (10036): Verilog HDL or VHDL warning at threshold_cdf.vhd(28): object "cumulative_sum" assigned a value but never read File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 28
 Warning (10492): VHDL Process Statement warning at threshold_cdf.vhd(60): signal "thrs_en" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 60
 Warning (10492): VHDL Process Statement warning at threshold_cdf.vhd(61): signal "data_in" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 61
@@ -600,8 +899,8 @@ Info (10041): Inferred latch for "cumulative[28]" at threshold_cdf.vhd(56) File:
 Info (10041): Inferred latch for "cumulative[29]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
 Info (10041): Inferred latch for "cumulative[30]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
 Info (10041): Inferred latch for "cumulative[31]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (12128): Elaborating entity "scan_image" for hierarchy "scan_image:SCAN" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 181
-Info (12128): Elaborating entity "control_fsm" for hierarchy "control_fsm:FSM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 195
+Info (12128): Elaborating entity "scan_image" for hierarchy "scan_image:SCAN" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 176
+Info (12128): Elaborating entity "control_fsm" for hierarchy "control_fsm:FSM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 190
 Warning (10631): VHDL Process Statement warning at control_fsm.vhd(93): inferring latch(es) for signal or variable "next_state", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
 Warning (10631): VHDL Process Statement warning at control_fsm.vhd(141): inferring latch(es) for signal or variable "hist_rst", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 141
 Info (10041): Inferred latch for "hist_rst" at control_fsm.vhd(141) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 141
@@ -610,10 +909,31 @@ Info (10041): Inferred latch for "next_state.SCAN" at control_fsm.vhd(93) File: 
 Info (10041): Inferred latch for "next_state.THRESHOLD" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
 Info (10041): Inferred latch for "next_state.RECEIVE" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
 Info (10041): Inferred latch for "next_state.IDLE" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Info: Quartus Prime Analysis & Elaboration was successful. 0 errors, 9 warnings
-    Info: Peak virtual memory: 4862 megabytes
-    Info: Processing ended: Fri Dec 06 10:44:00 2024
+Warning (13012): Latch control_fsm:FSM|next_state.IDLE_345 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ready_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 23
+Warning (13012): Latch control_fsm:FSM|next_state.RECEIVE_327 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal valid_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 21
+Warning (13012): Latch control_fsm:FSM|next_state.SCAN_291 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ready_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 23
+Warning (13012): Latch control_fsm:FSM|next_state.THRESHOLD_309 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal valid_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 21
+Warning (13012): Latch control_fsm:FSM|next_state.HOLD_273 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
+    Warning (13013): Ports D and ENA on the latch are fed by the same signal ready_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 23
+Info (286030): Timing-Driven Synthesis is running
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 2 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "startpacket_in" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 19
+    Warning (15610): No output dependent on input pin "endpacket_in" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 20
+Info (21057): Implemented 477 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 22 input pins
+    Info (21059): Implemented 20 output pins
+    Info (21061): Implemented 291 logic cells
+    Info (21064): Implemented 144 RAM segments
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 22 warnings
+    Info: Peak virtual memory: 4941 megabytes
+    Info: Processing ended: Fri Dec 06 15:05:49 2024
     Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:41
+    Info: Total CPU time (on all processors): 00:00:38
 
 

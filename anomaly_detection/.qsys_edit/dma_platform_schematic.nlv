@@ -1,0 +1,79 @@
+# # File gsaved with Nlview version 6.3.8  2013-12-19 bk=1.2992 VDI=34 GEI=35
+# 
+preplace inst dma_platform.ARM_A9_HPS.scu -pg 1
+preplace inst dma_platform.ARM_A9_HPS.axi_ocram -pg 1
+preplace inst dma_platform.ARM_A9_HPS.dcan0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.qspi -pg 1
+preplace inst dma_platform.ARM_A9_HPS.rstmgr -pg 1
+preplace inst dma_platform.ARM_A9_HPS.eosc2 -pg 1
+preplace inst dma_platform -pg 1 -lvl 1 -y 40 -regy -20
+preplace inst dma_platform.System_PLL.reset_from_locked -pg 1
+preplace inst dma_platform.ARM_A9_HPS.dcan1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.gmac0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.i2c0 -pg 1
+preplace inst dma_platform.System_PLL -pg 1 -lvl 1 -y 280
+preplace inst dma_platform.ARM_A9_HPS.gmac1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.usb0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.nand0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.i2c1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.timer0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.fpgamgr -pg 1
+preplace inst dma_platform.ARM_A9_HPS.sysmgr -pg 1
+preplace inst dma_platform.ARM_A9_HPS.fpga_interfaces -pg 1
+preplace inst dma_platform.ARM_A9_HPS.timer -pg 1
+preplace inst dma_platform.ARM_A9_HPS.usb1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.i2c2 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.gpio0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.timer1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.f2s_sdram_ref_clk -pg 1
+preplace inst dma_platform.ARM_A9_HPS.clk_0 -pg 1
+preplace inst dma_platform.System_PLL.sys_pll -pg 1
+preplace inst dma_platform.Change_Detection_Stream_to_Mem_DMA -pg 1 -lvl 6 -y 90
+preplace inst dma_platform.ARM_A9_HPS.i2c3 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.gpio1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.timer2 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.dma -pg 1
+preplace inst dma_platform.ARM_A9_HPS.hps_io -pg 1
+preplace inst dma_platform.SDRAM -pg 1 -lvl 7 -y 30
+preplace inst dma_platform.ARM_A9_HPS.gpio2 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.timer3 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.arm_a9_0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.l3regs -pg 1
+preplace inst dma_platform.ARM_A9_HPS.L2 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.arm_a9_1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.f2s_periph_ref_clk -pg 1
+preplace inst dma_platform.ARM_A9_HPS.bridges -pg 1
+preplace inst dma_platform.Anomaly_Detection -pg 1 -lvl 5 -y 210
+preplace inst dma_platform.ARM_A9_HPS.clkmgr -pg 1
+preplace inst dma_platform.ARM_A9_HPS.wd_timer0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.arm_gic_0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.hps_io.border -pg 1
+preplace inst dma_platform.Change_Detection_Stream_to_Mem_Translator -pg 1 -lvl 5 -y 90
+preplace inst dma_platform.Change_Detection_Mem_to_Stream_DMA -pg 1 -lvl 4 -y 190
+preplace inst dma_platform.ARM_A9_HPS.sdrctl -pg 1
+preplace inst dma_platform.ARM_A9_HPS.wd_timer1 -pg 1
+preplace inst dma_platform.Change_Detection_Mem_to_Stream_Translator -pg 1 -lvl 3 -y 150
+preplace inst dma_platform.ARM_A9_HPS.uart0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS -pg 1 -lvl 2 -y 110
+preplace inst dma_platform.ARM_A9_HPS.axi_sdram -pg 1
+preplace inst dma_platform.ARM_A9_HPS.spim0 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.uart1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.sdmmc -pg 1
+preplace inst dma_platform.ARM_A9_HPS.spim1 -pg 1
+preplace inst dma_platform.ARM_A9_HPS.eosc1 -pg 1
+preplace netloc EXPORT<net_container>dma_platform</net_container>(SLAVE)ARM_A9_HPS.memory,(SLAVE)dma_platform.memory) 1 0 2 NJ 240 NJ
+preplace netloc POINT_TO_POINT<net_container>dma_platform</net_container>(MASTER)Anomaly_Detection.avalon_streaming_source,(SLAVE)Change_Detection_Stream_to_Mem_DMA.avalon_dma_sink) 1 5 1 1780
+preplace netloc INTERCONNECT<net_container>dma_platform</net_container>(SLAVE)Anomaly_Detection.clock_reset,(MASTER)ARM_A9_HPS.h2f_reset,(SLAVE)Change_Detection_Stream_to_Mem_Translator.reset,(SLAVE)Change_Detection_Stream_to_Mem_DMA.reset,(SLAVE)SDRAM.reset,(MASTER)System_PLL.reset_source,(SLAVE)Change_Detection_Mem_to_Stream_Translator.reset,(SLAVE)Change_Detection_Mem_to_Stream_DMA.reset) 1 1 6 NJ 290 810 260 1030 300 1390 180 1740 60 NJ
+preplace netloc POINT_TO_POINT<net_container>dma_platform</net_container>(MASTER)Change_Detection_Mem_to_Stream_Translator.master,(SLAVE)Change_Detection_Mem_to_Stream_DMA.avalon_dma_control_slave) 1 3 1 1010
+preplace netloc FAN_OUT<net_container>dma_platform</net_container>(SLAVE)Change_Detection_Mem_to_Stream_Translator.slave,(MASTER)ARM_A9_HPS.h2f_lw_axi_master,(SLAVE)Change_Detection_Stream_to_Mem_Translator.slave) 1 2 3 770 140 NJ 140 N
+preplace netloc EXPORT<net_container>dma_platform</net_container>(SLAVE)ARM_A9_HPS.f2h_stm_hw_events,(SLAVE)dma_platform.arm_a9_hps_f2h_stm_hw_events) 1 0 2 NJ 160 NJ
+preplace netloc EXPORT<net_container>dma_platform</net_container>(SLAVE)System_PLL.ref_clk,(SLAVE)dma_platform.system_pll_ref_clk) 1 0 1 NJ
+preplace netloc FAN_OUT<net_container>dma_platform</net_container>(SLAVE)SDRAM.clk,(SLAVE)Change_Detection_Stream_to_Mem_Translator.clock,(SLAVE)ARM_A9_HPS.f2h_axi_clock,(SLAVE)ARM_A9_HPS.h2f_lw_axi_clock,(SLAVE)Change_Detection_Mem_to_Stream_Translator.clock,(SLAVE)Change_Detection_Mem_to_Stream_DMA.clk,(SLAVE)Change_Detection_Stream_to_Mem_DMA.clk,(MASTER)System_PLL.sys_clk,(SLAVE)Anomaly_Detection.clock_sink,(SLAVE)ARM_A9_HPS.h2f_axi_clock) 1 1 6 430 310 790 240 1010 320 1370 80 1700 40 NJ
+preplace netloc EXPORT<net_container>dma_platform</net_container>(SLAVE)dma_platform.hps_io,(SLAVE)ARM_A9_HPS.hps_io) 1 0 2 NJ 180 NJ
+preplace netloc POINT_TO_POINT<net_container>dma_platform</net_container>(SLAVE)Anomaly_Detection.avalon_streaming_sink,(MASTER)Change_Detection_Mem_to_Stream_DMA.avalon_pixel_source) 1 4 1 N
+preplace netloc FAN_IN<net_container>dma_platform</net_container>(MASTER)Change_Detection_Stream_to_Mem_DMA.avalon_dma_master,(SLAVE)SDRAM.s1,(MASTER)Change_Detection_Mem_to_Stream_DMA.avalon_dma_master,(MASTER)ARM_A9_HPS.h2f_axi_master) 1 2 5 NJ 280 NJ 280 1350 200 NJ 200 2070
+preplace netloc EXPORT<net_container>dma_platform</net_container>(SLAVE)System_PLL.ref_reset,(SLAVE)dma_platform.system_pll_ref_reset) 1 0 1 NJ
+preplace netloc EXPORT<net_container>dma_platform</net_container>(SLAVE)dma_platform.sdram,(SLAVE)SDRAM.wire) 1 0 7 NJ 60 NJ 60 NJ 60 NJ 60 NJ 60 NJ 80 NJ
+preplace netloc POINT_TO_POINT<net_container>dma_platform</net_container>(MASTER)Change_Detection_Stream_to_Mem_Translator.master,(SLAVE)Change_Detection_Stream_to_Mem_DMA.avalon_dma_control_slave) 1 5 1 1760
+levelinfo -pg 1 0 180 2190
+levelinfo -hier dma_platform 190 270 560 870 1060 1450 1810 2100 2180

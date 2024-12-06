@@ -1,0 +1,20 @@
+Fitter Status : Successful - Fri Dec 06 15:10:41 2024
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+Revision Name : anomaly_detection
+Top-level Entity Name : anomaly_detection
+Family : Cyclone V
+Device : 5CSXFC6D6F31C6
+Timing Models : Final
+Logic utilization (in ALMs) : 146 / 41,910 ( < 1 % )
+Total registers : 106
+Total pins : 42 / 499 ( 8 % )
+Total virtual pins : 0
+Total block memory bits : 1,056,576 / 5,662,720 ( 19 % )
+Total RAM Blocks : 129 / 553 ( 23 % )
+Total DSP Blocks : 0 / 112 ( 0 % )
+Total HSSI RX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA RX Deserializers : 0 / 9 ( 0 % )
+Total HSSI TX PCSs : 0 / 9 ( 0 % )
+Total HSSI PMA TX Serializers : 0 / 9 ( 0 % )
+Total PLLs : 0 / 15 ( 0 % )
+Total DLLs : 0 / 4 ( 0 % )
