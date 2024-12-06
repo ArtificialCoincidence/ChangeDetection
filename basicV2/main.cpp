@@ -36,9 +36,9 @@ int main() {
         
 	Add(refMatrix, testMatrix,rho);
         //-----------SpatialFilter and AnomalyDetection--------
-    writeData("./res.txt",refMatrix);
         SpatialFilter(refMatrix);
 	
+    writeData("./res.txt",refMatrix);
 	AnomalyDetection(refMatrix);
 
         //-----------update the result--------
