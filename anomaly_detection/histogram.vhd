@@ -12,7 +12,7 @@ entity histogram is
         clk             : in  std_logic;
         hist_rst        : in  std_logic;
         hist_en         : in  std_logic;
-        thres_en        : in  std_logic;
+        thrs_en         : in  std_logic;
         ram_addr        : in  std_logic_vector(ADDR_SIZE-1 downto 0); -- read address from threshold or address for reset
         data_in         : in  std_logic_vector(ADDR_SIZE-1 downto 0); -- device data as read address for RAM
         data_out        : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- data to threshold
@@ -68,7 +68,7 @@ begin
     BRAM: bram_histogram
 	 port map(clk, ram_data_mux, rd_add_mux, wr_add_mux, wren, ram_data_out);
 
-    rd_add_mux <= data_in when thres_en = '0' else ram_addr;
+    rd_add_mux <= data_in when thrs_en = '0' else ram_addr;
     wr_add_mux <= ram_wr_add when hist_rst = '0' else ram_addr;
     ram_data_mux <= ram_data_in when hist_rst = '0' else (others => '0');
     wren <= hist_en or hist_rst;

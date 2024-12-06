@@ -7,6 +7,6 @@
    <irq preferredWidth="34" />
   </columns>
  </systemtable>
- <library expandedCategories="Project,Library" />
- <window width="2584" height="1540" x="-12" y="-12" />
+ <library expandedCategories="Library,Project" />
+ <window width="2560" height="1516" x="0" y="0" />
 </preferences>
