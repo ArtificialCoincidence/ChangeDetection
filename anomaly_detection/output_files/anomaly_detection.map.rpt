@@ -1,5 +1,5 @@
-Analysis & Synthesis report for anomaly_detection
-Fri Dec 06 15:05:49 2024
+Analysis & Elaboration report for anomaly_detection
+Fri Dec 06 22:26:19 2024
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -7,33 +7,11 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Synthesis Summary
-  3. Analysis & Synthesis Settings
-  4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. Analysis & Synthesis RAM Summary
-  9. Analysis & Synthesis IP Cores Summary
- 10. State Machine - |anomaly_detection|control_fsm:FSM|state
- 11. User-Specified and Inferred Latches
- 12. Registers Removed During Synthesis
- 13. Removed Registers Triggering Further Register Optimizations
- 14. General Register Statistics
- 15. Multiplexer Restructuring Statistics (Restructuring Performed)
- 16. Source assignments for histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated
- 17. Source assignments for bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated
- 18. Parameter Settings for User Entity Instance: Top-level Entity: |anomaly_detection
- 19. Parameter Settings for User Entity Instance: histogram:HIST
- 20. Parameter Settings for User Entity Instance: histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component
- 21. Parameter Settings for User Entity Instance: bram_row:BRAM|altsyncram:altsyncram_component
- 22. Parameter Settings for User Entity Instance: threshold_cdf:THRS
- 23. Parameter Settings for User Entity Instance: scan_image:SCAN
- 24. Parameter Settings for User Entity Instance: control_fsm:FSM
- 25. altsyncram Parameter Settings by Entity Instance
- 26. Post-Synthesis Netlist Statistics for Top Partition
- 27. Elapsed Time Per Partition
- 28. Analysis & Synthesis Messages
+  2. Analysis & Elaboration Summary
+  3. Parallel Compilation
+  4. Analysis & Elaboration Settings
+  5. Analysis & Elaboration Messages
+  6. Analysis & Elaboration Suppressed Messages
 
 
 
@@ -56,31 +34,42 @@ refer to the applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                  ;
-+---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri Dec 06 15:05:49 2024       ;
-; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
-; Revision Name                   ; anomaly_detection                           ;
-; Top-level Entity Name           ; anomaly_detection                           ;
-; Family                          ; Cyclone V                                   ;
-; Logic utilization (in ALMs)     ; N/A                                         ;
-; Total registers                 ; 106                                         ;
-; Total pins                      ; 42                                          ;
-; Total virtual pins              ; 0                                           ;
-; Total block memory bits         ; 1,056,576                                   ;
-; Total DSP Blocks                ; 0                                           ;
-; Total HSSI RX PCSs              ; 0                                           ;
-; Total HSSI PMA RX Deserializers ; 0                                           ;
-; Total HSSI TX PCSs              ; 0                                           ;
-; Total HSSI PMA TX Serializers   ; 0                                           ;
-; Total PLLs                      ; 0                                           ;
-; Total DLLs                      ; 0                                           ;
-+---------------------------------+---------------------------------------------+
++-----------------------------------------------------------------------------+
+; Analysis & Elaboration Summary                                              ;
++-------------------------------+---------------------------------------------+
+; Analysis & Elaboration Status ; Failed - Fri Dec 06 22:26:19 2024           ;
+; Quartus Prime Version         ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
+; Revision Name                 ; anomaly_detection                           ;
+; Top-level Entity Name         ; anomaly_detection                           ;
+; Family                        ; Cyclone V                                   ;
+; Logic utilization (in ALMs)   ; N/A until Partition Merge                   ;
+; Total registers               ; N/A until Partition Merge                   ;
+; Total pins                    ; N/A until Partition Merge                   ;
+; Total virtual pins            ; N/A until Partition Merge                   ;
+; Total block memory bits       ; N/A until Partition Merge                   ;
+; Total PLLs                    ; N/A until Partition Merge                   ;
+; Total DLLs                    ; N/A until Partition Merge                   ;
++-------------------------------+---------------------------------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 16          ;
+; Maximum allowed            ; 16          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 1           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
++----------------------------+-------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                                             ;
+; Analysis & Elaboration Settings                                                                                           ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
@@ -166,549 +155,205 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+------------------------------------------+
-; Parallel Compilation                     ;
-+----------------------------+-------------+
-; Processors                 ; Number      ;
-+----------------------------+-------------+
-; Number detected on machine ; 16          ;
-; Maximum allowed            ; 16          ;
-;                            ;             ;
-; Average used               ; 1.00        ;
-; Maximum used               ; 16          ;
-;                            ;             ;
-; Usage by Processor         ; % Time Used ;
-;     Processor 1            ; 100.0%      ;
-;     Processors 2-16        ;   0.0%      ;
-+----------------------------+-------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                     ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                 ; Library ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
-; anomaly_detection.vhd            ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd      ;         ;
-; bram_row.vhd                     ; yes             ; User Wizard-Generated File   ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd               ;         ;
-; bram_histogram.vhd               ; yes             ; User Wizard-Generated File   ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd         ;         ;
-; threshold_cdf.vhd                ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd          ;         ;
-; histogram.vhd                    ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd              ;         ;
-; scan_image.vhd                   ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/scan_image.vhd             ;         ;
-; control_fsm.vhd                  ; yes             ; User VHDL File               ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd            ;         ;
-; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
-; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
-; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
-; aglobal181.inc                   ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/aglobal181.inc        ;         ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
-; altrom.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altrom.inc            ;         ;
-; altram.inc                       ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altram.inc            ;         ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altdpram.inc          ;         ;
-; db/altsyncram_l2v3.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_l2v3.tdf     ;         ;
-; db/decode_dla.tdf                ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/decode_dla.tdf          ;         ;
-; db/mux_chb.tdf                   ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/mux_chb.tdf             ;         ;
-; db/altsyncram_2ov3.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_2ov3.tdf     ;         ;
-+----------------------------------+-----------------+------------------------------+------------------------------------------------------------------------------+---------+
-
-
-+---------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary             ;
-+---------------------------------------------+-----------+
-; Resource                                    ; Usage     ;
-+---------------------------------------------+-----------+
-; Estimate of Logic utilization (ALMs needed) ; 147       ;
-;                                             ;           ;
-; Combinational ALUT usage for logic          ; 239       ;
-;     -- 7 input functions                    ; 0         ;
-;     -- 6 input functions                    ; 48        ;
-;     -- 5 input functions                    ; 11        ;
-;     -- 4 input functions                    ; 101       ;
-;     -- <=3 input functions                  ; 79        ;
-;                                             ;           ;
-; Dedicated logic registers                   ; 106       ;
-;                                             ;           ;
-; I/O pins                                    ; 42        ;
-; Total MLAB memory bits                      ; 0         ;
-; Total block memory bits                     ; 1056576   ;
-;                                             ;           ;
-; Total DSP Blocks                            ; 0         ;
-;                                             ;           ;
-; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 234       ;
-; Total fan-out                               ; 5358      ;
-; Average fan-out                             ; 9.35      ;
-+---------------------------------------------+-----------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                                                ;
-+----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
-; Compilation Hierarchy Node                   ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                     ; Entity Name       ; Library Name ;
-+----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
-; |anomaly_detection                           ; 239 (1)             ; 106 (0)                   ; 1056576           ; 0          ; 42   ; 0            ; |anomaly_detection                                                                                                                      ; anomaly_detection ; work         ;
-;    |bram_row:BRAM|                           ; 0 (0)               ; 0 (0)                     ; 8000              ; 0          ; 0    ; 0            ; |anomaly_detection|bram_row:BRAM                                                                                                        ; bram_row          ; work         ;
-;       |altsyncram:altsyncram_component|      ; 0 (0)               ; 0 (0)                     ; 8000              ; 0          ; 0    ; 0            ; |anomaly_detection|bram_row:BRAM|altsyncram:altsyncram_component                                                                        ; altsyncram        ; work         ;
-;          |altsyncram_2ov3:auto_generated|    ; 0 (0)               ; 0 (0)                     ; 8000              ; 0          ; 0    ; 0            ; |anomaly_detection|bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated                                         ; altsyncram_2ov3   ; work         ;
-;    |control_fsm:FSM|                         ; 51 (51)             ; 23 (23)                   ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|control_fsm:FSM                                                                                                      ; control_fsm       ; work         ;
-;    |histogram:HIST|                          ; 56 (16)             ; 3 (0)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST                                                                                                       ; histogram         ; work         ;
-;       |bram_histogram:BRAM|                  ; 40 (0)              ; 3 (0)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM                                                                                   ; bram_histogram    ; work         ;
-;          |altsyncram:altsyncram_component|   ; 40 (0)              ; 3 (0)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component                                                   ; altsyncram        ; work         ;
-;             |altsyncram_l2v3:auto_generated| ; 40 (0)              ; 3 (3)                     ; 1048576           ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated                    ; altsyncram_l2v3   ; work         ;
-;                |decode_dla:decode2|          ; 8 (8)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|decode_dla:decode2 ; decode_dla        ; work         ;
-;                |mux_chb:mux3|                ; 32 (32)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|mux_chb:mux3       ; mux_chb           ; work         ;
-;    |scan_image:SCAN|                         ; 16 (16)             ; 16 (16)                   ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|scan_image:SCAN                                                                                                      ; scan_image        ; work         ;
-;    |threshold_cdf:THRS|                      ; 115 (115)           ; 64 (64)                   ; 0                 ; 0          ; 0    ; 0            ; |anomaly_detection|threshold_cdf:THRS                                                                                                   ; threshold_cdf     ; work         ;
-+----------------------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+-------------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis RAM Summary                                                                                                                                                                                    ;
-+--------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+------+
-; Name                                                                                                         ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size    ; MIF  ;
-+--------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+------+
-; bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated|ALTSYNCRAM                      ; AUTO ; Single Port      ; 500          ; 16           ; --           ; --           ; 8000    ; None ;
-; histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 65536        ; 16           ; 65536        ; 16           ; 1048576 ; None ;
-+--------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+---------+------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis IP Cores Summary                                                                                                      ;
-+--------+--------------+---------+--------------+--------------+-------------------------------------------------------+--------------------+
-; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                                       ; IP Include File    ;
-+--------+--------------+---------+--------------+--------------+-------------------------------------------------------+--------------------+
-; Altera ; RAM: 1-PORT  ; 18.1    ; N/A          ; N/A          ; |anomaly_detection|bram_row:BRAM                      ; bram_row.vhd       ;
-; Altera ; RAM: 2-PORT  ; 18.1    ; N/A          ; N/A          ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM ; bram_histogram.vhd ;
-+--------+--------------+---------+--------------+--------------+-------------------------------------------------------+--------------------+
-
-
-Encoding Type:  One-Hot
-+------------------------------------------------------------------------------------------+
-; State Machine - |anomaly_detection|control_fsm:FSM|state                                 ;
-+-----------------+------------+------------+-----------------+---------------+------------+
-; Name            ; state.HOLD ; state.SCAN ; state.THRESHOLD ; state.RECEIVE ; state.IDLE ;
-+-----------------+------------+------------+-----------------+---------------+------------+
-; state.IDLE      ; 0          ; 0          ; 0               ; 0             ; 0          ;
-; state.RECEIVE   ; 0          ; 0          ; 0               ; 1             ; 1          ;
-; state.THRESHOLD ; 0          ; 0          ; 1               ; 0             ; 1          ;
-; state.SCAN      ; 0          ; 1          ; 0               ; 0             ; 1          ;
-; state.HOLD      ; 1          ; 0          ; 0               ; 0             ; 1          ;
-+-----------------+------------+------------+-----------------+---------------+------------+
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                            ;
-+-----------------------------------------------------+---------------------------------+------------------------+
-; Latch Name                                          ; Latch Enable Signal             ; Free of Timing Hazards ;
-+-----------------------------------------------------+---------------------------------+------------------------+
-; control_fsm:FSM|next_state.IDLE_345                 ; control_fsm:FSM|Selector16      ; yes                    ;
-; control_fsm:FSM|next_state.RECEIVE_327              ; control_fsm:FSM|Selector16      ; yes                    ;
-; control_fsm:FSM|next_state.SCAN_291                 ; control_fsm:FSM|Selector16      ; yes                    ;
-; threshold_cdf:THRS|outlayer                         ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; control_fsm:FSM|next_state.THRESHOLD_309            ; control_fsm:FSM|Selector16      ; yes                    ;
-; control_fsm:FSM|next_state.HOLD_273                 ; control_fsm:FSM|Selector16      ; yes                    ;
-; threshold_cdf:THRS|cumulative[0]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[1]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[2]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[3]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[4]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[5]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[6]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[7]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[8]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[9]                    ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[10]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[11]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[12]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[13]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[14]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[15]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[16]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[17]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[18]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[19]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[20]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[21]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[22]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[23]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[24]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[25]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[26]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[27]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[28]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[29]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[30]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; threshold_cdf:THRS|cumulative[31]                   ; control_fsm:FSM|state.THRESHOLD ; yes                    ;
-; Number of user-specified and inferred latches = 38  ;                                 ;                        ;
-+-----------------------------------------------------+---------------------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
-
-
-+--------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                   ;
-+----------------------------------------+---------------------------------------------+
-; Register name                          ; Reason for Removal                          ;
-+----------------------------------------+---------------------------------------------+
-; histogram:HIST|ram_wr_add[0]           ; Stuck at GND due to stuck port clock_enable ;
-; histogram:HIST|\incr:counter[1..31]    ; Stuck at GND due to stuck port clock_enable ;
-; histogram:HIST|\incr:counter[0]        ; Stuck at VCC due to stuck port clock_enable ;
-; histogram:HIST|wr_add_del1[0..15]      ; Stuck at GND due to stuck port clear        ;
-; histogram:HIST|ram_data_in[0..15]      ; Stuck at GND due to stuck port clear        ;
-; histogram:HIST|ram_wr_add[1..15]       ; Stuck at GND due to stuck port clock_enable ;
-; Total Number of Removed Registers = 80 ;                                             ;
-+----------------------------------------+---------------------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                         ;
-+----------------------------------+--------------------------------+-----------------------------------------------------------------+
-; Register name                    ; Reason for Removal             ; Registers Removed due to This Register                          ;
-+----------------------------------+--------------------------------+-----------------------------------------------------------------+
-; histogram:HIST|wr_add_del1[15]   ; Stuck at GND                   ; histogram:HIST|ram_data_in[7], histogram:HIST|ram_data_in[6],   ;
-;                                  ; due to stuck port clear        ; histogram:HIST|ram_data_in[5], histogram:HIST|ram_data_in[4],   ;
-;                                  ;                                ; histogram:HIST|ram_data_in[3], histogram:HIST|ram_data_in[2],   ;
-;                                  ;                                ; histogram:HIST|ram_data_in[1], histogram:HIST|ram_data_in[0],   ;
-;                                  ;                                ; histogram:HIST|ram_wr_add[15]                                   ;
-; histogram:HIST|\incr:counter[31] ; Stuck at GND                   ; histogram:HIST|ram_data_in[15], histogram:HIST|ram_data_in[14], ;
-;                                  ; due to stuck port clock_enable ; histogram:HIST|ram_data_in[13], histogram:HIST|ram_data_in[12], ;
-;                                  ;                                ; histogram:HIST|ram_data_in[11], histogram:HIST|ram_data_in[10], ;
-;                                  ;                                ; histogram:HIST|ram_data_in[9], histogram:HIST|ram_data_in[8]    ;
-; histogram:HIST|wr_add_del1[14]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[14]                                   ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[13]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[13]                                   ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[12]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[12]                                   ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[11]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[11]                                   ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[10]   ; Stuck at GND                   ; histogram:HIST|ram_wr_add[10]                                   ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[9]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[9]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[8]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[8]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[7]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[7]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[6]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[6]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[5]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[5]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[4]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[4]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[3]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[3]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[2]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[2]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-; histogram:HIST|wr_add_del1[1]    ; Stuck at GND                   ; histogram:HIST|ram_wr_add[1]                                    ;
-;                                  ; due to stuck port clear        ;                                                                 ;
-+----------------------------------+--------------------------------+-----------------------------------------------------------------+
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 106   ;
-; Number of registers using Synchronous Clear  ; 34    ;
-; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 71    ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 82    ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                                                                                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                                                                                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-; 4:1                ; 9 bits    ; 18 LEs        ; 0 LEs                ; 18 LEs                 ; Yes        ; |anomaly_detection|control_fsm:FSM|counter_receive[5]                                                                                                   ;
-; 4:1                ; 9 bits    ; 18 LEs        ; 0 LEs                ; 18 LEs                 ; Yes        ; |anomaly_detection|control_fsm:FSM|counter_scan[5]                                                                                                      ;
-; 8:1                ; 16 bits   ; 80 LEs        ; 80 LEs               ; 0 LEs                  ; No         ; |anomaly_detection|histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|mux_chb:mux3|l3_w15_n0_mux_dataout ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated ;
-+---------------------------------+--------------------+------+------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                         ;
-+---------------------------------+--------------------+------+------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                          ;
-+---------------------------------+--------------------+------+------------------------------------------------------------+
-
-
-+-----------------------------------------------------------------------------------------------------+
-; Source assignments for bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated ;
-+---------------------------------+--------------------+------+---------------------------------------+
-; Assignment                      ; Value              ; From ; To                                    ;
-+---------------------------------+--------------------+------+---------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                     ;
-+---------------------------------+--------------------+------+---------------------------------------+
-
-
-+-----------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |anomaly_detection ;
-+----------------+-------+----------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                     ;
-+----------------+-------+----------------------------------------------------------+
-; IM_SIZE        ; 500   ; Signed Integer                                           ;
-; ADDR_SIZE      ; 16    ; Signed Integer                                           ;
-; WORD_SIZE      ; 16    ; Signed Integer                                           ;
-; COUNT_WIDTH    ; 9     ; Signed Integer                                           ;
-+----------------+-------+----------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: histogram:HIST ;
-+----------------+-------+------------------------------------+
-; Parameter Name ; Value ; Type                               ;
-+----------------+-------+------------------------------------+
-; addr_size      ; 16    ; Signed Integer                     ;
-; word_size      ; 16    ; Signed Integer                     ;
-+----------------+-------+------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component ;
-+------------------------------------+----------------------+-----------------------------------------------------+
-; Parameter Name                     ; Value                ; Type                                                ;
-+------------------------------------+----------------------+-----------------------------------------------------+
-; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                                             ;
-; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                                          ;
-; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                                        ;
-; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                                        ;
-; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                                      ;
-; WIDTH_BYTEENA                      ; 1                    ; Untyped                                             ;
-; OPERATION_MODE                     ; DUAL_PORT            ; Untyped                                             ;
-; WIDTH_A                            ; 16                   ; Signed Integer                                      ;
-; WIDTHAD_A                          ; 16                   ; Signed Integer                                      ;
-; NUMWORDS_A                         ; 65536                ; Signed Integer                                      ;
-; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                                             ;
-; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                                             ;
-; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                                             ;
-; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                                             ;
-; INDATA_ACLR_A                      ; NONE                 ; Untyped                                             ;
-; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                                             ;
-; WIDTH_B                            ; 16                   ; Signed Integer                                      ;
-; WIDTHAD_B                          ; 16                   ; Signed Integer                                      ;
-; NUMWORDS_B                         ; 65536                ; Signed Integer                                      ;
-; INDATA_REG_B                       ; CLOCK1               ; Untyped                                             ;
-; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                                             ;
-; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                                             ;
-; ADDRESS_REG_B                      ; CLOCK0               ; Untyped                                             ;
-; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                                             ;
-; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                                             ;
-; INDATA_ACLR_B                      ; NONE                 ; Untyped                                             ;
-; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                                             ;
-; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                                             ;
-; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                                             ;
-; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                                             ;
-; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                                             ;
-; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                                      ;
-; WIDTH_BYTEENA_B                    ; 1                    ; Signed Integer                                      ;
-; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                                             ;
-; BYTE_SIZE                          ; 8                    ; Signed Integer                                      ;
-; READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA             ; Untyped                                             ;
-; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped                                             ;
-; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                                             ;
-; INIT_FILE                          ; UNUSED               ; Untyped                                             ;
-; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                                             ;
-; MAXIMUM_DEPTH                      ; 0                    ; Signed Integer                                      ;
-; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                                             ;
-; CLOCK_ENABLE_INPUT_B               ; BYPASS               ; Untyped                                             ;
-; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped                                             ;
-; CLOCK_ENABLE_OUTPUT_B              ; BYPASS               ; Untyped                                             ;
-; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                                             ;
-; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                                             ;
-; ENABLE_ECC                         ; FALSE                ; Untyped                                             ;
-; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                                             ;
-; WIDTH_ECCSTATUS                    ; 3                    ; Signed Integer                                      ;
-; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                                             ;
-; CBXI_PARAMETER                     ; altsyncram_l2v3      ; Untyped                                             ;
-+------------------------------------+----------------------+-----------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: bram_row:BRAM|altsyncram:altsyncram_component ;
-+------------------------------------+----------------------+--------------------------------+
-; Parameter Name                     ; Value                ; Type                           ;
-+------------------------------------+----------------------+--------------------------------+
-; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped                        ;
-; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY                     ;
-; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY                   ;
-; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE                   ;
-; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE                 ;
-; WIDTH_BYTEENA                      ; 1                    ; Untyped                        ;
-; OPERATION_MODE                     ; SINGLE_PORT          ; Untyped                        ;
-; WIDTH_A                            ; 16                   ; Signed Integer                 ;
-; WIDTHAD_A                          ; 9                    ; Signed Integer                 ;
-; NUMWORDS_A                         ; 500                  ; Signed Integer                 ;
-; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped                        ;
-; ADDRESS_ACLR_A                     ; NONE                 ; Untyped                        ;
-; OUTDATA_ACLR_A                     ; NONE                 ; Untyped                        ;
-; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped                        ;
-; INDATA_ACLR_A                      ; NONE                 ; Untyped                        ;
-; BYTEENA_ACLR_A                     ; NONE                 ; Untyped                        ;
-; WIDTH_B                            ; 1                    ; Signed Integer                 ;
-; WIDTHAD_B                          ; 1                    ; Signed Integer                 ;
-; NUMWORDS_B                         ; 0                    ; Signed Integer                 ;
-; INDATA_REG_B                       ; CLOCK1               ; Untyped                        ;
-; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped                        ;
-; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped                        ;
-; ADDRESS_REG_B                      ; CLOCK1               ; Untyped                        ;
-; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped                        ;
-; BYTEENA_REG_B                      ; CLOCK1               ; Untyped                        ;
-; INDATA_ACLR_B                      ; NONE                 ; Untyped                        ;
-; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped                        ;
-; ADDRESS_ACLR_B                     ; NONE                 ; Untyped                        ;
-; OUTDATA_ACLR_B                     ; NONE                 ; Untyped                        ;
-; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped                        ;
-; BYTEENA_ACLR_B                     ; NONE                 ; Untyped                        ;
-; WIDTH_BYTEENA_A                    ; 1                    ; Signed Integer                 ;
-; WIDTH_BYTEENA_B                    ; 1                    ; Signed Integer                 ;
-; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped                        ;
-; BYTE_SIZE                          ; 8                    ; Signed Integer                 ;
-; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped                        ;
-; READ_DURING_WRITE_MODE_PORT_A      ; DONT_CARE            ; Untyped                        ;
-; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped                        ;
-; INIT_FILE                          ; UNUSED               ; Untyped                        ;
-; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped                        ;
-; MAXIMUM_DEPTH                      ; 0                    ; Signed Integer                 ;
-; CLOCK_ENABLE_INPUT_A               ; BYPASS               ; Untyped                        ;
-; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped                        ;
-; CLOCK_ENABLE_OUTPUT_A              ; BYPASS               ; Untyped                        ;
-; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped                        ;
-; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped                        ;
-; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped                        ;
-; ENABLE_ECC                         ; FALSE                ; Untyped                        ;
-; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped                        ;
-; WIDTH_ECCSTATUS                    ; 3                    ; Signed Integer                 ;
-; DEVICE_FAMILY                      ; Cyclone V            ; Untyped                        ;
-; CBXI_PARAMETER                     ; altsyncram_2ov3      ; Untyped                        ;
-+------------------------------------+----------------------+--------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: threshold_cdf:THRS ;
-+----------------+-------+----------------------------------------+
-; Parameter Name ; Value ; Type                                   ;
-+----------------+-------+----------------------------------------+
-; im_size        ; 500   ; Signed Integer                         ;
-; word_size      ; 16    ; Signed Integer                         ;
-; addr_size      ; 16    ; Signed Integer                         ;
-+----------------+-------+----------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: scan_image:SCAN ;
-+----------------+-------+-------------------------------------+
-; Parameter Name ; Value ; Type                                ;
-+----------------+-------+-------------------------------------+
-; addr_size      ; 16    ; Signed Integer                      ;
-; word_size      ; 16    ; Signed Integer                      ;
-+----------------+-------+-------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: control_fsm:FSM ;
-+----------------+-------+-------------------------------------+
-; Parameter Name ; Value ; Type                                ;
-+----------------+-------+-------------------------------------+
-; count_width    ; 9     ; Signed Integer                      ;
-+----------------+-------+-------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------------------------------------------------------+
-; altsyncram Parameter Settings by Entity Instance                                                               ;
-+-------------------------------------------+--------------------------------------------------------------------+
-; Name                                      ; Value                                                              ;
-+-------------------------------------------+--------------------------------------------------------------------+
-; Number of entity instances                ; 2                                                                  ;
-; Entity Instance                           ; histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component ;
-;     -- OPERATION_MODE                     ; DUAL_PORT                                                          ;
-;     -- WIDTH_A                            ; 16                                                                 ;
-;     -- NUMWORDS_A                         ; 65536                                                              ;
-;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                       ;
-;     -- WIDTH_B                            ; 16                                                                 ;
-;     -- NUMWORDS_B                         ; 65536                                                              ;
-;     -- ADDRESS_REG_B                      ; CLOCK0                                                             ;
-;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                       ;
-;     -- RAM_BLOCK_TYPE                     ; AUTO                                                               ;
-;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; OLD_DATA                                                           ;
-; Entity Instance                           ; bram_row:BRAM|altsyncram:altsyncram_component                      ;
-;     -- OPERATION_MODE                     ; SINGLE_PORT                                                        ;
-;     -- WIDTH_A                            ; 16                                                                 ;
-;     -- NUMWORDS_A                         ; 500                                                                ;
-;     -- OUTDATA_REG_A                      ; UNREGISTERED                                                       ;
-;     -- WIDTH_B                            ; 1                                                                  ;
-;     -- NUMWORDS_B                         ; 0                                                                  ;
-;     -- ADDRESS_REG_B                      ; CLOCK1                                                             ;
-;     -- OUTDATA_REG_B                      ; UNREGISTERED                                                       ;
-;     -- RAM_BLOCK_TYPE                     ; AUTO                                                               ;
-;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                                          ;
-+-------------------------------------------+--------------------------------------------------------------------+
-
-
-+-----------------------------------------------------+
-; Post-Synthesis Netlist Statistics for Top Partition ;
-+-----------------------+-----------------------------+
-; Type                  ; Count                       ;
-+-----------------------+-----------------------------+
-; arriav_ff             ; 106                         ;
-;     CLR               ; 21                          ;
-;     ENA               ; 32                          ;
-;     ENA CLR           ; 16                          ;
-;     ENA CLR SCLR      ; 34                          ;
-;     plain             ; 3                           ;
-; arriav_lcell_comb     ; 239                         ;
-;     arith             ; 81                          ;
-;         1 data inputs ; 35                          ;
-;         2 data inputs ; 3                           ;
-;         4 data inputs ; 43                          ;
-;     normal            ; 158                         ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 6                           ;
-;         3 data inputs ; 33                          ;
-;         4 data inputs ; 58                          ;
-;         5 data inputs ; 11                          ;
-;         6 data inputs ; 48                          ;
-; boundary_port         ; 42                          ;
-; stratixv_ram_block    ; 144                         ;
-;                       ;                             ;
-; Max LUT depth         ; 7.80                        ;
-; Average LUT depth     ; 4.94                        ;
-+-----------------------+-----------------------------+
-
-
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:01     ;
-+----------------+--------------+
-
-
-+-------------------------------+
-; Analysis & Synthesis Messages ;
-+-------------------------------+
++---------------------------------+
+; Analysis & Elaboration Messages ;
++---------------------------------+
 Info: *******************************************************************
-Info: Running Quartus Prime Analysis & Synthesis
+Info: Running Quartus Prime Analysis & Elaboration
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Fri Dec 06 15:05:31 2024
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off anomaly_detection -c anomaly_detection
+    Info: Processing started: Fri Dec 06 22:25:40 2024
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off anomaly_detection -c anomaly_detection --analysis_and_elaboration
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
+Info (12021): Found 2 design units, including 1 entities, in source file dma_platform/synthesis/dma_platform.vhd
+    Info (12022): Found design unit 1: dma_platform-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/dma_platform.vhd Line: 104
+    Info (12023): Found entity 1: dma_platform File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/dma_platform.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file dma_platform/synthesis/dma_platform_rst_controller.vhd
+    Info (12022): Found design unit 1: dma_platform_rst_controller-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/dma_platform_rst_controller.vhd Line: 75
+    Info (12023): Found entity 1: dma_platform_rst_controller File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/dma_platform_rst_controller.vhd Line: 9
+Info (12021): Found 2 design units, including 1 entities, in source file dma_platform/synthesis/dma_platform_rst_controller_001.vhd
+    Info (12022): Found design unit 1: dma_platform_rst_controller_001-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/dma_platform_rst_controller_001.vhd Line: 75
+    Info (12023): Found entity 1: dma_platform_rst_controller_001 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/dma_platform_rst_controller_001.vhd Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_reset_controller.v
+    Info (12023): Found entity 1: altera_reset_controller File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_reset_controller.v Line: 42
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_reset_synchronizer.v
+    Info (12023): Found entity 1: altera_reset_synchronizer File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_reset_synchronizer.v Line: 24
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_irq_mapper.sv
+    Info (12023): Found entity 1: dma_platform_irq_mapper File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_irq_mapper.sv Line: 31
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_3.v
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_3 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_3.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_slave_translator.sv
+    Info (12023): Found entity 1: altera_merlin_slave_translator File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_translator.sv Line: 35
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_master_translator.sv
+    Info (12023): Found entity 1: altera_merlin_master_translator File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_master_translator.sv Line: 32
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_2.v
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_2 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_2.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1.v
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter.v
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_avalon_st_adapter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0.sv Line: 66
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_mux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_rsp_mux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_mux.sv Line: 51
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv
+    Info (12023): Found entity 1: altera_merlin_arbitrator File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv Line: 103
+    Info (12023): Found entity 2: altera_merlin_arb_adder File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv Line: 228
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_demux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_rsp_demux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_demux.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_mux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_cmd_mux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_demux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_cmd_demux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_demux.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_burst_adapter.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter.sv Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_burst_adapter_uncmpr.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter_uncompressed_only File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_uncmpr.sv Line: 39
+Info (12021): Found 5 design units, including 5 entities, in source file dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter_burstwrap_increment File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 40
+    Info (12023): Found entity 2: altera_merlin_burst_adapter_adder File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 55
+    Info (12023): Found entity 3: altera_merlin_burst_adapter_subtractor File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 77
+    Info (12023): Found entity 4: altera_merlin_burst_adapter_min File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 98
+    Info (12023): Found entity 5: altera_merlin_burst_adapter_13_1 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv Line: 264
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_burst_adapter_new.sv
+    Info (12023): Found entity 1: altera_merlin_burst_adapter_new File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_new.sv Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_incr_burst_converter.sv
+    Info (12023): Found entity 1: altera_incr_burst_converter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_incr_burst_converter.sv Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_wrap_burst_converter.sv
+    Info (12023): Found entity 1: altera_wrap_burst_converter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_wrap_burst_converter.sv Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_default_burst_converter.sv
+    Info (12023): Found entity 1: altera_default_burst_converter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_default_burst_converter.sv Line: 30
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_address_alignment.sv
+    Info (12023): Found entity 1: altera_merlin_address_alignment File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_address_alignment.sv Line: 26
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_avalon_st_pipeline_stage.sv
+    Info (12023): Found entity 1: altera_avalon_st_pipeline_stage File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_st_pipeline_stage.sv Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_avalon_st_pipeline_base.v
+    Info (12023): Found entity 1: altera_avalon_st_pipeline_base File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_st_pipeline_base.v Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv
+    Info (12023): Found entity 1: altera_merlin_traffic_limiter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv Line: 49
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/altera_merlin_reorder_memory.sv
+    Info (12023): Found entity 1: altera_merlin_reorder_memory File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_reorder_memory.sv Line: 28
+    Info (12023): Found entity 2: memory_pointer_controller File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_reorder_memory.sv Line: 185
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_avalon_sc_fifo.v
+    Info (12023): Found entity 1: altera_avalon_sc_fifo File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_sc_fifo.v Line: 21
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router_002.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_router_002_default_decode File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router_002.sv Line: 45
+    Info (12023): Found entity 2: dma_platform_mm_interconnect_1_router_002 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router_002.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_1_router_default_decode File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router.sv Line: 45
+    Info (12023): Found entity 2: dma_platform_mm_interconnect_1_router File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router.sv Line: 84
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv
+    Info (12023): Found entity 1: altera_merlin_slave_agent File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv Line: 34
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv
+    Info (12023): Found entity 1: altera_merlin_burst_uncompressor File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv Line: 40
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv
+    Info (12023): Found entity 1: altera_merlin_axi_master_ni File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv Line: 27
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0.v
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter.v
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_avalon_st_adapter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv Line: 66
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_width_adapter.sv
+    Info (12023): Found entity 1: altera_merlin_width_adapter File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_width_adapter.sv Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_mux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_rsp_mux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_demux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_rsp_demux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_demux.sv Line: 43
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_mux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_cmd_mux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_mux.sv Line: 51
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_demux.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_cmd_demux File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_demux.sv Line: 43
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_004.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_router_004_default_decode File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_004.sv Line: 45
+    Info (12023): Found entity 2: dma_platform_mm_interconnect_0_router_004 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_004.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_002.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_router_002_default_decode File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_002.sv Line: 45
+    Info (12023): Found entity 2: dma_platform_mm_interconnect_0_router_002 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_002.sv Line: 84
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router.sv
+    Info (12023): Found entity 1: dma_platform_mm_interconnect_0_router_default_decode File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router.sv Line: 45
+    Info (12023): Found entity 2: dma_platform_mm_interconnect_0_router File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router.sv Line: 84
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_merlin_master_agent.sv
+    Info (12023): Found entity 1: altera_merlin_master_agent File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_master_agent.sv Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_system_pll.v
+    Info (12023): Found entity 1: dma_platform_System_PLL File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_System_PLL.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v
+    Info (12023): Found entity 1: altera_up_avalon_reset_from_locked_signal File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_system_pll_sys_pll.v
+    Info (12023): Found entity 1: dma_platform_System_PLL_sys_pll File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_System_PLL_sys_pll.v Line: 2
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_sdram.v
+    Info (12023): Found entity 1: dma_platform_SDRAM_input_efifo_module File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v Line: 21
+    Info (12023): Found entity 2: dma_platform_SDRAM File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v Line: 159
+Info (12021): Found 2 design units, including 2 entities, in source file dma_platform/synthesis/submodules/dma_platform_sdram_test_component.v
+    Info (12023): Found entity 1: dma_platform_SDRAM_test_component_ram_module File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM_test_component.v Line: 21
+    Info (12023): Found entity 2: dma_platform_SDRAM_test_component File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM_test_component.v Line: 114
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_up_video_dma_control_slave.v
+    Info (12023): Found entity 1: altera_up_video_dma_control_slave File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_control_slave.v Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_up_video_dma_to_memory.v
+    Info (12023): Found entity 1: altera_up_video_dma_to_memory File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_memory.v Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_up_video_dma_to_stream.v
+    Info (12023): Found entity 1: altera_up_video_dma_to_stream File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_stream.v Line: 22
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_change_detection_stream_to_mem_dma.v
+    Info (12023): Found entity 1: dma_platform_Change_Detection_Stream_to_Mem_DMA File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_Change_Detection_Stream_to_Mem_DMA.v Line: 31
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_up_avalon_video_dma_ctrl_addr_trans.v
+    Info (12023): Found entity 1: altera_up_avalon_video_dma_ctrl_addr_trans File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_avalon_video_dma_ctrl_addr_trans.v Line: 63
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_change_detection_mem_to_stream_dma.v
+    Info (12023): Found entity 1: dma_platform_Change_Detection_Mem_to_Stream_DMA File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_Change_Detection_Mem_to_Stream_DMA.v Line: 31
+Info (12021): Found 2 design units, including 1 entities, in source file dma_platform/synthesis/submodules/anomaly_detection.vhd
+    Info (12022): Found design unit 1: anomaly_detection-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/anomaly_detection.vhd Line: 31
+    Info (12023): Found entity 1: anomaly_detection File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/anomaly_detection.vhd Line: 6
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_arm_a9_hps.v
+    Info (12023): Found entity 1: dma_platform_ARM_A9_HPS File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_arm_a9_hps_hps_io.v
+    Info (12023): Found entity 1: dma_platform_ARM_A9_HPS_hps_io File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram.v
+    Info (12023): Found entity 1: hps_sdram File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram.v Line: 9
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv
+    Info (12023): Found entity 1: altdq_dqs2_acv_connect_to_hard_phy_cyclonev File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv Line: 19
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_mem_if_dll_cyclonev.sv
+    Info (12023): Found entity 1: altera_mem_if_dll_cyclonev File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_dll_cyclonev.sv Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_mem_if_hard_memory_controller_top_cyclonev.sv
+    Info (12023): Found entity 1: altera_mem_if_hard_memory_controller_top_cyclonev File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_hard_memory_controller_top_cyclonev.sv Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_mem_if_hhp_qseq_synth_top.v
+    Info (12023): Found entity 1: altera_mem_if_hhp_qseq_synth_top File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_hhp_qseq_synth_top.v Line: 15
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/altera_mem_if_oct_cyclonev.sv
+    Info (12023): Found entity 1: altera_mem_if_oct_cyclonev File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_oct_cyclonev.sv Line: 23
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0.sv
+    Info (12023): Found entity 1: hps_sdram_p0 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0.sv Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_addr_cmd_pads.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_hard_addr_cmd_pads File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_addr_cmd_pads.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_io_pads.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_hard_io_pads File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_io_pads.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_memphy.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_hard_memphy File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_memphy.v Line: 21
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_acv_ldc.v
+    Info (12023): Found entity 1: hps_sdram_p0_acv_ldc File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_ldc.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_altdqdqs.v
+    Info (12023): Found entity 1: hps_sdram_p0_altdqdqs File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_altdqdqs.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_clock_pair_generator.v
+    Info (12023): Found entity 1: hps_sdram_p0_clock_pair_generator File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_clock_pair_generator.v Line: 28
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_generic_ddio.v
+    Info (12023): Found entity 1: hps_sdram_p0_generic_ddio File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_generic_ddio.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_iss_probe.v
+    Info (12023): Found entity 1: hps_sdram_p0_iss_probe File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_iss_probe.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_phy_csr.sv
+    Info (12023): Found entity 1: hps_sdram_p0_phy_csr File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_phy_csr.sv Line: 31
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_reset.v
+    Info (12023): Found entity 1: hps_sdram_p0_reset File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_reset.v Line: 18
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_p0_reset_sync.v
+    Info (12023): Found entity 1: hps_sdram_p0_reset_sync File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_reset_sync.v Line: 17
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/hps_sdram_pll.sv
+    Info (12023): Found entity 1: hps_sdram_pll File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_pll.sv Line: 25
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_arm_a9_hps_hps_io_border.sv
+    Info (12023): Found entity 1: dma_platform_ARM_A9_HPS_hps_io_border File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io_border.sv Line: 14
+Info (12021): Found 1 design units, including 1 entities, in source file dma_platform/synthesis/submodules/dma_platform_arm_a9_hps_fpga_interfaces.sv
+    Info (12023): Found entity 1: dma_platform_ARM_A9_HPS_fpga_interfaces File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_fpga_interfaces.sv Line: 14
+Info (12021): Found 2 design units, including 1 entities, in source file tb/write_data.vhd
+    Info (12022): Found design unit 1: write_data-behavioral File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/write_data.vhd Line: 23
+    Info (12023): Found entity 1: write_data File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/write_data.vhd Line: 8
+Info (12021): Found 2 design units, including 1 entities, in source file tb/read_data.vhd
+    Info (12022): Found design unit 1: read_data-behavioral File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/read_data.vhd Line: 26
+    Info (12023): Found entity 1: read_data File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/read_data.vhd Line: 10
 Info (12021): Found 2 design units, including 1 entities, in source file anomaly_detection.vhd
     Info (12022): Found design unit 1: anomaly_detection-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 31
     Info (12023): Found entity 1: anomaly_detection File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 6
@@ -718,9 +363,6 @@ Info (12021): Found 2 design units, including 1 entities, in source file bram_ro
 Info (12021): Found 2 design units, including 1 entities, in source file bram_histogram.vhd
     Info (12022): Found design unit 1: bram_histogram-SYN File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 55
     Info (12023): Found entity 1: bram_histogram File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 42
-Info (12021): Found 2 design units, including 1 entities, in source file tb/hist_tb.vhd
-    Info (12022): Found design unit 1: hist_tb-test File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd Line: 8
-    Info (12023): Found entity 1: hist_tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file threshold_cdf.vhd
     Info (12022): Found design unit 1: threshold_cdf-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 22
     Info (12023): Found entity 1: threshold_cdf File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 6
@@ -734,206 +376,29 @@ Info (12021): Found 2 design units, including 1 entities, in source file control
     Info (12022): Found design unit 1: control_fsm-rtl File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 36
     Info (12023): Found entity 1: control_fsm File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 5
 Info (12021): Found 2 design units, including 1 entities, in source file tb/anomaly_tb.vhd
-    Info (12022): Found design unit 1: anomaly_detection_tb-tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/anomaly_tb.vhd Line: 8
-    Info (12023): Found entity 1: anomaly_detection_tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/anomaly_tb.vhd Line: 5
+    Info (12022): Found design unit 1: anomaly_tb-tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/anomaly_tb.vhd Line: 8
+    Info (12023): Found entity 1: anomaly_tb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/anomaly_tb.vhd Line: 5
+Warning (10236): Verilog HDL Implicit Net warning at hps_sdram_pll.sv(168): created implicit net for "pll_dr_clk" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_pll.sv Line: 168
+Warning (10037): Verilog HDL or VHDL warning at dma_platform_SDRAM.v(318): conditional expression evaluates to a constant File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v Line: 318
+Warning (10037): Verilog HDL or VHDL warning at dma_platform_SDRAM.v(328): conditional expression evaluates to a constant File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v Line: 328
+Warning (10037): Verilog HDL or VHDL warning at dma_platform_SDRAM.v(338): conditional expression evaluates to a constant File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v Line: 338
+Warning (10037): Verilog HDL or VHDL warning at dma_platform_SDRAM.v(682): conditional expression evaluates to a constant File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v Line: 682
+Error (12181): Top-level entity "anomaly_detection" is ambiguous
+    Error (12180): Instance could be entity "anomaly_detection" in file dma_platform/synthesis/submodules/anomaly_detection.vhd compiled in library dma_platform File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/anomaly_detection.vhd Line: 6
+    Error (12180): Instance could be entity "anomaly_detection" in file anomaly_detection.vhd compiled in library work File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 6
 Info (12127): Elaborating entity "anomaly_detection" for the top level hierarchy
-Info (12128): Elaborating entity "histogram" for hierarchy "histogram:HIST" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 136
-Info (12128): Elaborating entity "bram_histogram" for hierarchy "histogram:HIST|bram_histogram:BRAM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd Line: 68
-Info (12128): Elaborating entity "altsyncram" for hierarchy "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 62
-Info (12130): Elaborated megafunction instantiation "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 62
-Info (12133): Instantiated megafunction "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component" with the following parameter: File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd Line: 62
-    Info (12134): Parameter "address_aclr_a" = "UNUSED"
-    Info (12134): Parameter "address_aclr_b" = "NONE"
-    Info (12134): Parameter "address_reg_b" = "CLOCK0"
-    Info (12134): Parameter "byte_size" = "8"
-    Info (12134): Parameter "byteena_aclr_a" = "UNUSED"
-    Info (12134): Parameter "byteena_aclr_b" = "NONE"
-    Info (12134): Parameter "byteena_reg_b" = "CLOCK1"
-    Info (12134): Parameter "clock_enable_core_a" = "USE_INPUT_CLKEN"
-    Info (12134): Parameter "clock_enable_core_b" = "USE_INPUT_CLKEN"
-    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
-    Info (12134): Parameter "clock_enable_input_b" = "BYPASS"
-    Info (12134): Parameter "clock_enable_output_a" = "NORMAL"
-    Info (12134): Parameter "clock_enable_output_b" = "BYPASS"
-    Info (12134): Parameter "intended_device_family" = "Cyclone V"
-    Info (12134): Parameter "ecc_pipeline_stage_enabled" = "FALSE"
-    Info (12134): Parameter "enable_ecc" = "FALSE"
-    Info (12134): Parameter "implement_in_les" = "OFF"
-    Info (12134): Parameter "indata_aclr_a" = "UNUSED"
-    Info (12134): Parameter "indata_aclr_b" = "NONE"
-    Info (12134): Parameter "indata_reg_b" = "CLOCK1"
-    Info (12134): Parameter "init_file" = "UNUSED"
-    Info (12134): Parameter "init_file_layout" = "PORT_A"
-    Info (12134): Parameter "maximum_depth" = "0"
-    Info (12134): Parameter "numwords_a" = "65536"
-    Info (12134): Parameter "numwords_b" = "65536"
-    Info (12134): Parameter "operation_mode" = "DUAL_PORT"
-    Info (12134): Parameter "outdata_aclr_a" = "NONE"
-    Info (12134): Parameter "outdata_aclr_b" = "NONE"
-    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
-    Info (12134): Parameter "outdata_reg_b" = "UNREGISTERED"
-    Info (12134): Parameter "power_up_uninitialized" = "FALSE"
-    Info (12134): Parameter "ram_block_type" = "AUTO"
-    Info (12134): Parameter "rdcontrol_aclr_b" = "NONE"
-    Info (12134): Parameter "rdcontrol_reg_b" = "CLOCK1"
-    Info (12134): Parameter "read_during_write_mode_mixed_ports" = "OLD_DATA"
-    Info (12134): Parameter "read_during_write_mode_port_a" = "NEW_DATA_NO_NBE_READ"
-    Info (12134): Parameter "read_during_write_mode_port_b" = "NEW_DATA_NO_NBE_READ"
-    Info (12134): Parameter "stratixiv_m144k_allow_dual_clocks" = "ON"
-    Info (12134): Parameter "width_a" = "16"
-    Info (12134): Parameter "width_b" = "16"
-    Info (12134): Parameter "width_byteena_a" = "1"
-    Info (12134): Parameter "width_byteena_b" = "1"
-    Info (12134): Parameter "width_eccstatus" = "3"
-    Info (12134): Parameter "widthad_a" = "16"
-    Info (12134): Parameter "widthad_b" = "16"
-    Info (12134): Parameter "wrcontrol_aclr_a" = "UNUSED"
-    Info (12134): Parameter "wrcontrol_aclr_b" = "NONE"
-    Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK1"
-    Info (12134): Parameter "lpm_hint" = "UNUSED"
-    Info (12134): Parameter "lpm_type" = "altsyncram"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_l2v3.tdf
-    Info (12023): Found entity 1: altsyncram_l2v3 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_l2v3.tdf Line: 31
-Info (12128): Elaborating entity "altsyncram_l2v3" for hierarchy "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12021): Found 1 design units, including 1 entities, in source file db/decode_dla.tdf
-    Info (12023): Found entity 1: decode_dla File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/decode_dla.tdf Line: 22
-Info (12128): Elaborating entity "decode_dla" for hierarchy "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|decode_dla:decode2" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_l2v3.tdf Line: 42
-Info (12021): Found 1 design units, including 1 entities, in source file db/mux_chb.tdf
-    Info (12023): Found entity 1: mux_chb File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/mux_chb.tdf Line: 22
-Info (12128): Elaborating entity "mux_chb" for hierarchy "histogram:HIST|bram_histogram:BRAM|altsyncram:altsyncram_component|altsyncram_l2v3:auto_generated|mux_chb:mux3" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_l2v3.tdf Line: 43
-Info (12128): Elaborating entity "bram_row" for hierarchy "bram_row:BRAM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 151
-Info (12128): Elaborating entity "altsyncram" for hierarchy "bram_row:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd Line: 62
-Info (12130): Elaborated megafunction instantiation "bram_row:BRAM|altsyncram:altsyncram_component" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd Line: 62
-Info (12133): Instantiated megafunction "bram_row:BRAM|altsyncram:altsyncram_component" with the following parameter: File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_row.vhd Line: 62
-    Info (12134): Parameter "address_aclr_a" = "UNUSED"
-    Info (12134): Parameter "address_aclr_b" = "NONE"
-    Info (12134): Parameter "address_reg_b" = "CLOCK1"
-    Info (12134): Parameter "byte_size" = "8"
-    Info (12134): Parameter "byteena_aclr_a" = "UNUSED"
-    Info (12134): Parameter "byteena_aclr_b" = "NONE"
-    Info (12134): Parameter "byteena_reg_b" = "CLOCK1"
-    Info (12134): Parameter "clock_enable_core_a" = "USE_INPUT_CLKEN"
-    Info (12134): Parameter "clock_enable_core_b" = "USE_INPUT_CLKEN"
-    Info (12134): Parameter "clock_enable_input_a" = "BYPASS"
-    Info (12134): Parameter "clock_enable_input_b" = "NORMAL"
-    Info (12134): Parameter "clock_enable_output_a" = "BYPASS"
-    Info (12134): Parameter "clock_enable_output_b" = "NORMAL"
-    Info (12134): Parameter "intended_device_family" = "Cyclone V"
-    Info (12134): Parameter "ecc_pipeline_stage_enabled" = "FALSE"
-    Info (12134): Parameter "enable_ecc" = "FALSE"
-    Info (12134): Parameter "implement_in_les" = "OFF"
-    Info (12134): Parameter "indata_aclr_a" = "UNUSED"
-    Info (12134): Parameter "indata_aclr_b" = "NONE"
-    Info (12134): Parameter "indata_reg_b" = "CLOCK1"
-    Info (12134): Parameter "init_file" = "UNUSED"
-    Info (12134): Parameter "init_file_layout" = "PORT_A"
-    Info (12134): Parameter "maximum_depth" = "0"
-    Info (12134): Parameter "numwords_a" = "500"
-    Info (12134): Parameter "numwords_b" = "0"
-    Info (12134): Parameter "operation_mode" = "SINGLE_PORT"
-    Info (12134): Parameter "outdata_aclr_a" = "NONE"
-    Info (12134): Parameter "outdata_aclr_b" = "NONE"
-    Info (12134): Parameter "outdata_reg_a" = "UNREGISTERED"
-    Info (12134): Parameter "outdata_reg_b" = "UNREGISTERED"
-    Info (12134): Parameter "power_up_uninitialized" = "FALSE"
-    Info (12134): Parameter "ram_block_type" = "AUTO"
-    Info (12134): Parameter "rdcontrol_aclr_b" = "NONE"
-    Info (12134): Parameter "rdcontrol_reg_b" = "CLOCK1"
-    Info (12134): Parameter "read_during_write_mode_mixed_ports" = "DONT_CARE"
-    Info (12134): Parameter "read_during_write_mode_port_a" = "DONT_CARE"
-    Info (12134): Parameter "read_during_write_mode_port_b" = "NEW_DATA_NO_NBE_READ"
-    Info (12134): Parameter "stratixiv_m144k_allow_dual_clocks" = "ON"
-    Info (12134): Parameter "width_a" = "16"
-    Info (12134): Parameter "width_b" = "1"
-    Info (12134): Parameter "width_byteena_a" = "1"
-    Info (12134): Parameter "width_byteena_b" = "1"
-    Info (12134): Parameter "width_eccstatus" = "3"
-    Info (12134): Parameter "widthad_a" = "9"
-    Info (12134): Parameter "widthad_b" = "1"
-    Info (12134): Parameter "wrcontrol_aclr_a" = "UNUSED"
-    Info (12134): Parameter "wrcontrol_aclr_b" = "NONE"
-    Info (12134): Parameter "wrcontrol_wraddress_reg_b" = "CLOCK1"
-    Info (12134): Parameter "lpm_hint" = "ENABLE_RUNTIME_MOD=NO"
-    Info (12134): Parameter "lpm_type" = "altsyncram"
-Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_2ov3.tdf
-    Info (12023): Found entity 1: altsyncram_2ov3 File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/db/altsyncram_2ov3.tdf Line: 27
-Info (12128): Elaborating entity "altsyncram_2ov3" for hierarchy "bram_row:BRAM|altsyncram:altsyncram_component|altsyncram_2ov3:auto_generated" File: c:/intelfpga_lite/18.1/quartus/libraries/megafunctions/altsyncram.tdf Line: 791
-Info (12128): Elaborating entity "threshold_cdf" for hierarchy "threshold_cdf:THRS" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 161
-Warning (10036): Verilog HDL or VHDL warning at threshold_cdf.vhd(28): object "cumulative_sum" assigned a value but never read File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 28
-Warning (10492): VHDL Process Statement warning at threshold_cdf.vhd(60): signal "thrs_en" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 60
-Warning (10492): VHDL Process Statement warning at threshold_cdf.vhd(61): signal "data_in" is read inside the Process Statement but isn't in the Process Statement's sensitivity list File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 61
-Warning (10631): VHDL Process Statement warning at threshold_cdf.vhd(51): inferring latch(es) for signal or variable "cumulative", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 51
-Warning (10631): VHDL Process Statement warning at threshold_cdf.vhd(51): inferring latch(es) for signal or variable "outlayer", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 51
-Warning (10631): VHDL Process Statement warning at threshold_cdf.vhd(51): inferring latch(es) for signal or variable "thrs_sig", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 51
-Info (10041): Inferred latch for "thrs_sig" at threshold_cdf.vhd(51) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 51
-Info (10041): Inferred latch for "outlayer" at threshold_cdf.vhd(51) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 51
-Info (10041): Inferred latch for "cumulative[0]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[1]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[2]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[3]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[4]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[5]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[6]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[7]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[8]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[9]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[10]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[11]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[12]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[13]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[14]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[15]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[16]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[17]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[18]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[19]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[20]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[21]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[22]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[23]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[24]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[25]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[26]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[27]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[28]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[29]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[30]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (10041): Inferred latch for "cumulative[31]" at threshold_cdf.vhd(56) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/threshold_cdf.vhd Line: 56
-Info (12128): Elaborating entity "scan_image" for hierarchy "scan_image:SCAN" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 176
-Info (12128): Elaborating entity "control_fsm" for hierarchy "control_fsm:FSM" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 190
-Warning (10631): VHDL Process Statement warning at control_fsm.vhd(93): inferring latch(es) for signal or variable "next_state", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Warning (10631): VHDL Process Statement warning at control_fsm.vhd(141): inferring latch(es) for signal or variable "hist_rst", which holds its previous value in one or more paths through the process File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 141
-Info (10041): Inferred latch for "hist_rst" at control_fsm.vhd(141) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 141
-Info (10041): Inferred latch for "next_state.HOLD" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Info (10041): Inferred latch for "next_state.SCAN" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Info (10041): Inferred latch for "next_state.THRESHOLD" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Info (10041): Inferred latch for "next_state.RECEIVE" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Info (10041): Inferred latch for "next_state.IDLE" at control_fsm.vhd(93) File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-Warning (13012): Latch control_fsm:FSM|next_state.IDLE_345 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ready_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 23
-Warning (13012): Latch control_fsm:FSM|next_state.RECEIVE_327 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal valid_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 21
-Warning (13012): Latch control_fsm:FSM|next_state.SCAN_291 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ready_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 23
-Warning (13012): Latch control_fsm:FSM|next_state.THRESHOLD_309 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal valid_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 21
-Warning (13012): Latch control_fsm:FSM|next_state.HOLD_273 has unsafe behavior File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/control_fsm.vhd Line: 93
-    Warning (13013): Ports D and ENA on the latch are fed by the same signal ready_in File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 23
-Info (286030): Timing-Driven Synthesis is running
-Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
-    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 2 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "startpacket_in" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 19
-    Warning (15610): No output dependent on input pin "endpacket_in" File: C:/intelFPGA_lite/18.1/projects/anomaly_detection/anomaly_detection.vhd Line: 20
-Info (21057): Implemented 477 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 22 input pins
-    Info (21059): Implemented 20 output pins
-    Info (21061): Implemented 291 logic cells
-    Info (21064): Implemented 144 RAM segments
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 22 warnings
-    Info: Peak virtual memory: 4941 megabytes
-    Info: Processing ended: Fri Dec 06 15:05:49 2024
-    Info: Elapsed time: 00:00:18
-    Info: Total CPU time (on all processors): 00:00:38
+Error (12153): Can't elaborate top-level user hierarchy
+Info (144001): Generated suppressed messages file C:/intelFPGA_lite/18.1/projects/anomaly_detection/output_files/anomaly_detection.map.smsg
+Error: Quartus Prime Analysis & Elaboration was unsuccessful. 4 errors, 6 warnings
+    Error: Peak virtual memory: 4944 megabytes
+    Error: Processing ended: Fri Dec 06 22:26:19 2024
+    Error: Elapsed time: 00:00:39
+    Error: Total CPU time (on all processors): 00:01:06
+
+
++--------------------------------------------+
+; Analysis & Elaboration Suppressed Messages ;
++--------------------------------------------+
+The suppressed messages can be found in C:/intelFPGA_lite/18.1/projects/anomaly_detection/output_files/anomaly_detection.map.smsg.
 
 

@@ -2,196 +2,103 @@
 Timing Analyzer Summary
 ------------------------------------------------------------
 
-Type  : Slow 1100mV 85C Model Setup 'control_fsm:FSM|state.THRESHOLD'
-Slack : -12.280
-TNS   : -337.240
-
-Type  : Slow 1100mV 85C Model Setup 'clk'
-Slack : -7.423
-TNS   : -18222.979
-
-Type  : Slow 1100mV 85C Model Setup 'ready_in'
-Slack : -4.632
-TNS   : -19.763
-
-Type  : Slow 1100mV 85C Model Setup 'threshold_cdf:THRS|outlayer'
-Slack : -3.113
-TNS   : -46.159
-
-Type  : Slow 1100mV 85C Model Hold 'clk'
-Slack : -0.834
-TNS   : -12.015
-
-Type  : Slow 1100mV 85C Model Hold 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.750
+Type  : Slow 1100mV 85C Model Setup 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 1.730
 TNS   : 0.000
 
-Type  : Slow 1100mV 85C Model Hold 'ready_in'
-Slack : 0.815
+Type  : Slow 1100mV 85C Model Hold 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.143
 TNS   : 0.000
 
-Type  : Slow 1100mV 85C Model Hold 'threshold_cdf:THRS|outlayer'
-Slack : 2.300
+Type  : Slow 1100mV 85C Model Recovery 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 3.375
 TNS   : 0.000
 
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'clk'
-Slack : -2.636
-TNS   : -20663.627
-
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'threshold_cdf:THRS|outlayer'
-Slack : -0.394
-TNS   : -9.329
-
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'ready_in'
-Slack : -0.024
-TNS   : -0.054
-
-Type  : Slow 1100mV 85C Model Minimum Pulse Width 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.199
+Type  : Slow 1100mV 85C Model Removal 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.470
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Setup 'control_fsm:FSM|state.THRESHOLD'
-Slack : -12.549
-TNS   : -343.334
-
-Type  : Slow 1100mV 0C Model Setup 'clk'
-Slack : -7.274
-TNS   : -17921.437
-
-Type  : Slow 1100mV 0C Model Setup 'ready_in'
-Slack : -4.412
-TNS   : -19.862
-
-Type  : Slow 1100mV 0C Model Setup 'threshold_cdf:THRS|outlayer'
-Slack : -3.239
-TNS   : -48.055
-
-Type  : Slow 1100mV 0C Model Hold 'clk'
-Slack : -1.122
-TNS   : -16.724
-
-Type  : Slow 1100mV 0C Model Hold 'ready_in'
-Slack : 0.667
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'
+Slack : 0.608
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Hold 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.729
+Type  : Slow 1100mV 85C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.623
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Hold 'threshold_cdf:THRS|outlayer'
-Slack : 2.411
+Type  : Slow 1100mV 0C Model Setup 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 1.727
 TNS   : 0.000
 
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'clk'
-Slack : -2.636
-TNS   : -20653.333
-
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'threshold_cdf:THRS|outlayer'
-Slack : -0.394
-TNS   : -9.196
-
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'ready_in'
-Slack : -0.024
-TNS   : -0.039
-
-Type  : Slow 1100mV 0C Model Minimum Pulse Width 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.203
+Type  : Slow 1100mV 0C Model Hold 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.162
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Setup 'control_fsm:FSM|state.THRESHOLD'
-Slack : -6.709
-TNS   : -185.281
-
-Type  : Fast 1100mV 85C Model Setup 'clk'
-Slack : -4.525
-TNS   : -10346.023
-
-Type  : Fast 1100mV 85C Model Setup 'ready_in'
-Slack : -3.598
-TNS   : -13.586
-
-Type  : Fast 1100mV 85C Model Setup 'threshold_cdf:THRS|outlayer'
-Slack : -1.378
-TNS   : -20.088
-
-Type  : Fast 1100mV 85C Model Hold 'clk'
-Slack : -0.541
-TNS   : -7.870
-
-Type  : Fast 1100mV 85C Model Hold 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.368
+Type  : Slow 1100mV 0C Model Recovery 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 3.468
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Hold 'ready_in'
-Slack : 0.564
+Type  : Slow 1100mV 0C Model Removal 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.460
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Hold 'threshold_cdf:THRS|outlayer'
-Slack : 1.149
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'
+Slack : 0.613
 TNS   : 0.000
 
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'clk'
-Slack : -2.636
-TNS   : -20525.853
-
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'ready_in'
-Slack : -0.194
-TNS   : -1.709
-
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'threshold_cdf:THRS|outlayer'
-Slack : -0.001
-TNS   : -0.002
-
-Type  : Fast 1100mV 85C Model Minimum Pulse Width 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.261
+Type  : Slow 1100mV 0C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.630
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Setup 'control_fsm:FSM|state.THRESHOLD'
-Slack : -6.352
-TNS   : -176.442
-
-Type  : Fast 1100mV 0C Model Setup 'clk'
-Slack : -3.994
-TNS   : -9219.598
-
-Type  : Fast 1100mV 0C Model Setup 'ready_in'
-Slack : -2.955
-TNS   : -11.895
-
-Type  : Fast 1100mV 0C Model Setup 'threshold_cdf:THRS|outlayer'
-Slack : -1.364
-TNS   : -19.931
-
-Type  : Fast 1100mV 0C Model Hold 'clk'
-Slack : -0.702
-TNS   : -10.676
-
-Type  : Fast 1100mV 0C Model Hold 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.357
+Type  : Fast 1100mV 85C Model Setup 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 2.110
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Hold 'ready_in'
+Type  : Fast 1100mV 85C Model Hold 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.084
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Recovery 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 3.727
+TNS   : 0.000
+
+Type  : Fast 1100mV 85C Model Removal 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
 Slack : 0.497
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Hold 'threshold_cdf:THRS|outlayer'
-Slack : 1.162
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'
+Slack : 0.883
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'clk'
-Slack : -2.636
-TNS   : -20533.013
-
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'ready_in'
-Slack : -0.178
-TNS   : -1.615
-
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'threshold_cdf:THRS|outlayer'
-Slack : 0.034
+Type  : Fast 1100mV 85C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.891
 TNS   : 0.000
 
-Type  : Fast 1100mV 0C Model Minimum Pulse Width 'control_fsm:FSM|state.THRESHOLD'
-Slack : 0.309
+Type  : Fast 1100mV 0C Model Setup 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 2.110
 TNS   : 0.000
 
+Type  : Fast 1100mV 0C Model Hold 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.077
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Recovery 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 3.825
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Removal 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.473
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|pll_write_clk_dq_write_clk'
+Slack : 0.887
+TNS   : 0.000
+
+Type  : Fast 1100mV 0C Model Minimum Pulse Width 'dma_platform_ARM_A9_HPS:arm_a9_hps|dma_platform_ARM_A9_HPS_hps_io:hps_io|dma_platform_ARM_A9_HPS_hps_io_border:border|hps_sdram:hps_sdram_inst|hps_sdram_pll:pll|afi_clk_write_clk'
+Slack : 0.894
+TNS   : 0.000
+
+------------------------------------------------------------
+Info: see the "DDR report" for DDR timing results
+------------------------------------------------------------
 ------------------------------------------------------------

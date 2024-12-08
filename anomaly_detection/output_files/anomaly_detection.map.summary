@@ -1,17 +1,12 @@
-Analysis & Synthesis Status : Successful - Fri Dec 06 16:07:28 2024
+Analysis & Elaboration Status : Failed - Fri Dec 06 22:26:19 2024
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : anomaly_detection
-Top-level Entity Name : dma_platform
+Top-level Entity Name : anomaly_detection
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A until Partition Merge
 Total registers : N/A until Partition Merge
 Total pins : N/A until Partition Merge
 Total virtual pins : N/A until Partition Merge
 Total block memory bits : N/A until Partition Merge
-Total DSP Blocks : N/A until Partition Merge
-Total HSSI RX PCSs : N/A until Partition Merge
-Total HSSI PMA RX Deserializers : N/A until Partition Merge
-Total HSSI TX PCSs : N/A until Partition Merge
-Total HSSI PMA TX Serializers : N/A until Partition Merge
 Total PLLs : N/A until Partition Merge
 Total DLLs : N/A until Partition Merge

@@ -2,14 +2,68 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity anomaly_detection_tb is
-end entity anomaly_detection_tb;
+entity anomaly_tb is
+end entity anomaly_tb;
 
-architecture tb of anomaly_detection_tb is
-    -- Constants
+architecture tb of anomaly_tb is
+
+    component anomaly_detection is
+        generic(
+            IM_SIZE 	: integer := 500;
+            ADDR_SIZE 	: integer := 16;
+            WORD_SIZE 	: integer := 16;
+            COUNT_WIDTH	: integer := 9
+        );
+        port (
+            clk 					: in  std_logic;
+            rst					: in  std_logic;
+            -- SINK
+            ready_out			: out std_logic;
+            data_in				: in  std_logic_vector(WORD_SIZE-1 downto 0);
+            startpacket_in		: in  std_logic;
+            endpacket_in		: in  std_logic;
+            valid_in				: in  std_logic;
+            -- SOURCE
+            ready_in				: in  std_logic;
+            data_out				: out std_logic_vector(WORD_SIZE-1 downto 0);
+				startpacket_out	: out std_logic;
+            endpacket_out		: out std_logic;
+            valid_out			: out std_logic
+        );
+    end component;
+
+    component read_data is
+        generic(
+            file_path       	: string := "";
+            ENTRIES		    	: integer := 500;
+            WORD_SIZE	    	: integer := 16;
+            ADDR_SIZE	    	: integer := 16
+        );
+        port(
+            clk             	: in  std_logic;
+            rst             	: in  std_logic;
+            enable		    	: in  std_logic;
+            data_out	    	 	: out std_logic_vector(ADDR_SIZE-1 downto 0)
+        );
+    end component;
+
+    component write_data is
+        generic(
+            file_path   		: string := "";
+            ENTRIES				: integer := 500;
+            WORD_SIZE			: integer := 16;
+            ADDR_SIZE			: integer := 16
+            );
+        port (
+            clk					: in std_logic;
+            rst             	: in std_logic;
+            enable				: in std_logic;
+            data_in         	: in std_logic_vector(WORD_SIZE-1 downto 0)
+        );
+    end component;
+    
     constant CLK_PERIOD : time := 10 ns;
 
-    -- DUT (Device Under Test) Signals
     signal clk             : std_logic := '0';
     signal rst             : std_logic := '0';
     signal ready_out       : std_logic;
@@ -24,30 +78,57 @@ architecture tb of anomaly_detection_tb is
     signal valid_out       : std_logic;
 
 begin
-    -- DUT Instantiation
-    uut: entity work.anomaly_detection
-        generic map (
-            IM_SIZE      => 500,
-            ADDR_SIZE    => 16,
-            WORD_SIZE    => 16,
-            COUNT_WIDTH  => 9
-        )
-        port map (
-            clk             => clk,
-            rst             => rst,
-            ready_out       => ready_out,
-            data_in         => data_in,
-            startpacket_in  => startpacket_in,
-            endpacket_in    => endpacket_in,
-            valid_in        => valid_in,
-            ready_in        => ready_in,
-            data_out        => data_out,
-            startpacket_out => startpacket_out,
-            endpacket_out   => endpacket_out,
-            valid_out       => valid_out
-        );
+    
+    dut: anomaly_detection
+    generic map (
+        IM_SIZE      => 500,
+        ADDR_SIZE    => 16,
+        WORD_SIZE    => 16,
+        COUNT_WIDTH  => 9
+    )
+    port map (
+        clk             => clk,
+        rst             => rst,
+        ready_out       => ready_out,
+        data_in         => data_in,
+        startpacket_in  => startpacket_in,
+        endpacket_in    => endpacket_in,
+        valid_in        => valid_in,
+        ready_in        => ready_in,
+        data_out        => data_out,
+        startpacket_out => startpacket_out,
+        endpacket_out   => endpacket_out,
+        valid_out       => valid_out
+    );
 
-    -- Clock Generation
+    rmem: read_data
+    generic map(
+        file_path       => "tb/files/AROutputs/AR1_Outputs_Changes/Sc_inref1.txt",  --\tb\files\AROutputs\AR1_Outputs_Changes\Sc_inref1.txt"
+        ENTRIES         => 500,
+        WORD_SIZE       => 16,
+        ADDR_SIZE       => 16
+    )
+    port map(
+        clk             => clk,
+        rst             => rst,
+        enable          => ready_out,
+        data_out        => data_in
+    );
+
+    wmem: write_data
+    generic map(
+        file_path       => "tb/files/anomalyOutputs/anomaly_Outputs_Changes/Sc_inref1.txt",
+        ENTRIES         => 500,
+        WORD_SIZE       => 16,
+        ADDR_SIZE       => 16
+    )
+    port map(
+        clk             => clk,
+        rst             => rst,
+        enable          => valid_out,
+        data_in         => data_out
+    );
+
     clk_process: process
     begin
         clk <= '0';
@@ -56,10 +137,8 @@ begin
         wait for CLK_PERIOD / 2;
     end process clk_process;
 
-    -- Stimulus Process
-    stimulus_process: process
+    stim_process: process
     begin
-        -- Reset the DUT
         rst <= '1';
         wait for CLK_PERIOD * 2;
         rst <= '0';
@@ -68,13 +147,10 @@ begin
         wait for CLK_PERIOD;
         startpacket_in <= '1';
         valid_in <= '1';
-        data_in <= x"0001";
         wait for CLK_PERIOD;
         startpacket_in <= '0';
-        data_in <= x"0002";
-        wait for CLK_PERIOD;
+        wait for CLK_PERIOD * 499;
         endpacket_in <= '1';
-        data_in <= x"0003";
         wait for CLK_PERIOD;
         endpacket_in <= '0';
         valid_in <= '0';
@@ -82,10 +158,9 @@ begin
         -- Wait for processing
         wait for CLK_PERIOD * 10;
 
-        -- Add more test cases as needed
+        ready_in <= '1';
 
-        -- Finish Simulation
         wait;
-    end process stimulus_process;
+    end process stim_process;
 
 end architecture tb;

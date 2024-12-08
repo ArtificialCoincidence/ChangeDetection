@@ -1,5 +1,5 @@
 # Reading C:/intelFPGA/18.1/modelsim_ase/tcl/vsim/pref.tcl
-# do anomaly_fsm_run_msim_rtl_vhdl.do
+# do anomaly_detection_run_msim_rtl_vhdl.do
 # if {[file exists rtl_work]} {
 # 	vdel -lib rtl_work -all
 # }
@@ -10,406 +10,732 @@
 # Copying C:/intelFPGA/18.1/modelsim_ase/win32aloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vcom -93 -work work {C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 14:35:46 on Dec 05,2024
-# vcom -reportprogress 300 -93 -work work C:/intelFPGA_lite/18.1/projects/anomaly_detection/histogram.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package std_logic_arith
-# -- Loading package STD_LOGIC_UNSIGNED
-# -- Loading package NUMERIC_STD
-# -- Compiling entity anomaly_fsm
-# -- Compiling architecture rtl of anomaly_fsm
-# End time: 14:35:46 on Dec 05,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# vcom -93 -work work {C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 14:35:46 on Dec 05,2024
-# vcom -reportprogress 300 -93 -work work C:/intelFPGA_lite/18.1/projects/anomaly_detection/bram_histogram.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package altera_mf_components
-# -- Compiling entity bram_histogram
-# -- Compiling architecture SYN of bram_histogram
-# End time: 14:35:46 on Dec 05,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# vlib dma_platform
+# ** Warning: (vlib-34) Library already exists at "dma_platform".
+# vmap dma_platform dma_platform
+# Model Technology ModelSim - Intel FPGA Edition vmap 10.5b Lib Mapping Utility 2016.10 Oct  5 2016
+# vmap dma_platform dma_platform 
+# Modifying modelsim.ini
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_reset_controller.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:34 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_reset_controller.v 
+# -- Compiling module altera_reset_controller
 # 
-# vcom -93 -work work {C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd}
-# Model Technology ModelSim - Intel FPGA Edition vcom 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 14:35:46 on Dec 05,2024
-# vcom -reportprogress 300 -93 -work work C:/intelFPGA_lite/18.1/projects/anomaly_detection/tb/hist_tb.vhd 
-# -- Loading package STANDARD
-# -- Loading package TEXTIO
-# -- Loading package std_logic_1164
-# -- Loading package NUMERIC_STD
-# -- Compiling entity hist_tb
-# -- Compiling architecture test of hist_tb
-# End time: 14:35:47 on Dec 05,2024, Elapsed time: 0:00:01
+# Top level modules:
+# 	altera_reset_controller
+# End time: 22:15:34 on Dec 06,2024, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_reset_synchronizer.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:34 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_reset_synchronizer.v 
+# -- Compiling module altera_reset_synchronizer
 # 
-# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L rtl_work -L work -voptargs="+acc"  hist_tb
-# vsim -t 1ps -L altera -L lpm -L sgate -L altera_mf -L altera_lnsim -L cyclonev -L rtl_work -L work -voptargs=""+acc"" hist_tb 
-# Start time: 14:35:47 on Dec 05,2024
-# Loading std.standard
-# Loading std.textio(body)
-# Loading ieee.std_logic_1164(body)
-# Loading ieee.numeric_std(body)
-# Loading work.hist_tb(test)
-# Loading ieee.std_logic_arith(body)
-# Loading ieee.std_logic_unsigned(body)
-# Loading work.anomaly_fsm(rtl)
-# Loading altera_mf.altera_mf_components
-# Loading work.bram_histogram(syn)
-# Loading altera_mf.altera_common_conversion(body)
-# Loading altera_mf.altera_device_families(body)
-# Loading altera_mf.altsyncram(translated)
+# Top level modules:
+# 	altera_reset_synchronizer
+# End time: 22:15:34 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_3.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:34 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_3.v 
+# -- Compiling module dma_platform_mm_interconnect_3
 # 
-# add wave *
-# view structure
-# .main_pane.structure.interior.cs.body.struct
-# view signals
-# .main_pane.objects.interior.cs.body.tree
-# run -all
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 0  Instance: /hist_tb/dut
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 11 ns  Iteration: 0  Instance: /hist_tb/dut
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# Break key hit
-# Simulation stop requested.
-restart -f
-log -r /*
-run 100 ns
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 1 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 2 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 3 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 4 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 5 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 6 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 7 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 8 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 9 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 0  Instance: /hist_tb/dut
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 10 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 11 ns  Iteration: 0  Instance: /hist_tb/dut
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, the result will be 'X'(es).
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-# ** Warning: CONV_INTEGER: There is an 'U'|'X'|'W'|'Z'|'-' in an arithmetic operand, and it has been converted to 0.
-#    Time: 12 ns  Iteration: 1  Instance: /hist_tb/dut/BRAM/altsyncram_component
-add wave -position end  sim:/hist_tb/dut/BRAM/rdaddress
-add wave -position end  sim:/hist_tb/dut/BRAM/q
-add wave -position end  sim:/hist_tb/dut/BRAM/wraddress
-add wave -position end  sim:/hist_tb/dut/BRAM/data
-add wave -position 6  sim:/hist_tb/dut/data_out
-# End time: 14:41:03 on Dec 05,2024, Elapsed time: 0:05:16
-# Errors: 0, Warnings: 164
+# Top level modules:
+# 	dma_platform_mm_interconnect_3
+# End time: 22:15:34 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_2.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:34 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_2.v 
+# -- Compiling module dma_platform_mm_interconnect_2
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_2
+# End time: 22:15:35 on Dec 06,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:35 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1.v 
+# -- Compiling module dma_platform_mm_interconnect_1
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1
+# End time: 22:15:35 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:35 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter.v 
+# -- Compiling module dma_platform_mm_interconnect_1_avalon_st_adapter
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_avalon_st_adapter
+# End time: 22:15:35 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:35 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0.v 
+# -- Compiling module dma_platform_mm_interconnect_0
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:36 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter.v 
+# -- Compiling module dma_platform_mm_interconnect_0_avalon_st_adapter
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_avalon_st_adapter
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_System_PLL.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:36 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_System_PLL.v 
+# -- Compiling module dma_platform_System_PLL
+# 
+# Top level modules:
+# 	dma_platform_System_PLL
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:36 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_avalon_reset_from_locked_signal.v 
+# -- Compiling module altera_up_avalon_reset_from_locked_signal
+# 
+# Top level modules:
+# 	altera_up_avalon_reset_from_locked_signal
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_System_PLL_sys_pll.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:36 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_System_PLL_sys_pll.v 
+# -- Compiling module dma_platform_System_PLL_sys_pll
+# 
+# Top level modules:
+# 	dma_platform_System_PLL_sys_pll
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:36 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_SDRAM.v 
+# -- Compiling module dma_platform_SDRAM_input_efifo_module
+# -- Compiling module dma_platform_SDRAM
+# 
+# Top level modules:
+# 	dma_platform_SDRAM
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_control_slave.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:36 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_control_slave.v 
+# -- Compiling module altera_up_video_dma_control_slave
+# 
+# Top level modules:
+# 	altera_up_video_dma_control_slave
+# End time: 22:15:36 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_memory.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_memory.v 
+# -- Compiling module altera_up_video_dma_to_memory
+# 
+# Top level modules:
+# 	altera_up_video_dma_to_memory
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_stream.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_video_dma_to_stream.v 
+# -- Compiling module altera_up_video_dma_to_stream
+# 
+# Top level modules:
+# 	altera_up_video_dma_to_stream
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_Change_Detection_Stream_to_Mem_DMA.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_Change_Detection_Stream_to_Mem_DMA.v 
+# -- Compiling module dma_platform_Change_Detection_Stream_to_Mem_DMA
+# 
+# Top level modules:
+# 	dma_platform_Change_Detection_Stream_to_Mem_DMA
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_avalon_video_dma_ctrl_addr_trans.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_up_avalon_video_dma_ctrl_addr_trans.v 
+# -- Compiling module altera_up_avalon_video_dma_ctrl_addr_trans
+# 
+# Top level modules:
+# 	altera_up_avalon_video_dma_ctrl_addr_trans
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_Change_Detection_Mem_to_Stream_DMA.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_Change_Detection_Mem_to_Stream_DMA.v 
+# -- Compiling module dma_platform_Change_Detection_Mem_to_Stream_DMA
+# 
+# Top level modules:
+# 	dma_platform_Change_Detection_Mem_to_Stream_DMA
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS.v 
+# -- Compiling module dma_platform_ARM_A9_HPS
+# 
+# Top level modules:
+# 	dma_platform_ARM_A9_HPS
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io.v 
+# -- Compiling module dma_platform_ARM_A9_HPS_hps_io
+# 
+# Top level modules:
+# 	dma_platform_ARM_A9_HPS_hps_io
+# End time: 22:15:37 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:37 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram.v 
+# -- Compiling module hps_sdram
+# 
+# Top level modules:
+# 	hps_sdram
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_hhp_qseq_synth_top.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_hhp_qseq_synth_top.v 
+# -- Compiling module altera_mem_if_hhp_qseq_synth_top
+# 
+# Top level modules:
+# 	altera_mem_if_hhp_qseq_synth_top
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_addr_cmd_pads.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_addr_cmd_pads.v 
+# -- Compiling module hps_sdram_p0_acv_hard_addr_cmd_pads
+# 
+# Top level modules:
+# 	hps_sdram_p0_acv_hard_addr_cmd_pads
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_io_pads.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_io_pads.v 
+# -- Compiling module hps_sdram_p0_acv_hard_io_pads
+# 
+# Top level modules:
+# 	hps_sdram_p0_acv_hard_io_pads
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_memphy.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_hard_memphy.v 
+# -- Compiling module hps_sdram_p0_acv_hard_memphy
+# 
+# Top level modules:
+# 	hps_sdram_p0_acv_hard_memphy
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_ldc.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_acv_ldc.v 
+# -- Compiling module hps_sdram_p0_acv_ldc
+# 
+# Top level modules:
+# 	hps_sdram_p0_acv_ldc
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_altdqdqs.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_altdqdqs.v 
+# -- Compiling module hps_sdram_p0_altdqdqs
+# 
+# Top level modules:
+# 	hps_sdram_p0_altdqdqs
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_clock_pair_generator.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:38 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_clock_pair_generator.v 
+# -- Compiling module hps_sdram_p0_clock_pair_generator
+# 
+# Top level modules:
+# 	hps_sdram_p0_clock_pair_generator
+# End time: 22:15:38 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_generic_ddio.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0_generic_ddio.v 
+# -- Compiling module hps_sdram_p0_generic_ddio
+# 
+# Top level modules:
+# 	hps_sdram_p0_generic_ddio
+# End time: 22:15:39 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_irq_mapper.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_irq_mapper.sv 
+# -- Compiling module dma_platform_irq_mapper
+# 
+# Top level modules:
+# 	dma_platform_irq_mapper
+# End time: 22:15:39 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_translator.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_translator.sv 
+# -- Compiling module altera_merlin_slave_translator
+# 
+# Top level modules:
+# 	altera_merlin_slave_translator
+# End time: 22:15:39 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_master_translator.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_master_translator.sv 
+# -- Compiling module altera_merlin_master_translator
+# 
+# Top level modules:
+# 	altera_merlin_master_translator
+# End time: 22:15:39 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_avalon_st_adapter_error_adapter_0
+# End time: 22:15:39 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_mux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_mux.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_rsp_mux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_rsp_mux
+# End time: 22:15:39 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:39 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_arbitrator.sv 
+# -- Compiling module altera_merlin_arbitrator
+# -- Compiling module altera_merlin_arb_adder
+# 
+# Top level modules:
+# 	altera_merlin_arbitrator
+# End time: 22:15:40 on Dec 06,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_demux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:40 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_rsp_demux.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_rsp_demux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_rsp_demux
+# End time: 22:15:40 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_mux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:40 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_mux.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_cmd_mux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_cmd_mux
+# End time: 22:15:40 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_demux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:40 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_cmd_demux.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_cmd_demux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_cmd_demux
+# End time: 22:15:40 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:40 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter.sv 
+# -- Compiling module altera_merlin_burst_adapter
+# 
+# Top level modules:
+# 	altera_merlin_burst_adapter
+# End time: 22:15:40 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:40 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_adapter_13_1.sv 
+# -- Compiling module altera_merlin_burst_adapter_burstwrap_increment
+# -- Compiling module altera_merlin_burst_adapter_adder
+# -- Compiling module altera_merlin_burst_adapter_subtractor
+# -- Compiling module altera_merlin_burst_adapter_min
+# -- Compiling module altera_merlin_burst_adapter_13_1
+# 
+# Top level modules:
+# 	altera_merlin_burst_adapter_13_1
+# End time: 22:15:40 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_address_alignment.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:41 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_address_alignment.sv 
+# -- Compiling module altera_merlin_address_alignment
+# 
+# Top level modules:
+# 	altera_merlin_address_alignment
+# End time: 22:15:41 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:41 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv 
+# -- Compiling module altera_merlin_traffic_limiter
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(531): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(602): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(603): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(604): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(605): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(606): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(607): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(612): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(614): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(617): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(618): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(644): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(646): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(647): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(648): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(649): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(650): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(655): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(657): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(660): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_traffic_limiter.sv(661): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# 
+# Top level modules:
+# 	altera_merlin_traffic_limiter
+# End time: 22:15:41 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 21
+# vlog -vlog01compat -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_sc_fifo.v}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:41 on Dec 06,2024
+# vlog -reportprogress 300 -vlog01compat -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_avalon_sc_fifo.v 
+# -- Compiling module altera_avalon_sc_fifo
+# 
+# Top level modules:
+# 	altera_avalon_sc_fifo
+# End time: 22:15:41 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router_002.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:41 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router_002.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_router_002_default_decode
+# -- Compiling module dma_platform_mm_interconnect_1_router_002
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_router_002
+# End time: 22:15:41 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:41 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_1_router.sv 
+# -- Compiling module dma_platform_mm_interconnect_1_router_default_decode
+# -- Compiling module dma_platform_mm_interconnect_1_router
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_1_router
+# End time: 22:15:41 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:41 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv 
+# -- Compiling module altera_merlin_slave_agent
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv(618): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv(488): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv(489): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv(490): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv(491): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_slave_agent.sv(34): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# 
+# Top level modules:
+# 	altera_merlin_slave_agent
+# End time: 22:15:41 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 6
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_burst_uncompressor.sv 
+# -- Compiling module altera_merlin_burst_uncompressor
+# 
+# Top level modules:
+# 	altera_merlin_burst_uncompressor
+# End time: 22:15:42 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv 
+# -- Compiling module altera_merlin_axi_master_ni
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(763): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(767): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(701): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(703): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(705): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(707): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(722): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(738): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(740): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(742): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_axi_master_ni.sv(744): (vlog-2583) [SVCHK] - Some checking for conflicts with always_comb and always_latch variables not yet supported. Run vopt to provide additional design-level checks.
+# 
+# Top level modules:
+# 	altera_merlin_axi_master_ni
+# End time: 22:15:42 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 11
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_avalon_st_adapter_error_adapter_0
+# End time: 22:15:42 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_width_adapter.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_width_adapter.sv 
+# -- Compiling module altera_merlin_width_adapter
+# 
+# Top level modules:
+# 	altera_merlin_width_adapter
+# End time: 22:15:42 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_mux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_mux.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_rsp_mux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_rsp_mux
+# End time: 22:15:42 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_demux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_rsp_demux.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_rsp_demux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_rsp_demux
+# End time: 22:15:42 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_mux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:42 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_mux.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_cmd_mux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_cmd_mux
+# End time: 22:15:43 on Dec 06,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_demux.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:43 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_cmd_demux.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_cmd_demux
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_cmd_demux
+# End time: 22:15:43 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_004.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:43 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_004.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_router_004_default_decode
+# -- Compiling module dma_platform_mm_interconnect_0_router_004
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_router_004
+# End time: 22:15:43 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_002.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:43 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router_002.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_router_002_default_decode
+# -- Compiling module dma_platform_mm_interconnect_0_router_002
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_router_002
+# End time: 22:15:43 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:43 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_mm_interconnect_0_router.sv 
+# -- Compiling module dma_platform_mm_interconnect_0_router_default_decode
+# -- Compiling module dma_platform_mm_interconnect_0_router
+# 
+# Top level modules:
+# 	dma_platform_mm_interconnect_0_router
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_master_agent.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:44 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_merlin_master_agent.sv 
+# -- Compiling module altera_merlin_master_agent
+# 
+# Top level modules:
+# 	altera_merlin_master_agent
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:44 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv 
+# -- Compiling module altdq_dqs2_acv_connect_to_hard_phy_cyclonev
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv(199): (vlog-2597) '4294967295' is being treated as 32-bit signed integer and will overflow.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv(2258): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv(2262): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# ** Warning: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altdq_dqs2_acv_connect_to_hard_phy_cyclonev.sv(2242): (vlog-2186) SystemVerilog testbench feature
+# (randomization, coverage or assertion) detected in the design.
+# These features are only supported in Questasim.
+# 
+# Top level modules:
+# 	altdq_dqs2_acv_connect_to_hard_phy_cyclonev
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 4
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_dll_cyclonev.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:44 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_dll_cyclonev.sv 
+# -- Compiling module altera_mem_if_dll_cyclonev
+# 
+# Top level modules:
+# 	altera_mem_if_dll_cyclonev
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_hard_memory_controller_top_cyclonev.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:44 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_hard_memory_controller_top_cyclonev.sv 
+# -- Compiling module altera_mem_if_hard_memory_controller_top_cyclonev
+# 
+# Top level modules:
+# 	altera_mem_if_hard_memory_controller_top_cyclonev
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_oct_cyclonev.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:44 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/altera_mem_if_oct_cyclonev.sv 
+# -- Compiling module altera_mem_if_oct_cyclonev
+# 
+# Top level modules:
+# 	altera_mem_if_oct_cyclonev
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:44 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_p0.sv 
+# -- Compiling module hps_sdram_p0
+# 
+# Top level modules:
+# 	hps_sdram_p0
+# End time: 22:15:44 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_pll.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:45 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/hps_sdram_pll.sv 
+# -- Compiling module hps_sdram_pll
+# 
+# Top level modules:
+# 	hps_sdram_pll
+# End time: 22:15:45 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io_border.sv}
+# Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+# Start time: 22:15:45 on Dec 06,2024
+# vlog -reportprogress 300 -sv -work dma_platform "+incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules" C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io_border.sv 
+# -- Compiling module dma_platform_ARM_A9_HPS_hps_io_border
+# ** Error: C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io_border.sv(97): (vlog-2730) Undefined variable: 'intermediate'.
+# ** Error (suppressible): C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules/dma_platform_ARM_A9_HPS_hps_io_border.sv(132): (vlog-2388) 'intermediate' already declared in this scope (dma_platform_ARM_A9_HPS_hps_io_border).
+# End time: 22:15:45 on Dec 06,2024, Elapsed time: 0:00:00
+# Errors: 2, Warnings: 0
+# ** Error: C:/intelFPGA/18.1/modelsim_ase/win32aloem/vlog failed.
+# Error in macro ./anomaly_detection_run_msim_rtl_vhdl.do line 74
+# C:/intelFPGA/18.1/modelsim_ase/win32aloem/vlog failed.
+#     while executing
+# "vlog -sv -work dma_platform +incdir+C:/intelFPGA_lite/18.1/projects/anomaly_detection/dma_platform/synthesis/submodules {C:/intelFPGA_lite/18.1/projec..."

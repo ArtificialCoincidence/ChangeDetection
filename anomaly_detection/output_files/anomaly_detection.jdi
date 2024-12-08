@@ -1,8 +1,16 @@
 <sld_project_info>
   <project>
-    <hash md5_digest_80b="09201a8c727cbbf09b7f"/>
+    <hash md5_digest_80b="3d212a2de8f685f558ac"/>
   </project>
   <file_info>
     <file device="5CSXFC6D6F31C6" path="anomaly_detection.sof" usercode="0xFFFFFFFF"/>
   </file_info>
+  <sld_infos>
+    <sld_info hpath="" name="">
+      <assignment_values>
+        <assignment_value text="QSYS_NAME dma_platform HAS_SOPCINFO 1 GENERATION_ID 1733495760"/>
+      </assignment_values>
+      <parameters/>
+    </sld_info>
+  </sld_infos>
 </sld_project_info>
