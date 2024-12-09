@@ -107,7 +107,7 @@ begin
 
     rmem: read_data
     generic map(
-        file_path       => "../../tb/files/AROutputs/AR1_Outputs_Changes/Sc_inref1.txt",
+        file_path       => "../../tb/files/AROutputs/AR1_Outputs_Changes/Sc_inref3.txt",
         ENTRIES         => 500,
         WORD_SIZE       => 16,
         ADDR_SIZE       => 16
@@ -124,7 +124,7 @@ begin
 
     wmem: write_data
     generic map(
-        file_path       => "../../tb/files/anomalyOutputs/anomaly_Outputs_Changes/Sc_inref1.txt",
+        file_path       => "../../tb/files/anomalyOutputs/anomaly_Outputs_Changes/Sc_inref3.txt",
         ENTRIES         => 500,
         WORD_SIZE       => 16,
         ADDR_SIZE       => 16

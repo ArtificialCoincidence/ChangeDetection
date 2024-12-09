@@ -27,22 +27,25 @@ architecture rtl of threshold_cdf is
 	 signal rd_addr			 : std_logic_vector(ADDR_SIZE-1 downto 0);
 	 signal address_ramp     : std_logic_vector(ADDR_SIZE-1 downto 0);
     signal cumulative_sum   : std_logic_vector(WORD_SIZE-1 downto 0);
+	 signal thrs_en_del		 : std_logic;
+	 signal outlayer			 : std_logic;
 
 begin
 
 	process(clk, thrs_rst)
-		variable pixel_count : integer := 0;
+		variable pixel_count : integer := 1;
    begin
 		if thrs_rst = '1' then
 			address_ramp <= (others => '0');
 		elsif rising_edge(clk) then
 			if thrs_en = '1' then
-				address_ramp <= std_logic_vector(to_unsigned(pixel_count, address_ramp'length));
-					if pixel_count >= tot_pixels then
-						pixel_count := 0;
-					end if;
 				pixel_count := pixel_count + 1;
+				if pixel_count >= tot_pixels then
+					pixel_count := 1;
+				end if;
 			end if;
+			address_ramp <= std_logic_vector(to_unsigned(pixel_count, address_ramp'length));
+			thrs_en_del <= thrs_en;
 		end if;
 	end process;
 	
@@ -50,30 +53,30 @@ begin
 	bram_addr <= address_ramp;
 	
 	process(rd_addr, thrs_rst)
-		variable cumulative : integer := 0;
 		constant quantile3  : integer := tot_pixels*3/4;
 		constant quantile4  : integer := tot_pixels;
 	begin
 		if thrs_rst = '1' then
-			cumulative := 0;
+			cumulative_sum <= (others => '0');
 			thrs_sig <= '0';
-			thrs_sig <= '0';
-		elsif thrs_en = '1' then
-			cumulative := cumulative + to_integer(unsigned(data_in));
-			if cumulative >= quantile3 and cumulative <= quantile4 then
+			outlayer <= '0';
+		elsif thrs_en_del = '1' then
+			cumulative_sum <= cumulative_sum + data_in;
+			if cumulative_sum >= quantile3 and cumulative_sum <= quantile4 then
 				thrs_sig <= '1';
+				outlayer <= '1';
 			else
 				thrs_sig <= '0';
+				outlayer <= '0';
 			end if;
 		end if;
-		cumulative_sum <= std_logic_vector(to_unsigned(cumulative, cumulative_sum'length));
 	end process;
 	
-	process(thrs_sig, thrs_rst)
+	process(outlayer, thrs_rst)
 	begin
 		if thrs_rst = '1' then
 			thrs_val <= (others => '0');
-		elsif rising_edge(thrs_sig) then
+		elsif rising_edge(outlayer) then
 			thrs_val <= rd_addr;
       end if;
 	end process;

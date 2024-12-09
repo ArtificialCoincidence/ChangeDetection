@@ -40,6 +40,7 @@ architecture rtl of anomaly_detection is
 			hist_rst    : in  std_logic;
 			hist_en     : in  std_logic;
 			thrs_en    	: in  std_logic;
+			end_count	: in  std_logic;
 			ram_addr    : in  std_logic_vector(ADDR_SIZE-1 downto 0);
 			data_in     : in  std_logic_vector(ADDR_SIZE-1 downto 0);
 			data_out    : out std_logic_vector(ADDR_SIZE-1 downto 0)
@@ -145,6 +146,7 @@ begin
 		hist_rst    => hist_rst_sig,
 		hist_en     => hist_en_sig,
 		thrs_en    	=> thrs_en_sig,
+		end_count 	=> endpacket_in,
 		ram_addr    => bram_addr_sig,
 		data_in     => data_in,
 		data_out		=> data_hist_sig

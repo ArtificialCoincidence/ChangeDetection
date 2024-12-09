@@ -35,13 +35,15 @@ end control_fsm;
 
 architecture rtl of control_fsm is
 
-  type 	state_type is (IDLE, RECEIVE, THRESHOLD, SCAN, HOLD);
+  type 	state_type is (IDLE, RECEIVE, WAIT_R, THRESHOLD, WAIT_S, SCAN, HOLD);
   signal state, next_state : state_type := IDLE;
 
   signal counter_receive 	: unsigned(COUNT_WIDTH-1 downto 0) := (others => '0');
   signal counter_scan    	: unsigned(COUNT_WIDTH-1 downto 0) := (others => '0');
+  signal counter_delay		: unsigned(1 downto 0) := (others => '0');
   signal en_cnt1 				: std_logic_vector(1 downto 0) := "00";
   signal en_cnt2 				: std_logic_vector(1 downto 0) := "00";
+  signal en_cnt3				: std_logic;
 
 begin
 	
@@ -55,7 +57,7 @@ begin
                 when "00" =>
                     counter_receive <= (others => '0');
                 when "01" =>
-                    counter_receive <= counter_receive + 1;
+						  counter_receive <= counter_receive + 1;
                 when others =>
                     counter_receive <= counter_receive;
             end case;
@@ -78,6 +80,20 @@ begin
             end case;
         end if;
     end process;
+	 
+	 -- Delay Counter
+    process(clk, rst)
+    begin
+        if rst = '1' then
+            counter_delay <= (others => '0');
+        elsif rising_edge(clk) then
+            if en_cnt3 = '0' then
+                counter_delay <= (others => '0');
+            else
+                counter_delay <= counter_delay + 1;
+            end if;
+        end if;
+    end process;
 
 	-- State Register
 	process(clk, rst)
@@ -90,7 +106,7 @@ begin
 	end process;
 
 	-- Next State Logic
-	process(state, valid_in, ready_in, counter_receive, counter_scan, thrs_sig)
+	process(state, valid_in, ready_in, counter_receive, counter_scan, counter_delay, thrs_sig)
 	begin
 		case state is
 			when IDLE =>
@@ -103,17 +119,31 @@ begin
 			when RECEIVE =>
 				if valid_in = '0' then
 					next_state <= IDLE;
-				elsif counter_receive < 500 then
+				elsif counter_receive < 499 then
 					next_state <= RECEIVE;
-				elsif counter_receive = 500 then
+				elsif counter_receive = 499 then
+					next_state <= WAIT_R;
+				end if;
+				
+			when WAIT_R =>
+				if counter_delay = 1 then
 					next_state <= THRESHOLD;
+				else
+					next_state <= WAIT_R;
 				end if;
 
 			when THRESHOLD =>
 				if thrs_sig = '1' then
-					next_state <= SCAN;
+					next_state <= WAIT_S;
 				else
 					next_state <= THRESHOLD;
+				end if;
+			
+			when WAIT_S =>
+				if counter_delay = 1 then
+					next_state <= SCAN;
+				else
+					next_state <= WAIT_S;
 				end if;
 
 			when SCAN =>
@@ -138,7 +168,7 @@ begin
 	end process;	 
 
 	-- Output Logic
-	process(state, counter_receive, counter_scan)
+	process(state, counter_receive, counter_scan, startpacket_in, endpacket_in)
 		begin
 			-- Default values
 			addr_gen <= (others => '0');
@@ -152,21 +182,32 @@ begin
 			valid_out <= '0';
 			startpacket_out <= '0';
 			endpacket_out <= '0';
-			en_cnt1 <= "00";
 			en_cnt2 <= "00";
+			en_cnt3 <= '0';
 
         case state is
             when IDLE =>
                 ready_out <= '0';
+					 hist_rst <= '1';
             when RECEIVE =>
                 addr_gen <= std_logic_vector(counter_receive);
-                en_cnt1 <= "01";
+					 if startpacket_in = '1' then
+						 en_cnt1 <= "01";
+					 elsif endpacket_in = '1' then
+						 en_cnt1 <= "00";
+					 end if;
                 ready_out <= '1';
                 hist_en <= '1';
                 bram_wr_en <= '1';
                 scan_en <= '1';
+				when WAIT_R =>
+					 hist_en <= '1';
+					 en_cnt3 <= '1';
             when THRESHOLD =>
                 thrs_en <= '1';
+				when WAIT_S =>
+					 bram_rd_en <= '1';
+					 en_cnt3 <= '1';
             when SCAN =>
                 addr_gen <= std_logic_vector(counter_scan);
                 en_cnt2 <= "01";

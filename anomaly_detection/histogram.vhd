@@ -13,6 +13,7 @@ entity histogram is
         hist_rst        : in  std_logic;
         hist_en         : in  std_logic;
         thrs_en         : in  std_logic;
+		  end_count			: in  std_logic;
         ram_addr        : in  std_logic_vector(ADDR_SIZE-1 downto 0); -- read address from threshold or address for reset
         data_in         : in  std_logic_vector(ADDR_SIZE-1 downto 0); -- device data as read address for RAM
         data_out        : out std_logic_vector(ADDR_SIZE-1 downto 0)  -- data to threshold
@@ -42,6 +43,7 @@ architecture rtl of histogram is
     signal wren		       : std_logic;
 	 
     signal wr_add_del1      : std_logic_vector(ADDR_SIZE-1 downto 0);
+	 signal wr_add_del2      : std_logic_vector(ADDR_SIZE-1 downto 0);
 	 signal cnt_value			 : unsigned(8 downto 0);
 
 begin
@@ -50,18 +52,28 @@ begin
 		variable counter : integer := 1;
     begin
         if hist_rst = '1' then
-            wr_add_del1 <= (others => '0');
 				ram_data_in <= (others => '0');
+				wr_add_del1 <= (others => '0');
+				wr_add_del2 <= (others => '0');
         elsif rising_edge(clk) then
             if hist_en = '1' then
 					if data_in = wr_add_del1 then
 						counter := counter + 1;
+						if wr_add_del1 /= wr_add_del2 then
+							ram_data_in <= ram_data_out;
+						end if;
 					else
 						ram_data_in <= ram_data_out + counter;
 						counter := 1;
 					end if;
             end if;
+				
+				if end_count = '1' then
+					ram_data_in <= ram_data_out + counter;
+				end if;
+				
             wr_add_del1 <= data_in;
+				wr_add_del2 <= wr_add_del1;
 				ram_wr_add <= wr_add_del1;
         end if;
 		  cnt_value <= to_unsigned(counter, cnt_value'length);
@@ -74,7 +86,6 @@ begin
     wr_add_mux <= ram_wr_add when hist_rst = '0' else ram_addr;
     ram_data_mux <= ram_data_in when hist_rst = '0' else (others => '0');
     wren <= hist_en or hist_rst;
-	 
-	 data_out <= ram_data_out;
+	 data_out <= ram_data_out when thrs_en = '1' else (others => '0');
     
 end rtl;
