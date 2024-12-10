@@ -20,6 +20,9 @@ import Data.Vector.Unboxed qualified as U
 import Data.Massiv.Array
 import GHC.Conc (labelThread)
 import Data.Time
+import System.Directory (createDirectoryIfMissing)
+import System.FilePath.Posix (takeDirectory)
+import Data.Vector (create)
 
 -- First-order Autoregressive Model [AR(1)]: (ELEMENTARY MODEL)
 ---------------------------------------------------------------------------------------------------------------
@@ -260,6 +263,12 @@ probMatrix dimx dimy dat = signal [out1]
         out = cms !! head sorList
         out1 = out `atV` 0
 
+
+createAndWriteFile :: FilePath -> String -> IO ()
+createAndWriteFile path content = do
+    createDirectoryIfMissing True $ takeDirectory path
+    writeFile path content
+
         
 -- MAIN
 ----------------------------------------------------------------------------------------------------------------
@@ -267,11 +276,10 @@ main :: IO ()
 main = do
 
     -- choose read and write filepath for the target
-    let target = "18"
-    -- let readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag1/LagParallelization/CD0.txt" -- S1
-    -- let readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag1/LagParallelization/CD0.txt" -- K1
-    -- let readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag1/LagParallelization/CD0.txt" -- F1
-    let readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag1/LagParallelization/CD0.txt" -- AF1
+    -- let target = "0"; readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag1/LagParallelization/CD0.txt" -- S1
+    -- let target = "6"; readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag1/LagParallelization/CD0.txt" -- K1
+    let target = "12"; readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag1/LagParallelization/CD0.txt" -- F1
+    -- let target = "18"; readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag1/LagParallelization/CD0.txt" -- AF1
 
     m1 <- newEmptyMVar
 
@@ -311,8 +319,8 @@ main = do
 
     ----- Output File ------------------------------------------------------------------------------------------------
     writeFile writepath (show res)
+    -- createAndWriteFile writepath (show res)
     
     -- RUN CODE USING THE TERMINAL :
-    -- sudo apt install threadscope
-    --  ghc -O2 multi_thread_lag6.hs -threaded -rtsopts -eventlog
-    -- ./multi_thread_lag6 +RTS -N6 -ls; threadscope multi_thread_lag6.eventlog
+    --  ghc -O2 LagParallelization_Multithreading_lag1.hs -threaded -rtsopts -eventlog
+    -- ./LagParallelization_Multithreading_lag1 +RTS -N8 -ls; threadscope LagParallelization_Multithreading_lag1.eventlog

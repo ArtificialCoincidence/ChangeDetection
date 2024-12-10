@@ -20,6 +20,9 @@ import Data.Vector.Unboxed qualified as U
 import Data.Massiv.Array
 import GHC.Conc (labelThread)
 import Data.Time
+import System.Directory (createDirectoryIfMissing)
+import System.FilePath.Posix (takeDirectory)
+import Data.Vector (create)
 
 -- First-order Autoregressive Model [AR(1)]: (ELEMENTARY MODEL)
 ---------------------------------------------------------------------------------------------------------------
@@ -306,21 +309,22 @@ procMatrix dimx dimy dat = fromMatrix res !! 0
 
         arCS = cms !! head sorList
         res = zipWithMat(\ x y -> subMatrix x y) st arCS
-        
+
+createAndWriteFile :: FilePath -> String -> IO ()
+createAndWriteFile path content = do
+    createDirectoryIfMissing True $ takeDirectory path
+    writeFile path content
+
 -- MAIN
 ----------------------------------------------------------------------------------------------------------------
 main :: IO ()
 main = do
 
     -- choose read and write filepath for the target
-    -- let target = "0"
-    -- let target = "6"
-    let target = "12"
-    -- let target = "18"
-    -- let readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag9/LagParallelization/CD0.txt" -- S1
-    -- let readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag9/LagParallelization/CD0.txt" -- K1
-    let readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag9/LagParallelization/CD0.txt" -- F1
-    -- let readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag9/LagParallelization/CD0.txt" -- AF1
+    -- let target = "0"; readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag6/LagParallelization/CD0.txt" -- S1
+    -- let target = "6"; readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag6/LagParallelization/CD0.txt" -- K1
+    -- let target = "12"; readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag6/LagParallelization/CD0.txt" -- F1
+    let target = "18"; readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag6/LagParallelization/CD0.txt" -- AF1
 
     m1 <- newEmptyMVar
     m2 <- newEmptyMVar
@@ -502,6 +506,7 @@ main = do
 
     ----- Output File ------------------------------------------------------------------------------------------------
     writeFile writepath (show res)
+    -- createAndWriteFile writepath (show res)
     
     -- RUN CODE USING THE TERMINAL :
     --  ghc -O2 multi_thread_lag9.hs -threaded -rtsopts -eventlog
