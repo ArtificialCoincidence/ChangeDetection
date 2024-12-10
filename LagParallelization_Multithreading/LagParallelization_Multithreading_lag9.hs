@@ -357,6 +357,7 @@ main = do
             sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
             u1 = vector [intest,inref1]
             m = zipWithxSY (procAR1 dimx dimy) u1
+        writeFile "IPC9/proc1.txt" (show m)
         putMVar m1 m
         
         timeParallelEnd <- getCurrentTime
@@ -372,6 +373,7 @@ main = do
             sr2 = signal [inrefMat2]; inref2 = mapSY (chunks dimx dimy)  (signal [sr2])
             u2 = vector [intest,inref2]
             m = zipWithxSY (procAR1 dimx dimy) u2
+        writeFile "IPC9/proc2.txt" (show m)
         putMVar m2 m
         
         timeParallelEnd <- getCurrentTime
@@ -387,6 +389,7 @@ main = do
             sr3 = signal [inrefMat3]; inref3 = mapSY (chunks dimx dimy)  (signal [sr3]) 
             u3 = vector [intest,inref3]
             m = zipWithxSY (procAR1 dimx dimy) u3
+        writeFile "IPC9/proc3.txt" (show m)
         putMVar m3 m
         
         timeParallelEnd <- getCurrentTime
@@ -402,6 +405,7 @@ main = do
             sr4 = signal [inrefMat4]; inref4 = mapSY (chunks dimx dimy)  (signal [sr4])
             u4 = vector [intest,inref4]
             m = zipWithxSY (procAR1 dimx dimy) u4
+        writeFile "IPC9/proc4.txt" (show m)
         putMVar m4 m
         
         timeParallelEnd <- getCurrentTime
@@ -417,6 +421,7 @@ main = do
             sr5 = signal [inrefMat5]; inref5 = mapSY (chunks dimx dimy)  (signal [sr5])
             u5 = vector [intest,inref5]
             m = zipWithxSY (procAR1 dimx dimy) u5
+        writeFile "IPC9/proc5.txt" (show m)
         putMVar m5 m
         
         timeParallelEnd <- getCurrentTime
@@ -432,6 +437,7 @@ main = do
             sr6 = signal [inrefMat6]; inref6 = mapSY (chunks dimx dimy)  (signal [sr6])
             u6 = vector [intest,inref6]
             m = zipWithxSY (procAR1 dimx dimy) u6
+        writeFile "IPC9/proc6.txt" (show m)
         putMVar m6 m
         
         timeParallelEnd <- getCurrentTime
@@ -447,6 +453,7 @@ main = do
             sr7 = signal [inrefMat7]; inref7 = mapSY (chunks dimx dimy)  (signal [sr7])
             u7 = vector [intest,inref7]
             m = zipWithxSY (procAR1 dimx dimy) u7
+        writeFile "IPC9/proc7.txt" (show m)
         putMVar m7 m
         
         timeParallelEnd <- getCurrentTime
@@ -462,6 +469,7 @@ main = do
             sr8 = signal [inrefMat8]; inref8 = mapSY (chunks dimx dimy)  (signal [sr8])
             u8 = vector [intest,inref8]
             m = zipWithxSY (procAR1 dimx dimy) u8
+        writeFile "IPC9/proc8.txt" (show m)
         putMVar m8 m
         
         timeParallelEnd <- getCurrentTime
@@ -477,6 +485,7 @@ main = do
             sr9 = signal [inrefMat9]; inref9 = mapSY (chunks dimx dimy)  (signal [sr9])
             u9 = vector [intest,inref9]
             m = zipWithxSY (procAR1 dimx dimy) u9
+        writeFile "IPC9/proc9.txt" (show m)
         putMVar m9 m
         
         timeParallelEnd <- getCurrentTime
