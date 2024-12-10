@@ -20,6 +20,9 @@ import Data.Vector.Unboxed qualified as U
 import Data.Massiv.Array
 import GHC.Conc (labelThread)
 import Data.Time
+import System.Directory (createDirectoryIfMissing)
+import System.FilePath.Posix (takeDirectory)
+import Data.Vector (create)
 
 
 -- First-order Autoregressive Model [AR(1)]: (ELEMENTARY MODEL)
@@ -296,18 +299,22 @@ procMatrix dimx dimy dat = fromMatrix res !! 0
 
         arCS = cms !! head sorList
         res = zipWithMat(\ x y -> subMatrix x y) st arCS
-        
+
+createAndWriteFile :: FilePath -> String -> IO ()
+createAndWriteFile path content = do
+    createDirectoryIfMissing True $ takeDirectory path
+    writeFile path content
+
 -- MAIN
 ----------------------------------------------------------------------------------------------------------------
 main :: IO ()
 main = do
 
     -- choose read and write filepath for the target
-    let target = "18"
-    -- let readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag3/LagParallelization/CD0.txt" -- S1
-    -- let readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag3/LagParallelization/CD0.txt" -- K1
-    -- let readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag3/LagParallelization/CD0.txt" -- F1
-    let readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag3/LagParallelization/CD0.txt" -- AF1
+    -- let target = "0"; readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag3/LagParallelization/CD0.txt" -- S1
+    -- let target = "6"; readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag3/LagParallelization/CD0.txt" -- K1
+    let target = "12"; readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag3/LagParallelization/CD0.txt" -- F1
+    -- let target = "18"; readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag3/LagParallelization/CD0.txt" -- AF1
 
     m1 <- newEmptyMVar
     m2 <- newEmptyMVar
@@ -334,6 +341,7 @@ main = do
             sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
             u1 = vector [intest,inref1]
             m = zipWithxSY (procAR1 dimx dimy) u1
+        writeFile "IPC3/proc1.txt" (show m)
         putMVar m1 m
         
         timeParallelEnd <- getCurrentTime
@@ -349,6 +357,7 @@ main = do
             sr2 = signal [inrefMat2]; inref2 = mapSY (chunks dimx dimy)  (signal [sr2])
             u2 = vector [intest,inref2]
             m = zipWithxSY (procAR1 dimx dimy) u2
+        writeFile "IPC3/proc2.txt" (show m)
         putMVar m2 m
         
         timeParallelEnd <- getCurrentTime
@@ -364,6 +373,7 @@ main = do
             sr3 = signal [inrefMat3]; inref3 = mapSY (chunks dimx dimy)  (signal [sr3]) 
             u3 = vector [intest,inref3]
             m = zipWithxSY (procAR1 dimx dimy) u3
+        writeFile "IPC3/proc3.txt" (show m)
         putMVar m3 m
         
         timeParallelEnd <- getCurrentTime
@@ -386,8 +396,8 @@ main = do
 
     ----- Output File ------------------------------------------------------------------------------------------------
     writeFile writepath (show res)
-    
+    -- createAndWriteFile writepath (show res)
+
     -- RUN CODE USING THE TERMINAL :
-    -- sudo apt install threadscope
-    --  ghc -O2 multi_thread_lag6.hs -threaded -rtsopts -eventlog
-    -- ./multi_thread_lag6 +RTS -N6 -ls; threadscope multi_thread_lag6.eventlog
+    --  ghc -O2 LagParallelization_Multithreading_lag3.hs -threaded -rtsopts -eventlog
+    -- ./LagParallelization_Multithreading_lag3 +RTS -N6 -ls; threadscope LagParallelization_Multithreading_lag3.eventlog
