@@ -117,7 +117,7 @@ __global__ void Add(double* ref, double* test, double rho) {
 
 
 
-void AnomalyDetection(double* a) {
+__host__ __device__ void AnomalyDetection(double* a) {
 	double data[SIZE];
 	memcpy(data, a, sizeof(double) * SIZE);
 	sort(data,data+SIZE);

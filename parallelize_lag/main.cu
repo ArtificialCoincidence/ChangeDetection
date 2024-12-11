@@ -11,57 +11,65 @@ int main() {
     //-------------------Read Data------------------------
 
     double* testMatrix = nullptr;
-    double* refMatrix = nullptr;
+    double* refMatrices[LAG] ;
+    double* as[LAG];
     double* finalRes = nullptr;
     double* rho=nullptr;
-    double minRho = 1.0;
-    double* a=nullptr;
-    cudaMallocManaged(&rho,sizeof(double));
-    cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
-    cudaMallocManaged(&refMatrix, SIZE * sizeof(double));
-    cudaMallocManaged(&finalRes, SIZE * sizeof(double));
-    cudaMallocManaged(&a,SIZE*sizeof(double));
-    ReadData(string(PATH) + "Itest6.dat",testMatrix);
-	
-   
-    cudaStream_t stream[LAG];
-    for(int i=0;i<LAG;++i)
-	    cudaStreamCreate(&stream[i]);
- 
-    for (int i = 0; i < LAG; ++i) {
+    double* maxRho ;
+    
+    cudaMallocManaged(&maxRho,sizeof(double));
+    *maxRho=0.0;
+    cudaMallocManaged(&finalRes,sizeof(double*));
+    finalRes=nullptr;
+
+    for(int i=0;i<LAG;++i){
+    	cudaMallocManaged(&refMatrices[i], SIZE * sizeof(double));
         string path = string(PATH) + "Iref6" + string(1, 'A' + i) + ".dat";
-        ReadData(path,refMatrix);
+        ReadData(path,refMatrices[i]);
+    	cudaMallocManaged(&as[i], SIZE * sizeof(double));
+	memcpy(as,refMatrix,sizeof(double)*SIZE);	
+	}
 
+    cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
+    ReadData(string(PATH) + "Itest6.dat",testMatrix);
+    
+    cudaMallocManaged(&rho,sizeof(double)*LAG);
+    cudaMallocManaged(&finalRes, SIZE * sizeof(double));
+	
+   __global__ Lag(testMatrix,refMatrices,as,finalRes,rho,maxRho){
+	int idx=blockIdx.x*blockDim.x+threadIdx.x;
+	double* refMatrix=refMatrices[idx];
+	double* a=as[idx];
 
-        //-----------------------AR(1)-------------------------
-	Pearson<<<1,512>>>(testMatrix, refMatrix,rho);
+	Pearson<<<1,512>>>(testMatrix, refMatrix,&rho[idx]);
 	cudaDeviceSynchronize();
-	std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << *rho << std::endl;
-        Add<<<128,512>>>(refMatrix, testMatrix,*rho);
+	printf("pearson:%f\n",rho[idx]);
+
+        Add<<<128,512>>>(refMatrix, testMatrix,rho[idx]);
 	cudaDeviceSynchronize();
-        //-----------SpatialFilter and AnomalyDetection--------
-	memcpy(a,refMatrix,sizeof(double)*SIZE);	
+
         SpatialFilter<<<128,512>>>(refMatrix,a);
 	cudaDeviceSynchronize();
+ 
+ 
         AnomalyDetection(refMatrix);
-
-        //-----------update the result--------
-	Pearson<<<1,512>>>(refMatrix, testMatrix,rho);
+ 
+	Pearson<<<1,512>>>(refMatrix, testMatrix,&rho[idx]);
 	cudaDeviceSynchronize();
-        if (*rho < minRho) {
-            minRho = *rho;
-            memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
-        }
-
-
-    }
+   
+	if(rho[idx]>*maxRho)
+	{
+		atomicExch(maxRho,rho[idx);
+		atomicExch(finalRes,refMatrix);
+	}
+   
+   }
+ 
+	Lag<<<1,LAG>>>(testMatrix,refMatrices,as,finalRes,rho,maxRho);	
 
     auto t3 = high_resolution_clock::now();
     duration<double> duration = t3 - t1;
     std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
-
-    for(int i=0;i<LAG;++i)
-	    cudaStreamDestroy(&stream[i]);
 
     //-----------------------Write Data--------------------
     return 0;
