@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 1
+#define LAG 15
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 
@@ -43,7 +43,8 @@ int main() {
 	Pearson<<<1,512>>>(testMatrix, refMatrix,rho);
 	cudaDeviceSynchronize();
 	std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << *rho << std::endl;
-        Add(refMatrix, testMatrix,*rho);
+        Add<<<128,512>>>(refMatrix, testMatrix,*rho);
+	cudaDeviceSynchronize();
         //-----------SpatialFilter and AnomalyDetection--------
 	memcpy(a,refMatrix,sizeof(double)*SIZE);	
         SpatialFilter<<<128,512>>>(refMatrix,a);

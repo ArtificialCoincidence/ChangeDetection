@@ -93,7 +93,7 @@ __global__ void SpatialFilter(double* ref,double*a)
 			}
 		}
 		ref[tmp] = sum / kernelSize;
-		if(idx==0) printf("idx:%d,sum:%lf\n",tmp,sum);
+		//if(idx==0) printf("idx:%d,sum:%lf\n",tmp,sum);
 	}
 	return ;
 
@@ -102,9 +102,10 @@ __global__ void SpatialFilter(double* ref,double*a)
 
 
 
-void Add(double* ref, double* test, double rho) {
+__global__ void Add(double* ref, double* test, double rho) {
+	int idx=blockIdx.x*blockDim.x+threadIdx.x;
 	double rho_y = sqrt(1 - rho * rho);
-	for (int i = 0; i < SIZE; ++i)
+	for (int i =idx; i < SIZE;i+=gridDim.x*blockDim.x)
 	{
 	       double refi=ref[i]*rho_y;
                double testi=test[i]*rho;

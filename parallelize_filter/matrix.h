@@ -17,7 +17,7 @@
 using namespace std;
 void ReadData(const string& filename, double* data);
 __global__ void Pearson(double* a, double* b,double* rho);
-void Add(double* a, double*b,double rho);
+__global__ void Add(double* a, double*b,double rho);
 __global__ void SpatialFilter(double* ref,double* a);
 void AnomalyDetection(double* a);
 void writeData(const string& filename,double* data);
