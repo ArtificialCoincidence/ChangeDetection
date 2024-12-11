@@ -63,12 +63,14 @@ __global__ void Pearson(double *x, double* y,double* rho) {
 }
 
 
-__global__ void SpatialFilter(double* a)
+__global__ void SpatialFilter(double* ref,double*a)
 {
 	const int rank = 9;//9x9 kernel
 	const int kernelSize = rank * rank;
 	int offset[rank];
 	int minOffset = -((rank - 1) >> 1);
+	
+
 	for (int i = 0; i < rank; ++i)
 		offset[i] = minOffset++;
 	/*
@@ -90,8 +92,8 @@ __global__ void SpatialFilter(double* a)
 		//			printf("%lf,",a[r*COL+c]);
 			}
 		}
-		a[tmp] = sum / kernelSize;
-		//if(idx==1) printf("idx:%d,sum:%lf\n",tmp,a[tmp]);
+		ref[tmp] = sum / kernelSize;
+		if(idx==0) printf("idx:%d,sum:%lf\n",tmp,sum);
 	}
 	return ;
 
@@ -103,7 +105,11 @@ __global__ void SpatialFilter(double* a)
 void Add(double* ref, double* test, double rho) {
 	double rho_y = sqrt(1 - rho * rho);
 	for (int i = 0; i < SIZE; ++i)
-		ref[i] = ref[i] * rho_y + test[i] * rho;
+	{
+	       double refi=ref[i]*rho_y;
+               double testi=test[i]*rho;
+               ref[i] = testi>refi?testi+refi:0;
+	}
 	return;
 
 }
@@ -120,7 +126,7 @@ void AnomalyDetection(double* a) {
 	double thresholdDown = data[static_cast<int>(percentileLow * SIZE)] - 1.5 * iqr;
 	double thresholdUp = data[static_cast<int>(percentileHigh * SIZE)] + 1.5 * iqr;
 	for (int i=0;i<SIZE;++i)
-		if (a[i]<thresholdDown || a[i]>thresholdUp)//not sure
+		if (a[i]>=thresholdDown && a[i]<=thresholdUp)//not sure
 			a[i] = 0;
 	return;
 

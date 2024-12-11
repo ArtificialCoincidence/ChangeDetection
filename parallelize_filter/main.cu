@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 15
+#define LAG 1
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 
@@ -15,13 +15,23 @@ int main() {
     double* finalRes = nullptr;
     double* rho=nullptr;
     double minRho = 1.0;
+    double* a=nullptr;
     cudaMallocManaged(&rho,sizeof(double));
     cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
     cudaMallocManaged(&refMatrix, SIZE * sizeof(double));
     cudaMallocManaged(&finalRes, SIZE * sizeof(double));
-    
+    cudaMallocManaged(&a,SIZE*sizeof(double));
     ReadData(string(PATH) + "Itest6.dat",testMatrix);
 
+/*     for(int i=0;i<SIZE;++i)
+	     refMatrix[i]=1+i;
+
+     memcpy(a,refMatrix,SIZE*sizeof(double));
+     SpatialFilter<<<64,512>>>(refMatrix,a);
+     cudaDeviceSynchronize();
+
+	writeData("./res.txt",refMatrix);
+*/
 
  
     for (int i = 0; i < LAG; ++i) {
@@ -34,11 +44,11 @@ int main() {
 	cudaDeviceSynchronize();
 	std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << *rho << std::endl;
         Add(refMatrix, testMatrix,*rho);
-	//if(i==0) printf("%lf,%lf,%lf,%lf",refMatrix[0],refMatrix[1],refMatrix[2],refMatrix[100]);
         //-----------SpatialFilter and AnomalyDetection--------
-        SpatialFilter<<<128,512>>>(refMatrix);
+	memcpy(a,refMatrix,sizeof(double)*SIZE);	
+        SpatialFilter<<<128,512>>>(refMatrix,a);
 	cudaDeviceSynchronize();
-//	if(i==0) printf("%lf,%lf,%lf,%lf",refMatrix[0],refMatrix[1],refMatrix[2],refMatrix[4]);
+	writeData("./res.txt",refMatrix);
         AnomalyDetection(refMatrix);
 
         //-----------update the result--------
@@ -57,7 +67,6 @@ int main() {
     std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
     //-----------------------Write Data--------------------
-    //finalRes.writeData(string(PATH)+"res.txt");
     return 0;
 }
 
