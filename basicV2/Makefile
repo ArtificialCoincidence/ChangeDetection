@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = g++
-CXXFLAGS = -O0
+CXXFLAGS = -O0 -g
 
 # Target executable
 TARGET = main

@@ -44,11 +44,13 @@ double Pearson(double *x, double* y) {
 }
 
 
-void SpatialFilter(double* a)
+void SpatialFilter(double* ref)
 {
 	const int rank = 9;//9x9 kernel
 	const int kernelSize = rank * rank;
-	int offset[rank];
+	int offset[rank];	
+	double a[SIZE];
+	memcpy(a,ref,SIZE*sizeof(double));	
 	int minOffset = -((rank - 1) >> 1);
 	for (int i = 0; i < rank; ++i)
 		offset[i] = minOffset++;
@@ -70,7 +72,7 @@ void SpatialFilter(double* a)
 			//			printf("%lf,",a[r*COL+c]);
 				}
 			}
-			a[i*COL+j] = sum / kernelSize;
+			ref[i*COL+j] = sum / kernelSize;
 
 		}
 	}
@@ -105,7 +107,7 @@ void AnomalyDetection(double* a) {
 	double thresholdDown = data[static_cast<int>(percentileLow * SIZE)] - 1.5 * iqr;
 	double thresholdUp = data[static_cast<int>(percentileHigh * SIZE)] + 1.5 * iqr;
 	for (int i=0;i<SIZE;++i)
-		if (a[i]<thresholdDown || a[i]>thresholdUp)//not sure
+		if (a[i]>=thresholdDown && a[i]<=thresholdUp)//not sure
 			a[i] = 0;
 	return;
 
@@ -125,7 +127,7 @@ void writeData(const string& filename,double *data ) {
 	for (int i = 0; i < SIZE; ++i)
 	{
 
-		if(i==249999) {
+		if(i==SIZE-1) {
 			out<<data[i];
 		}	
 		else if(data[i]==0.0){

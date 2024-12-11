@@ -15,13 +15,21 @@ int main() {
     double* finalRes = nullptr;
     double minRho = 1.0;
 
-//    cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
-//    cudaMallocManaged(&refMatrix, SIZE * sizeof(double));
-//    cudaMallocManaged(&finalRes, SIZE * sizeof(double));
     testMatrix=(double*)malloc(sizeof(double)*SIZE);
     refMatrix=(double*)malloc(sizeof(double)*SIZE);
     finalRes=(double*)malloc(sizeof(double)*SIZE);
-    ReadData(string(PATH) + "Itest6.dat",testMatrix);
+  
+
+/*    double *debug=(double*)malloc(sizeof(double)*9);
+
+    for(int i=0;i<9;++i)
+	    debug[i]=i+1;
+    SpatialFilter(debug);
+    for(int i=0;i<9;++i)
+	    printf("%f,",debug[i]);
+	writeData("./res.txt",debug);
+  */
+        ReadData(string(PATH) + "Itest6.dat",testMatrix);
 
 
  
@@ -38,9 +46,10 @@ int main() {
         //-----------SpatialFilter and AnomalyDetection--------
         SpatialFilter(refMatrix);
 	
-    writeData("./res.txt",refMatrix);
+	
 	AnomalyDetection(refMatrix);
 
+        writeData("./res.txt",refMatrix);
         //-----------update the result--------
         double r = Pearson(refMatrix, testMatrix);
         if (r < minRho) {
