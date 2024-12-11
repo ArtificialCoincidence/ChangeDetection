@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 1 
+#define LAG 15 
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 
@@ -12,23 +12,14 @@ int main() {
 
     double* testMatrix = nullptr;
     double* refMatrix = nullptr;
-    double* finalRes = nullptr;
-    double minRho = 1.0;
+    double* tmpMatrix = nullptr;
+    double maxRho = 0.0;
 
     testMatrix=(double*)malloc(sizeof(double)*SIZE);
     refMatrix=(double*)malloc(sizeof(double)*SIZE);
-    finalRes=(double*)malloc(sizeof(double)*SIZE);
+    tmpMatrix=(double*)malloc(sizeof(double)*SIZE);
   
 
-/*    double *debug=(double*)malloc(sizeof(double)*9);
-
-    for(int i=0;i<9;++i)
-	    debug[i]=i+1;
-    SpatialFilter(debug);
-    for(int i=0;i<9;++i)
-	    printf("%f,",debug[i]);
-	writeData("./res.txt",debug);
-  */
         ReadData(string(PATH) + "Itest6.dat",testMatrix);
 
 
@@ -40,25 +31,27 @@ int main() {
 
         //-----------------------AR(1)-------------------------
         double rho = Pearson(testMatrix, refMatrix);
-        std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << rho << std::endl;
         
 	Add(refMatrix, testMatrix,rho);
-        //-----------SpatialFilter and AnomalyDetection--------
-        SpatialFilter(refMatrix);
-	
-	
-	AnomalyDetection(refMatrix);
 
-        writeData("./res.txt",refMatrix);
         //-----------update the result--------
         double r = Pearson(refMatrix, testMatrix);
-        if (r < minRho) {
-            minRho = r;
-            memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
+       
+        std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << rho << std::endl;
+       	if (r > maxRho) {
+            maxRho = r;
+            memcpy(tmpMatrix, refMatrix, sizeof(double) * SIZE);
         }
 
-
     }
+
+
+        //-----------SpatialFilter and AnomalyDetection--------
+	Sub(testMatrix,tmpMatrix);//a-b->b
+    	SpatialFilter(tmpMatrix);
+	writeData("./res.txt",tmpMatrix);
+	AnomalyDetection(tmpMatrix);
+
 
     auto t3 = high_resolution_clock::now();
     duration<double> duration = t3 - t1;

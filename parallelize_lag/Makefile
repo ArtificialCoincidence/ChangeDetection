@@ -1,12 +1,12 @@
 # Compiler and flags
-CXX = g++
-CXXFLAGS = -Wall -g
+CXX = nvcc
+CXXFLAGS = -arch=sm_90 -g -G
 
 # Target executable
 TARGET = main
 
 # Source files
-SRCS = main.cpp matrix.cpp
+SRCS = main.cu matrix.cu
 # Object files
 OBJS = $(SRCS:.cpp=.o)
 
@@ -15,10 +15,9 @@ $(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
 
 # Rule to build object files
-%.o: %.cpp matrix.h
+%.o: %.cu matrix.h
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up build files
 clean:
-	rm -f $(OBJS) $(TARGET)
-
+	rm -rf main
