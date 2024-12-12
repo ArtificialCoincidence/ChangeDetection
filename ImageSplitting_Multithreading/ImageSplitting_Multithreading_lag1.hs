@@ -354,7 +354,7 @@ main = do
      
             u_1 = vector [test_1,ref1_1]
 
-        let result = zipWithxSY (procMatrix dimx dimy) u_1
+        let result = zipWithxSY (procAR1 dimx dimy) u_1
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
             output = mapSY (anomaly dimx dimy) (signal [sf])      -- anomaly detection
@@ -378,7 +378,7 @@ main = do
 
             u_2 = vector [test_2,ref1_2]
 
-        let result = zipWithxSY (procMatrix dimx dimy) u_2
+        let result = zipWithxSY (procAR1 dimx dimy) u_2
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
             output = mapSY (anomaly dimx dimy) (signal [sf])      -- anomaly detection
@@ -401,7 +401,7 @@ main = do
 
             u_3 = vector [test_3,ref1_3]
 
-        let result = zipWithxSY (procMatrix dimx dimy) u_3
+        let result = zipWithxSY (procAR1 dimx dimy) u_3
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
             output = mapSY (anomaly dimx dimy) (signal [sf])      -- anomaly detection
@@ -425,7 +425,7 @@ main = do
             u_4 = vector [test_4,ref1_4]
 
 
-        let result = zipWithxSY (procMatrix dimx dimy) u_4
+        let result = zipWithxSY (procAR1 dimx dimy) u_4
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
             output = mapSY (anomaly dimx dimy) (signal [sf])      -- anomaly detection
