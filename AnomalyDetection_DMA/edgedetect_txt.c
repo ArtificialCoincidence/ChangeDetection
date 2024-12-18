@@ -10,21 +10,23 @@
 
 #define FIXED_POINT_FRACTIONAL_BITS 15
 typedef int16_t fixed_point_t;
+
+// Convert from float to fixed-point
+inline fixed_point_t float_to_fixed(float input) {
+    return (fixed_point_t)(input * (1 << FIXED_POINT_FRACTIONAL_BITS));
+}
+
+// Convert from fixed-point back to float
+inline float fixed_to_float(fixed_point_t input) {
+    return ((float)input / (1 << FIXED_POINT_FRACTIONAL_BITS));
+}
+
 typedef float pixel_t; // Define a 16-bit grayscale pixel
 int width, height;
 
 
-inline fixed_point_t double_to_fixed(double input)
-{
-    return (fixed_point_t)((input * (1 << FIXED_POINT_FRACTIONAL_BITS)));
-}
-
-inline double fixed_to_double(fixed_point_t input)
-{
-    return ((double)input / (double)(1 << FIXED_POINT_FRACTIONAL_BITS));
-}
 // Function to read pixel values from a .txt file
-int read_txt(char *filename, pixel_t **data) {
+int read_txt(char *filename, fixed_point_t **data) {
     FILE *file = fopen(filename, "r");
     if (!file) {
         printf("Error opening file: %s\n", filename);
@@ -41,7 +43,7 @@ int read_txt(char *filename, pixel_t **data) {
 
     // Allocate memory for pixel data
     int size = width * height;
-    *data = (pixel_t *)malloc(size * sizeof(pixel_t));
+    *data = (fixed_point_t *)malloc(size * sizeof(fixed_point_t));
     if (*data == NULL) {
         printf("Memory allocation failed\n");
         fclose(file);
@@ -49,62 +51,65 @@ int read_txt(char *filename, pixel_t **data) {
     }
 
     // Read pixel values row by row
-    pixel_t *pixel_ptr = *data; // Pointer to traverse the pixel array
     char ch;
     int row = 0, col = 0;
-    // Loop through the file and read data row by row
-    
     for (row = 0; row < height; ++row) {
-        while (fscanf(file, "%c", &ch) == 1 && (ch == ' ' || ch == '\n' || ch == '\r')) {
-            // Skipping any spaces, newlines, or carriage returns
-        }
+        // Skip to the start of the row
+        do {
+            if (fscanf(file, "%c", &ch) != 1) {
+                printf("Error reading row start for row %d\n", row);
+                free(*data);
+                fclose(file);
+                return -1;
+            }
+        } while (ch == ' ' || ch == '\n' || ch == '\r');
 
-        // Ensure '<' exists at the start of the row
         if (ch != '<') {
-            printf("Error: Expected '<' at the start of row %d, but got '%c'.\n", row, ch);
+            printf("Error: Expected '<' at the start of row %d\n", row);
             free(*data);
             fclose(file);
             return -1;
         }
 
-
-        // Read pixels in the row
         for (col = 0; col < width; ++col) {
             float pixel_value;
             if (fscanf(file, "%f", &pixel_value) != 1) {
-                printf("Error: Invalid pixel value at row %d, col %d.\n", row, col);
+                printf("Error reading pixel value at row %d, col %d\n", row, col);
                 free(*data);
                 fclose(file);
                 return -1;
             }
 
-            fixed_point_t new_pixel;
-            new_pixel = double_to_fixed(pixel_value);
-            pixel_ptr[row * width + col] = (pixel_t) pixel_value;
+            // Convert float to fixed-point and store it
+            (*data)[row * width + col] = float_to_fixed(pixel_value);
 
-            // If not the last column, skip the comma
-            if (col < width - 1 && fscanf(file, ",") != 0) {
-                printf("Error: Expected ',' between pixel values.\n");
+            // Skip comma for all but the last column
+            if (col < width - 1) {
+                if (fscanf(file, "%c", &ch) != 1 || ch != ',') {
+                    printf("Error: Expected ',' at row %d, col %d\n", row, col);
+                    free(*data);
+                    fclose(file);
+                    return -1;
+                }
+            }
+        }
+
+        // Ensure the row ends with '>'
+        if (fscanf(file, "%c", &ch) != 1 || ch != '>') {
+            printf("Error: Expected '>' at the end of row %d\n", row);
+            free(*data);
+            fclose(file);
+            return -1;
+        }
+
+        // Skip the comma between rows, except for the last row
+        if (row < height - 1) {
+            if (fscanf(file, "%c", &ch) != 1 || ch != ',') {
+                printf("Error: Expected ',' between rows\n");
                 free(*data);
                 fclose(file);
                 return -1;
             }
-        }
-
-        // Skip the closing '>'
-        if (fscanf(file, ">") != 0) {
-            printf("Error: Expected '>' at the end of a row.\n");
-            free(*data);
-            fclose(file);
-            return -1;
-        }
-
-        // Skip the comma between rows (but not for the last row)
-        if (row < height - 1 && fscanf(file, ",") != 0) {
-            printf("Error: Expected ',' between rows.\n");
-            free(*data);
-            fclose(file);
-            return -1;
         }
     }
 
@@ -113,7 +118,7 @@ int read_txt(char *filename, pixel_t **data) {
 }
 
 // Function to write pixel values to a .txt file
-void write_txt(char *filename, pixel_t *data) {
+void write_txt(char *filename, fixed_point_t *data) {
     FILE *file = fopen(filename, "w");
     if (!file) {
         printf("Error opening file for writing: %s\n", filename);
@@ -123,13 +128,21 @@ void write_txt(char *filename, pixel_t *data) {
     // Write width and height as the first line
     fprintf(file, "%d %d\n", width, height);
 
-    double new_data;
-    new_data = fixed_to_double(data);
     // Write pixel values row by row
+    float pixel_value
     int i,j;
     for (i = 0; i < height; i++) {
+        fprintf(file, "<");
         for (j = 0; j < width; j++) {
-            fprintf(file, "%f ", data[i * width + j]);
+            pixel_value = fixed_to_float(data[i * width + j]); // Convert back to float
+            //fprintf(file, "%.6f", pixel_value); // Write the value
+            if (j < width - 1) {
+                fprintf(file, ",");
+            }
+        }
+        fprintf(file, ">");
+        if (i < height - 1) {
+            fprintf(file, ",");
         }
         fprintf(file, "\n");
     }
@@ -153,7 +166,7 @@ void flip(pixel_t *data, int width, int height) {
 }
 
 // Copy grayscale data to word-aligned DMA buffer
-void memcpy_consecutive_to_padded(pixel_t *from, volatile unsigned int *to, int pixels) {
+void memcpy_consecutive_to_padded(fixed_point_t *from, volatile unsigned int *to, int pixels) {
     int i;
     for (i = 0; i < pixels; i++) {
         to[i] = from[i]; // Copy 16-bit grayscale data directly
@@ -162,10 +175,10 @@ void memcpy_consecutive_to_padded(pixel_t *from, volatile unsigned int *to, int 
 }
 
 // Copy word-aligned DMA buffer back to grayscale data
-void memcpy_padded_to_consecutive(volatile unsigned int *from, pixel_t *to, int pixels) {
+void memcpy_padded_to_consecutive(volatile unsigned int *from, fixed_point_t *to, int pixels) {
     int i;
     for (i = 0; i < pixels; i++) {
-        to[i] = from[i] & 0xFFFF; // Extract 16-bit grayscale value
+        to[i] = (fixed_point_t)(from[i] & 0xFFFF); // Extract 16-bit grayscale value
     }
 }
 
