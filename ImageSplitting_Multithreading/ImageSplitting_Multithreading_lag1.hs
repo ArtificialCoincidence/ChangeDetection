@@ -350,8 +350,6 @@ main = do
 
             u_2 = vector [test_2,ref1_2]
 
-        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
-
         let result = zipWithxSY (procMatrix dimx dimy) u_2
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
@@ -376,10 +374,10 @@ main = do
             ref1_3 = mapSY (chunks dimx dimy)  (signal [sr1_3])            
 
             u_3 = vector [test_3,ref1_3]
-
+            
         -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
-        let result = zipWithxSY (procAR1 dimx dimy) u_3
+        let result = zipWithxSY (procMatrix dimx dimy) u_3
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
             output = mapSY (anomaly dimx dimy) (signal [sf])      -- anomaly detection
@@ -406,7 +404,7 @@ main = do
 
         -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
-        let result = zipWithxSY (procMatrix dimx dimy) u_4
+        let result = zipWithxSY (procAR1 dimx dimy) u_4
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
             output = mapSY (anomaly dimx dimy) (signal [sf])      -- anomaly detection
