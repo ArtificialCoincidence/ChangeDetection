@@ -20,9 +20,6 @@ import Data.Massiv.Array
 import Control.Concurrent
 import GHC.Conc (labelThread)
 import Data.Time
--- import System.Posix.Process (forkProcess, getProcessStatus)
--- import System.Posix.Types (ProcessID)
-
 
 
 -- First-order Autoregressive Model [AR(1)]: (ELEMENTARY MODEL)
@@ -199,47 +196,16 @@ reverseOrder (x : xs) = reverseOrder xs ++ [x]
 -- Call functions
 ----------------------------------------------------------------------------------------------------------------
 
-procAR1 :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)
-procAR1 dimx dimy dat = res
-        where
-
-        t = dat `atV` 0; st = fromSignal t !! 0
-        
-        ref1 = dat `atV` 1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
-        sv = signal [ssr1]
-
-        m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
-        m1 = fromSignal m !! 0; cm1 = m1 `atV` 0
-
-        res = zipWithMat(\ x y -> subMatrix x y) st cm1
-        
-
-
-
 -- Function to apply necessary operations for each index
 extractSignal :: Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double))) -> ForSyDe.Shallow.Vector (ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double))
 extractSignal idx datSignal = vector [fromSignal (datSignal `atV` idx) !! 0]
 
+-- Function computing first-order autoregreassive model and the Markov chain correlation for 6 lag
 procMatrix :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double) 
 procMatrix dimx dimy dat = res
         where
 
         t = dat `atV` 0; st = fromSignal t !! 0
-
-        -- -- OLD CODE
-        -- ref1 = dat `atV`  1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
-        -- ref2 = dat `atV`  3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
-        -- ref3 = dat `atV`  5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
-        -- ref4 = dat `atV`  7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
-        -- ref5 = dat `atV`  9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
-        -- ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
-        -- ref7 = dat `atV` 13; sr7 = fromSignal ref7 !! 0; ssr7 = vector [sr7]
-        -- ref8 = dat `atV` 15; sr8 = fromSignal ref8 !! 0; ssr8 = vector [sr8]
-        -- ref9 = dat `atV` 17; sr9 = fromSignal ref9 !! 0; ssr9 = vector [sr9]
-
-        -- sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6, ssr7, ssr8, ssr9]
-
-        -- -- NEW CODE:
 
         -- -- Create a list of indices to extract data
         indices = signal[1, 3, 5, 7, 9, 11]
@@ -247,23 +213,18 @@ procMatrix dimx dimy dat = res
         -- Create the signal vector using mapSY
         sv = mapSY (`extractSignal` dat) indices
 
-        -- -- END OF NEW CODE
-
         m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
         c = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> mcSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) m
 
         -----------------------------------------------------------------------------------------------------------------------
 
-        
         p1 = fromSignal c !! 0; p1mat = fromMatrix p1 !! 0; p1List = p1mat `atV` 0
         p2 = fromSignal c !! 1; p2mat = fromMatrix p2 !! 0; p2List = p2mat `atV` 0
         p3 = fromSignal c !! 2; p3mat = fromMatrix p3 !! 0; p3List = p3mat `atV` 0
         p4 = fromSignal c !! 3; p4mat = fromMatrix p4 !! 0; p4List = p4mat `atV` 0
         p5 = fromSignal c !! 4; p5mat = fromMatrix p5 !! 0; p5List = p5mat `atV` 0
         p6 = fromSignal c !! 5; p6mat = fromMatrix p6 !! 0; p6List = p6mat `atV` 0
-        -- p7 = fromSignal c !! 6; p7mat = fromMatrix p7 !! 0; p7List = p7mat `atV` 0
-        -- p8 = fromSignal c !! 7; p8mat = fromMatrix p8 !! 0; p8List = p8mat `atV` 0
-        -- p9 = fromSignal c !! 8; p9mat = fromMatrix p9 !! 0; p9List = p9mat `atV` 0
+
         pLists = [p1List] ++ [p2List] ++ [p3List] ++ [p4List] ++ [p5List]++ [p6List]          
         
         m1 = fromSignal m !! 0; cm1 = m1 `atV` 0
@@ -272,9 +233,6 @@ procMatrix dimx dimy dat = res
         m4 = fromSignal m !! 3; cm4 = m4 `atV` 0
         m5 = fromSignal m !! 4; cm5 = m5 `atV` 0
         m6 = fromSignal m !! 5; cm6 = m6 `atV` 0
-        -- m7 = fromSignal m !! 6; cm7 = m7 `atV` 0
-        -- m8 = fromSignal m !! 7; cm8 = m8 `atV` 0
-        -- m9 = fromSignal m !! 8; cm9 = m9 `atV` 0
 
         cms = [cm1, cm2, cm3, cm4, cm5, cm6]
         
@@ -292,20 +250,19 @@ procMatrix dimx dimy dat = res
 main :: IO ()
 main = do
 
-    -- modify begin
-    -- use forkio to create 4 threads, one for each zipwithxsy
+    -- Inter thread communication variables
     m1 <- newEmptyMVar
     m2 <- newEmptyMVar
     m3 <- newEmptyMVar
     m4 <- newEmptyMVar
 
-    -- Partition 1 (250 x 250 segment 1)
-
     let target = "0"
         mission = "S1"
         
-        --C E H J N P -- worst sub-lags
- 
+    --C E H J N P -- worst sub-lags
+
+     -- Preparing the read and write file paths
+
     let readpath = "./../SampleData/test" ++ target; 
     let writepath = "./Out/" ++ mission ++ "/Lag6/ImageSplitting" 
 
@@ -317,13 +274,10 @@ main = do
         readpathM = readpath ++ "/Iref" ++ target ++"M.dat"
         readpathR = readpath ++ "/Iref" ++ target ++"R.dat"
         
- 
-
         writepath1 = writepath ++ "/proc1.txt"
         writepath2 = writepath ++ "/proc2.txt"
         writepath3 = writepath ++ "/proc3.txt"
         writepath4 = writepath ++ "/proc4.txt"
-
 
 
     test <- openFile readpath0 ReadMode; contentsTest <- hGetContents test
@@ -367,9 +321,14 @@ main = do
 
     timeParallelStart <- getCurrentTime
 
+    -- Creating 4 threads, one for each sub image
+
+    -- First thread
     pid1 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 1"
+
+        -- Image Splitting
 
         let subImage1 = atMat 0 0 n_test;st1 = signal [subImage1]
             subRef1_1 = atMat 0 0 n_1;sr1_1 = signal [subRef1_1]
@@ -389,6 +348,8 @@ main = do
      
             u_1 = vector [test_1,ref1_1,test_1,ref2_1,test_1,ref3_1,test_1,ref4_1,test_1,ref5_1,test_1,ref6_1]
 
+    -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
+
         let result = zipWithxSY (procMatrix dimx dimy) u_1
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
@@ -400,10 +361,12 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 1 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
       
-
+    -- Second thread
     pid2 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 2"
+
+        -- Image Splitting
 
         let subImage2 = atMat 0 1 n_test;st2 = signal [subImage2]
             subRef1_2 = atMat 0 1 n_1;sr1_2 = signal [subRef1_2]
@@ -425,6 +388,8 @@ main = do
 
             u_2 = vector [test_2,ref1_2,test_2,ref2_2,test_2,ref3_2,test_2,ref4_2,test_2,ref5_2,test_2,ref6_2]
 
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
+
         let result = zipWithxSY (procMatrix dimx dimy) u_2
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
@@ -435,10 +400,12 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 2 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
        
-
+    -- Third thread
     pid3 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 3"
+
+        -- Image Splitting
 
         let subImage3 = atMat 1 0 n_test;st3 = signal [subImage3]
             subRef1_3 = atMat 1 0 n_1;sr1_3 = signal [subRef1_3]
@@ -460,6 +427,8 @@ main = do
 
             u_3 = vector [test_3,ref1_3,test_3,ref2_3,test_3,ref3_3,test_3,ref4_3,test_3,ref5_3,test_3,ref6_3]
 
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
+
         let result = zipWithxSY (procMatrix dimx dimy) u_3
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
             sf = mapSY (spatialFilter dimx dimy) (signal [mout]) -- Spatial Filtering
@@ -470,10 +439,12 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 3 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
        
-
+    -- Joinning the 4 threads
     pid4 <- forkIO $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 4"
+
+        -- Image Splitting
 
         let subImage4 = atMat 1 1 n_test;st4 = signal [subImage4]
             subRef1_4 = atMat 1 1 n_1;sr1_4 = signal [subRef1_4]
@@ -494,6 +465,7 @@ main = do
 
             u_4 = vector [test_4,ref1_4,test_4,ref2_4,test_4,ref3_4,test_4,ref4_4,test_4,ref5_4,test_4,ref6_4]
 
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
         let result = zipWithxSY (procMatrix dimx dimy) u_4
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
@@ -506,21 +478,20 @@ main = do
         putStrLn $ "parallelism 4 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
     
 
-
+    -- Joinning the 4 threads
     m1 <- takeMVar m1
     m2 <- takeMVar m2
     m3 <- takeMVar m3
     m4 <- takeMVar m4
 
+    -- Delay added, suggested for better use of the threads
+
     threadDelay 10
 
     print "Done"
 
-        -- RUN CODE USING THE TERMINAL :
-    -- sudo apt install threadscope
-    --  ghc -O2 MT6par.hs -threaded -rtsopts -eventlog
-    -- ./MT6par MT6par.1.txt +RTS -N4 -ls; threadscope MT6par.eventlog
-
-    -- ghci >> :set -package unix
-    -- ghci >> :l MT6par.hs
-    -- ghci >> main
+    -- RUN CODE USING THE TERMINAL :
+    
+    -- First install threadscope: sudo apt install threadscope
+    -- Then compile the haskell code: ghc -O2 ImageSplitting_Multithreading_lag6.hs -threaded -rtsopts -eventlog
+    -- Run the executable: ./ImageSplitting_Multithreading_lag6 ImageSplitting_Multithreading_lag6.1.txt +RTS -N4 -ls; threadscope ImageSplitting_Multithreading_lag6.eventlog
