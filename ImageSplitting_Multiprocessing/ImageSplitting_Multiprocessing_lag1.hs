@@ -199,6 +199,7 @@ reverseOrder (x : xs) = reverseOrder xs ++ [x]
 -- Call functions
 ----------------------------------------------------------------------------------------------------------------
 
+-- Function computing only the first-order autoregressive model for lag 1
 procAR1 :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)
 procAR1 dimx dimy dat = res
         where
@@ -214,72 +215,6 @@ procAR1 dimx dimy dat = res
         res = zipWithMat(\ x y -> subMatrix x y) st cm1
         
 
-
-
--- Function to apply necessary operations for each index
-extractSignal :: Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double))) -> ForSyDe.Shallow.Vector (ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double))
-extractSignal idx datSignal = vector [fromSignal (datSignal `atV` idx) !! 0]
-
-procMatrix :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double) 
-procMatrix dimx dimy dat = res
-        where
-
-        t = dat `atV` 0; st = fromSignal t !! 0
-
-        -- -- OLD CODE
-        -- ref1 = dat `atV`  1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
-        -- ref2 = dat `atV`  3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
-        -- ref3 = dat `atV`  5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
-        -- ref4 = dat `atV`  7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
-        -- ref5 = dat `atV`  9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
-        -- ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
-        -- ref7 = dat `atV` 13; sr7 = fromSignal ref7 !! 0; ssr7 = vector [sr7]
-        -- ref8 = dat `atV` 15; sr8 = fromSignal ref8 !! 0; ssr8 = vector [sr8]
-        -- ref9 = dat `atV` 17; sr9 = fromSignal ref9 !! 0; ssr9 = vector [sr9]
-
-        -- sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6, ssr7, ssr8, ssr9]
-
-        -- -- NEW CODE:
-
-        -- -- Create a list of indices to extract data
-        indices = signal[1, 3, 5]
-
-        -- Create the signal vector using mapSY
-        sv = mapSY (`extractSignal` dat) indices
-
-        -- -- END OF NEW CODE
-
-        m = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> arSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
-        c = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> mcSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) m
-
-        -----------------------------------------------------------------------------------------------------------------------
-
-        
-        p1 = fromSignal c !! 0; p1mat = fromMatrix p1 !! 0; p1List = p1mat `atV` 0
-        p2 = fromSignal c !! 1; p2mat = fromMatrix p2 !! 0; p2List = p2mat `atV` 0
-        p3 = fromSignal c !! 2; p3mat = fromMatrix p3 !! 0; p3List = p3mat `atV` 0
-
-
-        pLists = [p1List] ++ [p2List] ++ [p3List] 
-        
-        m1 = fromSignal m !! 0; cm1 = m1 `atV` 0
-        m2 = fromSignal m !! 1; cm2 = m2 `atV` 0
-        m3 = fromSignal m !! 2; cm3 = m3 `atV` 0
-
-
-
-        cms = [cm1, cm2, cm3]
-        
-        ---- Sorting Lists ---
-        revpLists = reverseOrder pLists
-        pOrder = qsort pLists
-        sorList = findIndices (\l -> l <= pLists !! 1) revpLists
-
-        arCS0 = cms !! head sorList
-        -- arCS1 = cms !! 1
-        -- avg = zipWithMat(\ x y -> avgMatrix x y) arCS0 arCS1
-        res = zipWithMat(\ x y -> subMatrix x y) st arCS0
-        
 -- Wait for a list of processes to finish
 waitForAllProcesses :: [ProcessID] -> IO ()
 waitForAllProcesses [] = return ()
@@ -291,12 +226,10 @@ waitForAllProcesses (pid:rest) = do
 main :: IO ()
 main = do
 
-    -- Partition 1 (250 x 250 segment 1)
-
-
 
     timeParallelStart <- getCurrentTime
 
+    -- First process
     pid1 <- forkProcess $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 1"
@@ -306,26 +239,22 @@ main = do
             
             --C E H J N P -- worst sub-lags
     
+        -- Preparing the read and write file paths
+
         let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag1/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
             readpathA = readpath ++ "/Iref" ++ target ++"A.dat"
 
-            
-
             writepath1 = writepath ++ "/proc1.txt"
             writepath2 = writepath ++ "/proc2.txt"
             writepath3 = writepath ++ "/proc3.txt"
             writepath4 = writepath ++ "/proc4.txt"
 
-
-
         test <- openFile readpath0 ReadMode; contentsTest <- hGetContents test
 
         ref1 <- openFile readpathA ReadMode; contentsRef1 <- hGetContents ref1
-
-
 
         ----- Dataset Arrangement---------------------------------------------------------------------------------------------
 
@@ -333,29 +262,24 @@ main = do
             (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest 
             (dimX1, dimY1, imageStreamRef1) = readDat contentsRef1; inrefMat1 = matrix dimX1 dimY1 imageStreamRef1
 
-
-
             st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st]) 
             sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
 
- 
-            
+
         let n_test = fromSignal m_test !! 0; m_test = fromSignal intest !! 0
         let n_1 = fromSignal m_1 !! 0; m_1 = fromSignal inref1 !! 0
 
-
+        -- Image splitting
 
         let subImage1 = atMat 0 0 n_test;st1 = signal [subImage1]
             subRef1_1 = atMat 0 0 n_1;sr1_1 = signal [subRef1_1]
-
-
                   
             test_1 = mapSY (chunks dimx dimy)  (signal [st1])
             ref1_1 = mapSY (chunks dimx dimy)  (signal [sr1_1])
 
-
-
             u_1 = vector [test_1,ref1_1]
+
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
         let result = zipWithxSY (procAR1 dimx dimy) u_1
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
@@ -367,7 +291,7 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 1 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
       
-
+    -- Second process
     pid2 <- forkProcess $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 2"
@@ -377,25 +301,22 @@ main = do
             
             --C E H J N P -- worst sub-lags
     
+        -- Preparing the read and write file paths
+
         let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag1/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
             readpathA = readpath ++ "/Iref" ++ target ++"A.dat"
 
- 
-
             writepath1 = writepath ++ "/proc1.txt"
             writepath2 = writepath ++ "/proc2.txt"
             writepath3 = writepath ++ "/proc3.txt"
             writepath4 = writepath ++ "/proc4.txt"
 
-
-
         test <- openFile readpath0 ReadMode; contentsTest <- hGetContents test
 
         ref1 <- openFile readpathA ReadMode; contentsRef1 <- hGetContents ref1
-
 
         ----- Dataset Arrangement---------------------------------------------------------------------------------------------
 
@@ -403,29 +324,23 @@ main = do
             (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest 
             (dimX1, dimY1, imageStreamRef1) = readDat contentsRef1; inrefMat1 = matrix dimX1 dimY1 imageStreamRef1
 
-
-
             st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st]) 
             sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
 
-  
-            
         let n_test = fromSignal m_test !! 0; m_test = fromSignal intest !! 0
         let n_1 = fromSignal m_1 !! 0; m_1 = fromSignal inref1 !! 0
 
-
+        -- Image splitting
 
         let subImage2 = atMat 0 1 n_test;st2 = signal [subImage2]
             subRef1_2 = atMat 0 1 n_1;sr1_2 = signal [subRef1_2]
 
-    
-
             test_2 = mapSY (chunks dimx dimy)  (signal [st2])
             ref1_2 = mapSY (chunks dimx dimy)  (signal [sr1_2])
 
-           
-
             u_2 = vector [test_2,ref1_2]
+
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
         let result = zipWithxSY (procAR1 dimx dimy) u_2
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
@@ -436,7 +351,7 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 2 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
        
-
+    -- Third process
     pid3 <- forkProcess $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 3"
@@ -445,27 +360,23 @@ main = do
             mission = "S1"
             
             --C E H J N P -- worst sub-lags
-    
+
+        -- Preparing the read and write file paths
+
         let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag1/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
             readpathA = readpath ++ "/Iref" ++ target ++"A.dat"
 
-
-
             writepath1 = writepath ++ "/proc1.txt"
             writepath2 = writepath ++ "/proc2.txt"
             writepath3 = writepath ++ "/proc3.txt"
             writepath4 = writepath ++ "/proc4.txt"
 
-
-
         test <- openFile readpath0 ReadMode; contentsTest <- hGetContents test
 
         ref1 <- openFile readpathA ReadMode; contentsRef1 <- hGetContents ref1
-
-
 
         ----- Dataset Arrangement---------------------------------------------------------------------------------------------
 
@@ -473,28 +384,23 @@ main = do
             (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest 
             (dimX1, dimY1, imageStreamRef1) = readDat contentsRef1; inrefMat1 = matrix dimX1 dimY1 imageStreamRef1
 
-
-
             st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st]) 
             sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
 
-  
-            
         let n_test = fromSignal m_test !! 0; m_test = fromSignal intest !! 0
         let n_1 = fromSignal m_1 !! 0; m_1 = fromSignal inref1 !! 0
 
+        -- Image splitting
 
         let subImage3 = atMat 1 0 n_test;st3 = signal [subImage3]
             subRef1_3 = atMat 1 0 n_1;sr1_3 = signal [subRef1_3]
 
-          
-
             test_3 = mapSY (chunks dimx dimy)  (signal [st3])
             ref1_3 = mapSY (chunks dimx dimy)  (signal [sr1_3])
 
-          
-
             u_3 = vector [test_3,ref1_3]
+
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
         let result = zipWithxSY (procAR1 dimx dimy) u_3
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
@@ -505,7 +411,7 @@ main = do
         timeParallelEnd <- getCurrentTime
         putStrLn $ "parallelism 3 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
        
-
+    -- Forth process
     pid4 <- forkProcess $ do
         myTid <- myThreadId
         labelThread myTid "parallelism 4"
@@ -513,16 +419,15 @@ main = do
         let target = "0"
             mission = "S1"
             
-            --C E H J N P -- worst sub-lags
-    
+        --C E H J N P -- worst sub-lags
+
+        -- Preparing the read and write file paths
+
         let readpath = "./../SampleData/test" ++ target; 
         let writepath = "./OutMP/" ++ mission ++ "/Lag1/ImageSplitting" 
 
             readpath0 = readpath ++ "/Itest" ++ target ++ ".dat"
             readpathA = readpath ++ "/Iref" ++ target ++"A.dat"
-
-
-            
 
             writepath1 = writepath ++ "/proc1.txt"
             writepath2 = writepath ++ "/proc2.txt"
@@ -530,13 +435,9 @@ main = do
             writepath4 = writepath ++ "/proc4.txt"
 
 
-
         test <- openFile readpath0 ReadMode; contentsTest <- hGetContents test
 
         ref1 <- openFile readpathA ReadMode; contentsRef1 <- hGetContents ref1
-
-
-
 
         ----- Dataset Arrangement---------------------------------------------------------------------------------------------
 
@@ -544,33 +445,23 @@ main = do
             (dimX, dimY, imageStreamTest) = readDat contentsTest; intestMat = matrix dimX dimY imageStreamTest 
             (dimX1, dimY1, imageStreamRef1) = readDat contentsRef1; inrefMat1 = matrix dimX1 dimY1 imageStreamRef1
 
-
-
-
             st = signal [intestMat];  intest = mapSY (chunks dimx dimy)  (signal [st]) 
             sr1 = signal [inrefMat1]; inref1 = mapSY (chunks dimx dimy)  (signal [sr1])
 
-
-  
-            
         let n_test = fromSignal m_test !! 0; m_test = fromSignal intest !! 0
         let n_1 = fromSignal m_1 !! 0; m_1 = fromSignal inref1 !! 0
 
-
-
-
+        -- Image splitting
 
         let subImage4 = atMat 1 1 n_test;st4 = signal [subImage4]
             subRef1_4 = atMat 1 1 n_1;sr1_4 = signal [subRef1_4]
 
-
             test_4 = mapSY (chunks dimx dimy)  (signal [st4])
             ref1_4 = mapSY (chunks dimx dimy)  (signal [sr1_4])
 
-        
-
             u_4 = vector [test_4,ref1_4]
 
+        -- Computations, first-order AR model, Markov chain correlation, filtering and anomaly detection
 
         let result = zipWithxSY (procAR1 dimx dimy) u_4
             out = fromSignal result !! 0; mout = fromMatrix out !! 0
@@ -582,15 +473,11 @@ main = do
         putStrLn $ "parallelism 4 done, execution time: " ++ show(diffUTCTime timeParallelEnd timeParallelStart)
     
     waitForAllProcesses [pid1, pid2, pid3, pid4]
-    threadDelay 10
 
     print "Done"
 
-        -- RUN CODE USING THE TERMINAL :
-    -- sudo apt install threadscope
-    --  ghc -O2 MT6par.hs -threaded -rtsopts -eventlog
-    -- ./MT6par MT6par.1.txt +RTS -N4 -ls; threadscope MT6par.eventlog
-
-    -- ghci >> :set -package unix
-    -- ghci >> :l MT6par.hs
-    -- ghci >> main
+    -- RUN CODE USING THE TERMINAL :
+    -- Threadscope is not used for multiprocessing thεrefore for running we use:
+    --
+    -- ghc -O2 ImageSplitting_Multiprocessing_lag1.hs
+    -- time ./ImageSplitting_Multiprocessing_lag1 +RTS -s 
