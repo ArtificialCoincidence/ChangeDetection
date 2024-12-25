@@ -319,6 +319,7 @@ main = do
 
     ----- Output File ------------------------------------------------------------------------------------------------
     writeFile writepath (show res)
+    -- comment the line above and uncomment the line below for the first run if you do not want to create folders manually
     -- createAndWriteFile writepath (show res)
     
     -- RUN CODE USING THE TERMINAL :
