@@ -117,10 +117,9 @@ __global__ void Add(double* ref, double* test, double rho) {
 
 
 
-__host__ __device__ void AnomalyDetection(double* a) {
-	double data[SIZE];
-	memcpy(data, a, sizeof(double) * SIZE);
-	sort(data,data+SIZE);
+void AnomalyDetection(double* a) {
+	thrust::device_ptr<double> data(a);
+	thrust::sort(data, data+SIZE);
 	double percentileLow = 0.25;
 	double percentileHigh = 0.9;
 	double iqr = data[static_cast<int>(percentileHigh * SIZE)] - data[static_cast<int>(percentileLow * SIZE)];
@@ -129,8 +128,6 @@ __host__ __device__ void AnomalyDetection(double* a) {
 	for (int i=0;i<SIZE;++i)
 		if (a[i]>=thresholdDown && a[i]<=thresholdUp)//not sure
 			a[i] = 0;
-	return;
-
 }
 
 

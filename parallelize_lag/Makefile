@@ -1,6 +1,6 @@
 # Compiler and flags
 CXX = nvcc
-CXXFLAGS = -arch=sm_90 -g -G
+CXXFLAGS = -rdc=true -arch=sm_90 -g -G 
 
 # Target executable
 TARGET = main

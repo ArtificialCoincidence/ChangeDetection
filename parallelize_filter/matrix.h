@@ -11,6 +11,10 @@
 #include <numeric>
 #include<algorithm>
 #include<cuda_runtime.h>
+#include <thrust/host_vector.h>
+#include <thrust/device_vector.h>
+#include <thrust/sort.h>
+
 #define ROW 500
 #define COL 500
 #define SIZE 250000

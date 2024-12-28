@@ -2,11 +2,11 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 15
+#define LAG 18
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 
-    auto t1 = high_resolution_clock::now();
+    	auto t0 = high_resolution_clock::now();
 
     //-------------------Read Data------------------------
 
@@ -33,23 +33,24 @@ int main() {
 	writeData("./res.txt",refMatrix);
 */
 
- 
+	duration<double> duration(0);
     for (int i = 0; i < LAG; ++i) {
         string path = string(PATH) + "Iref6" + string(1, 'A' + i) + ".dat";
         ReadData(path,refMatrix);
         //-----------------------AR(1)-------------------------
+    	auto t1 = high_resolution_clock::now();
 	Pearson<<<1,512>>>(testMatrix, refMatrix,rho);
 	cudaDeviceSynchronize();
-       	Add<<<128,512>>>(refMatrix, testMatrix,*rho);
+       	Add<<<500,512>>>(refMatrix, testMatrix,*rho);
 	cudaDeviceSynchronize();
         //-----------SpatialFilter and AnomalyDetection--------
-       std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << *rho << std::endl;
+       //std::cout << "Pearson correlation: " << fixed << std::setprecision(10) << *rho << std::endl;
 	memcpy(a,refMatrix,sizeof(double)*SIZE);	
         SpatialFilter<<<128,512>>>(refMatrix,a);
 	cudaDeviceSynchronize();
-	writeData("./res.txt",refMatrix);
         AnomalyDetection(refMatrix);
 
+//	writeData("./res.txt",refMatrix);
         //-----------update the result--------
 	Pearson<<<1,512>>>(refMatrix, testMatrix,rho);
 	cudaDeviceSynchronize();
@@ -58,11 +59,12 @@ int main() {
             memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
         }
 
-
+    	auto t2 = high_resolution_clock::now();
+	duration+=t2-t1;
     }
 
-    auto t3 = high_resolution_clock::now();
-    duration<double> duration = t3 - t1;
+    	auto t4 = high_resolution_clock::now();
+//	duration=t4-t0;
     std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
     //-----------------------Write Data--------------------

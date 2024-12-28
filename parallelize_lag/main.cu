@@ -2,76 +2,87 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 15
+#define LAG 18
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
-int main() {
-
-    auto t1 = high_resolution_clock::now();
-
-    //-------------------Read Data------------------------
-
-    double* testMatrix = nullptr;
-    double* refMatrices[LAG] ;
-    double* as[LAG];
-    double* finalRes = nullptr;
-    double* rho=nullptr;
-    double* maxRho ;
-    
-    cudaMallocManaged(&maxRho,sizeof(double));
-    *maxRho=0.0;
-    cudaMallocManaged(&finalRes,sizeof(double*));
-    finalRes=nullptr;
-
-    for(int i=0;i<LAG;++i){
-    	cudaMallocManaged(&refMatrices[i], SIZE * sizeof(double));
-        string path = string(PATH) + "Iref6" + string(1, 'A' + i) + ".dat";
-        ReadData(path,refMatrices[i]);
-    	cudaMallocManaged(&as[i], SIZE * sizeof(double));
-	memcpy(as,refMatrix,sizeof(double)*SIZE);	
-	}
-
-    cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
-    ReadData(string(PATH) + "Itest6.dat",testMatrix);
-    
-    cudaMallocManaged(&rho,sizeof(double)*LAG);
-    cudaMallocManaged(&finalRes, SIZE * sizeof(double));
-	
-   __global__ Lag(testMatrix,refMatrices,as,finalRes,rho,maxRho){
+__global__ void LagPearson(double* testMatrix,double**refMatrices,double* rho){
+	int idx=blockIdx.x*blockDim.x+threadIdx.x;
+	double* refMatrix=refMatrices[idx];
+	Pearson<<<1,512>>>(testMatrix, refMatrix,&rho[idx]);
+	cudaError_t err = cudaGetLastError();
+   }
+ 
+__global__ void LagAdd(double* testMatrix,double**refMatrices,double* rho){
+	int idx=blockIdx.x*blockDim.x+threadIdx.x;
+	double* refMatrix=refMatrices[idx];
+	Add<<<128,512>>>(refMatrix,testMatrix,rho[idx]);
+   }
+__global__ void LagSF(double**refMatrices,double** as){
 	int idx=blockIdx.x*blockDim.x+threadIdx.x;
 	double* refMatrix=refMatrices[idx];
 	double* a=as[idx];
-
-	Pearson<<<1,512>>>(testMatrix, refMatrix,&rho[idx]);
-	cudaDeviceSynchronize();
-	printf("pearson:%f\n",rho[idx]);
-
-        Add<<<128,512>>>(refMatrix, testMatrix,rho[idx]);
-	cudaDeviceSynchronize();
-
-        SpatialFilter<<<128,512>>>(refMatrix,a);
-	cudaDeviceSynchronize();
- 
- 
-        AnomalyDetection(refMatrix);
- 
-	Pearson<<<1,512>>>(refMatrix, testMatrix,&rho[idx]);
-	cudaDeviceSynchronize();
-   
-	if(rho[idx]>*maxRho)
-	{
-		atomicExch(maxRho,rho[idx);
-		atomicExch(finalRes,refMatrix);
-	}
-   
+	SpatialFilter<<<128,512>>>(refMatrix,a);
    }
- 
-	Lag<<<1,LAG>>>(testMatrix,refMatrices,as,finalRes,rho,maxRho);	
+int main() {
 
-    auto t3 = high_resolution_clock::now();
-    duration<double> duration = t3 - t1;
-    std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
-    //-----------------------Write Data--------------------
-    return 0;
+	//-------------------Read Data------------------------
+	//testMatrix
+	double* testMatrix = nullptr;
+	cudaMallocManaged(&testMatrix, SIZE * sizeof(double));
+	ReadData(string(PATH) + "Itest6.dat",testMatrix);
+	
+	//refMatrices and their copies
+	double** refMatrices = nullptr;
+	double** as=nullptr;//A copy of refMatrices. Spatial filtering directly modififies refMatrices, and as[LAG] serves as the original .
+	cudaMallocManaged(&refMatrices,SIZE*sizeof(double*));
+	cudaMallocManaged(&as,SIZE*sizeof(double*));
+	for(int i=0;i<LAG;++i){
+		cudaMallocManaged(&refMatrices[i], SIZE * sizeof(double));
+		string path = string(PATH) + "Iref6" + string(1, 'A' + i) + ".dat";
+		ReadData(path,refMatrices[i]);
+		cudaMallocManaged(&as[i], SIZE * sizeof(double));
+		memcpy(as[i],refMatrices[i],sizeof(double)*SIZE);	
+	}
+	
+	//rho	
+	double* rho=nullptr;
+	cudaMallocManaged(&rho,sizeof(double)*LAG);
+	
+	auto t1 = high_resolution_clock::now();
+        //--------------------Launch Kernel--------------------
+	LagPearson<<<1,LAG>>>(testMatrix,refMatrices,rho);	
+	cudaDeviceSynchronize();
+	LagAdd<<<1,LAG>>>(testMatrix,refMatrices,rho);	
+	cudaDeviceSynchronize();
+	LagSF<<<1,LAG>>>(refMatrices,as);	
+	cudaDeviceSynchronize();
+	for(int i=0;i<LAG;++i)
+		AnomalyDetection(refMatrices[i]);
+	LagPearson<<<1,LAG>>>(testMatrix,refMatrices,rho);	
+	cudaDeviceSynchronize();
+	
+	
+	auto t3 = high_resolution_clock::now();
+        //-----------------------Write Data--------------------
+/*	double maxRho=0;
+	double maxIdx=-1;
+	for(int i=0;i<LAG;++i)
+	{
+		if(rho[i]>maxRho){
+			maxRho=rho[i];
+			maxIdx=i;
+		}
+	}
+	writeData("res.txt",refMatrices[maxIdx]);
+*/		
+
+	
+	//---------------------Memory Free---------------------
+	
+
+	//---------------------Compute Time--------------------
+	duration<double> duration = t3 - t1;
+	std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
+	return 0;
 }
 
