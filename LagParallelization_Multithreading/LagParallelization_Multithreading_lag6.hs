@@ -152,13 +152,13 @@ chunks dimx dimy img = mapSY (groupMat dimx dimy) img
 
 -- Auxiliar: Stencil with Massiv
 ----------------------------------------------------------------------------------------------------------------
-spatialFilter :: Int -> Int -> ForSyDe.Shallow.Matrix Double  -> ForSyDe.Shallow.Matrix Double  
+spatialFilter :: Int -> Int -> Signal (ForSyDe.Shallow.Matrix Double)  -> ForSyDe.Shallow.Matrix Double  
 spatialFilter dimx dimy img = matrix dimx dimy $ toList $ dropWindow $ mapStencil Edge (avgStencil 9) barImg
     where
 
-        --y_n' = fromSignal img  !! 0
+        y_n' = fromSignal img  !! 0
         
-        imG = fromMatrix img
+        imG = fromMatrix y_n'
         
         barImg = fromLists' Seq [imG] :: Array U Ix2 Double
 
@@ -211,50 +211,48 @@ procAR1 dimx dimy dat = out
 
         out = signal [cm1]
 
-procMatrix :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> ForSyDe.Shallow.Matrix Double
-procMatrix dimx dimy dat = fromMatrix res !! 0 
+procMatrix :: Int -> Int -> ForSyDe.Shallow.Vector (Signal(ForSyDe.Shallow.Matrix (ForSyDe.Shallow.Matrix Double)))-> Signal (ForSyDe.Shallow.Matrix Double)
+procMatrix dimx dimy dat = signal [out1]
         where
 
         t = dat `atV` 0; st = fromSignal t !! 0
-
         ref1 = dat `atV` 1; sr1 = fromSignal ref1 !! 0; ssr1 = vector [sr1]
         ref2 = dat `atV` 3; sr2 = fromSignal ref2 !! 0; ssr2 = vector [sr2]
         ref3 = dat `atV` 5; sr3 = fromSignal ref3 !! 0; ssr3 = vector [sr3]
         ref4 = dat `atV` 7; sr4 = fromSignal ref4 !! 0; ssr4 = vector [sr4]
         ref5 = dat `atV` 9; sr5 = fromSignal ref5 !! 0; ssr5 = vector [sr5]
         ref6 = dat `atV` 11; sr6 = fromSignal ref6 !! 0; ssr6 = vector [sr6]
-        -- ref7 = dat `atV` 13; sr7 = fromSignal ref7 !! 0; ssr7 = vector [sr7]
-        -- ref8 = dat `atV` 15; sr8 = fromSignal ref8 !! 0; ssr8 = vector [sr8]
-        -- ref9 = dat `atV` 17; sr9 = fromSignal ref9 !! 0; ssr9 = vector [sr9]
 
-        sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6]
-
+    
+        sv = signal [ssr1, ssr2, ssr3, ssr4, ssr5, ssr6]  
+        --sv = signal [ssr1, ssr2, ssr3, ssr4]
         c = (zipxSY . mapV (mapSY (zipWithMat(\ x y -> mcSystem dimx dimy (signal [y]) (signal [x]) ) st )) . unzipxSY) sv
-        
 
-        -----------------------------------------------------------------------------------------------------------------------
-
-        
         p1 = fromSignal c !! 0; p1mat = fromMatrix p1 !! 0; p1List = p1mat `atV` 0
         p2 = fromSignal c !! 1; p2mat = fromMatrix p2 !! 0; p2List = p2mat `atV` 0
         p3 = fromSignal c !! 2; p3mat = fromMatrix p3 !! 0; p3List = p3mat `atV` 0
         p4 = fromSignal c !! 3; p4mat = fromMatrix p4 !! 0; p4List = p4mat `atV` 0
         p5 = fromSignal c !! 4; p5mat = fromMatrix p5 !! 0; p5List = p5mat `atV` 0
         p6 = fromSignal c !! 5; p6mat = fromMatrix p6 !! 0; p6List = p6mat `atV` 0
-        -- p7 = fromSignal c !! 6; p7mat = fromMatrix p7 !! 0; p7List = p7mat `atV` 0
-        -- p8 = fromSignal c !! 7; p8mat = fromMatrix p8 !! 0; p8List = p8mat `atV` 0
-        -- p9 = fromSignal c !! 8; p9mat = fromMatrix p9 !! 0; p9List = p9mat `atV` 0
-        pLists = [p1List] ++ [p2List] ++ [p3List] ++ [p4List] ++ [p5List]++ [p6List] -- ++ [p7List] ++ [p8List]++ [p9List]         
+       
+        pLists = [p1List] ++ [p2List] ++ [p3List] ++ [p4List] ++ [p5List] ++ [p6List]
         
-        
-        cms = [sr1, sr2, sr3, sr4, sr5, sr6]
+        cm1 = sr1 `atV` 0
+        cm2 = sr2 `atV` 0
+        cm3 = sr3 `atV` 0
+        cm4 = sr4 `atV` 0
+        cm5 = sr5 `atV` 0
+        cm6 = sr6 `atV` 0
+       
+        cms = [cm1, cm2, cm3, cm4, cm5, cm6]
         
         ---- Sorting Lists ---
         revpLists = reverseOrder pLists
-        sorList = findIndices (\l -> l <= pLists !! 0) revpLists
+        pOrder = qsort pLists
+        sorList = findIndices (\l -> l <= pOrder !! 0) pOrder
 
-        arCS = cms !! head sorList
-        res = zipWithMat(\ x y -> subMatrix x y) st arCS
+        out = cms !! head sorList
+        out1 = out `atV` 0
 
 createAndWriteFile :: FilePath -> String -> IO ()
 createAndWriteFile path content = do
@@ -267,10 +265,10 @@ main :: IO ()
 main = do
 
     -- choose read and write filepath for the target
-    -- let target = "0"; readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag6/LagParallelization/CD0.txt" -- S1
+    let target = "0"; readpath = "./../SampleData/test0"; writepath = "./Out/S1/Lag6/LagParallelization/CD0.txt" -- S1
     -- let target = "6"; readpath = "./../SampleData/test6"; writepath = "./Out/K1/Lag6/LagParallelization/CD0.txt" -- K1
     -- let target = "12"; readpath = "./../SampleData/test12"; writepath = "./Out/F1/Lag6/LagParallelization/CD0.txt" -- F1
-    let target = "18"; readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag6/LagParallelization/CD0.txt" -- AF1
+    -- let target = "18"; readpath = "./../SampleData/test18"; writepath = "./Out/AF1/Lag6/LagParallelization/CD0.txt" -- AF1
 
     m1 <- newEmptyMVar
     m2 <- newEmptyMVar
