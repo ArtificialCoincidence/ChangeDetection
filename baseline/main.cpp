@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 15 
+#define LAG 18 
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 

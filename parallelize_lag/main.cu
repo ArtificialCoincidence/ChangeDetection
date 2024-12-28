@@ -33,15 +33,14 @@ int main() {
 	
 	//refMatrices and their copies
 	double** refMatrices = nullptr;
-	double** as=nullptr;//A copy of refMatrices. Spatial filtering directly modififies refMatrices, and as[LAG] serves as the original .
-	cudaMallocManaged(&refMatrices,SIZE*sizeof(double*));
-	cudaMallocManaged(&as,SIZE*sizeof(double*));
+	double** as=nullptr;
+	cudaMallocManaged(&refMatrices,LAG*sizeof(double*));
+	cudaMallocManaged(&as,LAG*sizeof(double*));
 	for(int i=0;i<LAG;++i){
 		cudaMallocManaged(&refMatrices[i], SIZE * sizeof(double));
 		string path = string(PATH) + "Iref6" + string(1, 'A' + i) + ".dat";
 		ReadData(path,refMatrices[i]);
 		cudaMallocManaged(&as[i], SIZE * sizeof(double));
-		memcpy(as[i],refMatrices[i],sizeof(double)*SIZE);	
 	}
 	
 	//rho	
@@ -52,8 +51,12 @@ int main() {
         //--------------------Launch Kernel--------------------
 	LagPearson<<<1,LAG>>>(testMatrix,refMatrices,rho);	
 	cudaDeviceSynchronize();
+	
 	LagAdd<<<1,LAG>>>(testMatrix,refMatrices,rho);	
 	cudaDeviceSynchronize();
+	for(int i=0;i<LAG;++i)
+		memcpy(as[i],refMatrices[i],sizeof(double)*SIZE);	
+	
 	LagSF<<<1,LAG>>>(refMatrices,as);	
 	cudaDeviceSynchronize();
 	for(int i=0;i<LAG;++i)
@@ -64,17 +67,18 @@ int main() {
 	
 	auto t3 = high_resolution_clock::now();
         //-----------------------Write Data--------------------
-/*	double maxRho=0;
-	double maxIdx=-1;
+	double maxRho=0;
+	int  maxIdx=-1;
 	for(int i=0;i<LAG;++i)
 	{
+		//printf("rho:%lf\n",rho[i]);
 		if(rho[i]>maxRho){
 			maxRho=rho[i];
 			maxIdx=i;
 		}
 	}
-	writeData("res.txt",refMatrices[maxIdx]);
-*/		
+	//writeData("res.txt",refMatrices[maxIdx]);
+		
 
 	
 	//---------------------Memory Free---------------------

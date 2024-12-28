@@ -23,15 +23,6 @@ int main() {
     cudaMallocManaged(&a,SIZE*sizeof(double));
     ReadData(string(PATH) + "Itest6.dat",testMatrix);
 
-/*     for(int i=0;i<SIZE;++i)
-	     refMatrix[i]=1+i;
-
-     memcpy(a,refMatrix,SIZE*sizeof(double));
-     SpatialFilter<<<64,512>>>(refMatrix,a);
-     cudaDeviceSynchronize();
-
-	writeData("./res.txt",refMatrix);
-*/
 
 	duration<double> duration(0);
     for (int i = 0; i < LAG; ++i) {
@@ -50,12 +41,11 @@ int main() {
 	cudaDeviceSynchronize();
         AnomalyDetection(refMatrix);
 
-//	writeData("./res.txt",refMatrix);
         //-----------update the result--------
 	Pearson<<<1,512>>>(refMatrix, testMatrix,rho);
 	cudaDeviceSynchronize();
         if (*rho < minRho) {
-            minRho = *rho;
+	    minRho = *rho;
             memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
         }
 
@@ -66,7 +56,7 @@ int main() {
     	auto t4 = high_resolution_clock::now();
 //	duration=t4-t0;
     std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
-
+	writeData("res.txt",finalRes);
     //-----------------------Write Data--------------------
     return 0;
 }

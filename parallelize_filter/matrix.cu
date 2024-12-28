@@ -122,7 +122,7 @@ void AnomalyDetection(double* a) {
 	memcpy(data, a, sizeof(double) * SIZE);
 	sort(data,data+SIZE);
 //	 thrust::device_ptr<double> data(a);
-// 	 thrust::sort(data, data+SIZE);
+ //	 thrust::sort(data, data+SIZE);
 	double percentileLow = 0.25;
 	double percentileHigh = 0.9;
 	double iqr = data[static_cast<int>(percentileHigh * SIZE)] - data[static_cast<int>(percentileLow * SIZE)];
