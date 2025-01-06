@@ -77,7 +77,7 @@ int main() {
 			maxIdx=i;
 		}
 	}
-	//writeData("res.txt",refMatrices[maxIdx]);
+	writeData("res.txt",refMatrices[maxIdx]);
 		
 
 	
