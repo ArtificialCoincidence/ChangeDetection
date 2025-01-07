@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 1
+#define LAG 18
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 __global__ void LagPearson(double* testMatrix,double**refMatrices,double* rho){
 	int idx=blockIdx.x*blockDim.x+threadIdx.x;
@@ -25,6 +25,7 @@ __global__ void LagSF(double**refMatrices,double** as){
 int main() {
 
 
+	auto t1 = high_resolution_clock::now();
 	//-------------------Read Data------------------------
 	//testMatrix
 	double* testMatrix = nullptr;
@@ -46,8 +47,6 @@ int main() {
 	//rho	
 	double* rho=nullptr;
 	cudaMallocManaged(&rho,sizeof(double)*LAG);
-	
-	auto t1 = high_resolution_clock::now();
         //--------------------Launch Kernel--------------------
 	LagPearson<<<1,LAG>>>(testMatrix,refMatrices,rho);	
 	cudaDeviceSynchronize();
@@ -77,16 +76,24 @@ int main() {
 			maxIdx=i;
 		}
 	}
-	writeData("res.txt",refMatrices[maxIdx]);
 		
-
-	
-	//---------------------Memory Free---------------------
-	
 
 	//---------------------Compute Time--------------------
 	duration<double> duration = t3 - t1;
 	std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
+	writeData("res.txt",refMatrices[maxIdx]);
+	
+	//---------------------Memory Free---------------------
+	
+	cudaFree(testMatrix);
+	for(int i=0;i<LAG;++i)	{
+		cudaFree(refMatrices[i]);
+		cudaFree(as[i]);
+	}
+	cudaFree(refMatrices);
+	cudaFree(as);
+	cudaFree(rho);
+
 	return 0;
 }
 
