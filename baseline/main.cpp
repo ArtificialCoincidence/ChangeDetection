@@ -12,7 +12,7 @@ int main() {
 	double* testMatrix = nullptr;
 	double* refMatrix = nullptr;
 	double* finalRes = nullptr;
-	double minRho = 1.0;
+	double maxRho = 0.0;
 
 	testMatrix=(double*)malloc(sizeof(double)*SIZE);
 	refMatrix=(double*)malloc(sizeof(double)*SIZE);
@@ -43,8 +43,8 @@ int main() {
 
 		//-----------update the result--------
 		double r = Pearson(refMatrix, testMatrix);
-		if (r < minRho) {
-			minRho = r;
+		if (r > maxRho) {
+			maxRho = r;
 			memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
 		}
 
@@ -55,7 +55,7 @@ int main() {
 	std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
 	//-----------------------Write Data--------------------
-	writeData("./res_18lag.txt",finalRes);
+	writeData("./18_reverse.txt",finalRes);
 	return 0;
 }
 
