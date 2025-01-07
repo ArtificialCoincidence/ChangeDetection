@@ -43,7 +43,7 @@ int main() {
 
 		//-----------update the result--------
 		double r = Pearson(refMatrix, testMatrix);
-		if (r < minRho&&i!=2) {
+		if (r < minRho&&r>0.3) {
 			minRho = r;
 			memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
 			printf("%lf,%d",minRho,i);
