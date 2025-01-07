@@ -12,7 +12,7 @@ int main() {
 	double* testMatrix = nullptr;
 	double* refMatrix = nullptr;
 	double* finalRes = nullptr;
-	double minRho = 1.0;
+	double maxRho = 0.0;
 
 	testMatrix=(double*)malloc(sizeof(double)*SIZE);
 	refMatrix=(double*)malloc(sizeof(double)*SIZE);
@@ -43,10 +43,10 @@ int main() {
 
 		//-----------update the result--------
 		double r = Pearson(refMatrix, testMatrix);
-		if (r < minRho&&r>0.25) {
-			minRho = r;
+		if (r > maxRho&&r>0) {
+			maxRho = r;
 			memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
-			printf("%lf,%d",minRho,i);
+			printf("%lf,%d",maxRho,i);
 		}
 
 
