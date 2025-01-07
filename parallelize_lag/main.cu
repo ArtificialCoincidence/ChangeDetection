@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 18
+#define LAG 1
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 __global__ void LagPearson(double* testMatrix,double**refMatrices,double* rho){
 	int idx=blockIdx.x*blockDim.x+threadIdx.x;
