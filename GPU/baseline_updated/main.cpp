@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 15 
+#define LAG 18 
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 
@@ -49,7 +49,7 @@ int main() {
         //-----------SpatialFilter and AnomalyDetection--------
 	Sub(testMatrix,tmpMatrix);//a-b->b
     	SpatialFilter(tmpMatrix);
-	writeData("./res.txt",tmpMatrix);
+//	writeData("./18.txt",tmpMatrix);
 	AnomalyDetection(tmpMatrix);
 
 
@@ -58,7 +58,7 @@ int main() {
     std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
     //-----------------------Write Data--------------------
-    //writeData("./res.txt",finalRes);
+    writeData("./18.txt",tmpMatrix);
     return 0;
 }
 
