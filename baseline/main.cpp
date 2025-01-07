@@ -2,7 +2,7 @@
 using namespace std;
 using namespace std::chrono;
 #include <iomanip>
-#define LAG 18 
+#define LAG 1 
 #define PATH "/home/jiahuaz/ChangeDetection/test6/"
 int main() {
 
@@ -55,7 +55,7 @@ int main() {
 	std::cout << "Compute time: " << duration.count() << " seconds" << std::endl;
 
 	//-----------------------Write Data--------------------
-	//writeData("./res.txt",finalRes);
+	writeData("./res_1lag.txt",finalRes);
 	return 0;
 }
 
