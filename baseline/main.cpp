@@ -43,7 +43,7 @@ int main() {
 
 		//-----------update the result--------
 		double r = Pearson(refMatrix, testMatrix);
-		if (r > maxRho&&r<0.4378) {
+		if (r > maxRho&&r<0.4370) {
 			maxRho = r;
 			memcpy(finalRes, refMatrix, sizeof(double) * SIZE);
 			printf("%lf,%d",maxRho,i);
